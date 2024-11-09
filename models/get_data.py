@@ -103,7 +103,11 @@ def load_unlabels(conf):
 
   unalbels_generator = idg.flow_from_directory(
       directory=path,
+<<<<<<< HEAD
       target_size=(input_size),
+=======
+      target_size=(224,224),
+>>>>>>> e929c9913101fa2771f1d5b3c9b817b2fe641ac5
       color_mode="rgb",
       batch_size=conf['batch_size'],
       class_mode=None,
