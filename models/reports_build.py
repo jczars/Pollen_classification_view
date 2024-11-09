@@ -93,58 +93,6 @@ def plot_confusion_matrix(y_true, y_pred, categories, normalize=False):
 
     return fig, mat
 
-def plot_confusion_matrixV2(y_true, y_pred, categories, normalize=False):
-    """
-    Plots a confusion matrix for classification results, highlighting non-diagonal elements.
-
-    Parameters:
-        y_true (list): True labels.
-        y_pred (list): Predicted labels.
-        categories (list): List of class names.
-        normalize (bool): Whether to normalize the confusion matrix values.
-
-    Returns:
-        tuple: fig (Matplotlib figure object of the confusion matrix) and mat (Confusion matrix as a NumPy array).
-    """
-
-
-    # Compute confusion matrix
-    mat = confusion_matrix(y_true, y_pred)
-    
-    # Normalize the confusion matrix if specified
-    if normalize:
-        mat = mat.astype('float') / mat.sum(axis=1)[:, np.newaxis]
-    
-    # Create a figure for plotting
-    fig, ax = plt.subplots(figsize=(9, 9), dpi=100)
-    
-    # Plot the confusion matrix using seaborn
-    sns.set(font_scale=0.8)
-    sns.heatmap(mat, cmap="Blues", annot=False, 
-                xticklabels=categories, yticklabels=categories, cbar=True, ax=ax, linewidths=0.5)
-
-    # Set axis labels and title
-    ax.set_xlabel('Predicted Labels', fontsize=12)
-    ax.set_ylabel('True Labels', fontsize=12)
-    ax.set_title('Confusion Matrix' + (' (Normalized)' if normalize else ''), fontsize=14)
-    
-    # Rotate the tick labels for better readability
-    ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right', fontsize=10)
-    ax.set_yticklabels(ax.get_yticklabels(), rotation=0, ha='right', fontsize=10)
-
-    # Annotate cells with the data
-    for i in range(len(mat)):
-        for j in range(len(mat)):
-            value = mat[i, j]
-            text_color = 'black' if i == j else 'white'  # Make diagonal text black and non-diagonal white
-            bg_color = 'red' if i != j and value > 0 else None  # Highlight non-diagonal elements > 0
-            if bg_color:
-                ax.add_patch(plt.Rectangle((j, i), 1, 1, fill=True, color=bg_color, alpha=0.5))
-            ax.text(j + 0.5, i + 0.5, f'{value:.2f}' if normalize else f'{value}', 
-                    ha='center', va='center', color=text_color, fontsize=10)
-
-    plt.tight_layout()
-    return fig, mat
 
 def plot_confusion_matrixV3(y_true, y_pred, categories, normalize=False):
     """
@@ -203,8 +151,80 @@ def plot_confusion_matrixV3(y_true, y_pred, categories, normalize=False):
 
     plt.tight_layout()
     return fig, mat
+def plot_confusion_matrixV4(y_true, y_pred, categories, normalize=False):
+    """
+    Plots a confusion matrix for classification results, highlighting non-diagonal elements.
+    Adjusts text color based on background brightness (white for dark backgrounds, black for light backgrounds).
 
+    Parameters:
+        y_true (list): True labels.
+        y_pred (list): Predicted labels.
+        categories (list): List of class names.
+        normalize (bool): Whether to normalize the confusion matrix values.
 
+    Returns:
+        tuple: fig (Matplotlib figure object of the confusion matrix) and mat (Confusion matrix as a NumPy array).
+    """
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+    from sklearn.metrics import confusion_matrix
+    import numpy as np
+
+    # Compute confusion matrix
+    mat = confusion_matrix(y_true, y_pred)
+    
+    # Normalize the confusion matrix if specified
+    if normalize:
+        mat = mat.astype('float') / mat.sum(axis=1)[:, np.newaxis]
+    
+    # Create a figure for plotting
+    fig, ax = plt.subplots(figsize=(9, 9), dpi=100)
+    
+    # Plot the confusion matrix using seaborn
+    sns.set(font_scale=0.8)
+    sns.heatmap(mat, cmap="Blues", annot=False, 
+                xticklabels=categories, yticklabels=categories, cbar=True, ax=ax, linewidths=0.5)
+
+    # Set axis labels and title
+    ax.set_xlabel('Predicted Labels', fontsize=12)
+    ax.set_ylabel('True Labels', fontsize=12)
+    ax.set_title('Confusion Matrix' + (' (Normalized)' if normalize else ''), fontsize=14)
+    
+    # Rotate the tick labels for better readability
+    ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right', fontsize=10)
+    ax.set_yticklabels(ax.get_yticklabels(), rotation=0, ha='right', fontsize=10)
+
+    # Determine background brightness of the plot
+    fig.canvas.draw()
+    bg_color = fig.get_facecolor()
+    brightness = np.dot(np.array(bg_color[:3]), [0.299, 0.587, 0.114])  # Using luminosity formula
+    
+    # Set text color based on background brightness (light background -> black text, dark background -> white text)
+    text_color = 'black' if brightness > 0.5 else 'white'
+    
+    # Annotate cells with the data
+    for i in range(len(mat)):
+        for j in range(len(mat)):
+            value = mat[i, j]
+            
+            if i == j:  # Diagonal elements
+                # Always use white text for diagonal cells to ensure visibility
+                cell_text_color = 'white' if brightness < 0.5 else 'black'
+                ax.text(j + 0.5, i + 0.5, f'{value:.2f}' if normalize else f'{value}', 
+                        ha='center', va='center', color=cell_text_color, fontsize=10)
+            elif value > 0:  # Non-diagonal elements with value > 0
+                # Set text color based on background brightness (light background -> black text, dark background -> white text)
+                cell_text_color = 'white' if brightness < 0.5 else 'black'
+                # Highlight non-diagonal elements > 0 with a lighter red color
+                ax.add_patch(plt.Rectangle((j, i), 1, 1, fill=True, color='lightcoral', alpha=0.5))
+                ax.text(j + 0.5, i + 0.5, f'{value:.2f}' if normalize else f'{value}', 
+                        ha='center', va='center', color=cell_text_color, fontsize=10)
+            else:  # For cells with 0 value, we do not highlight
+                ax.text(j + 0.5, i + 0.5, f'{value:.2f}' if normalize else f'{value}', 
+                        ha='center', va='center', color='black', fontsize=10)
+
+    plt.tight_layout()
+    return fig, mat
 
 def predict_unlabeled_data(test_data_generator, model, batch_size, categories, verbose=2):
     """
@@ -299,7 +319,9 @@ def plot_confidence_boxplot(df_correct):
     sns.set_style("whitegrid")
     
     # Plot the boxplot using seaborn
-    sns.boxplot(data=df_correct, y="true_label", x="confidence", ax=ax, palette="Blues")
+    #sns.boxplot(data=df_correct, y="true_label", x="confidence", ax=ax, palette="Blues")
+    sns.boxplot(data=df_correct, x="confidence", y="true_label", ax=ax, hue="true_label", 
+                palette="Blues", showfliers=False)
     
     # Set up the plot title and labels
     ax.set_title("Confidence Scores for Correct Classifications", fontsize=16)
