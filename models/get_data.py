@@ -81,6 +81,99 @@ def reload_data_train(conf, _csv_training_data, SPLIT_VALID=0.2):
 
     return train_generator, val_generator
 
+def load_data_train_aug(PATH_BD, K, BATCH, INPUT_SIZE, SPLIT_VALID):
+    """
+    Load training data with augmentation.
+    
+    Args:
+        PATH_BD (str): Path to the dataset.
+        K (int): K-fold value.
+        BATCH (int): Batch size.
+        INPUT_SIZE (tuple): Input dimensions (height, width).
+        SPLIT_VALID (float): Portion to split the training data into training and validation sets.
+        
+    Returns:
+        tuple: Training and validation datasets.
+    """
+    train_dir = PATH_BD + '/Train/k' + str(K)
+    print('Training directory: ', train_dir)
+    
+    idg = ImageDataGenerator(
+        width_shift_range=0.1,
+        height_shift_range=0.1,
+        zoom_range=0.3,
+        fill_mode='nearest',
+        horizontal_flip=True,
+        rescale=1./255,
+        validation_split=SPLIT_VALID
+    )
+
+    train_generator = idg.flow_from_directory(
+        directory=train_dir,
+        target_size=INPUT_SIZE,
+        color_mode="rgb",
+        batch_size=BATCH,
+        class_mode="categorical",
+        shuffle=True,
+        seed=42,
+        subset='training'
+    )
+
+    val_generator = idg.flow_from_directory(
+        directory=train_dir,
+        target_size=INPUT_SIZE,
+        color_mode="rgb",
+        batch_size=BATCH,
+        class_mode="categorical",
+        shuffle=True,
+        seed=42,
+        subset='validation'
+    )
+
+    return train_generator, val_generator
+
+def load_data_ttv(PATH_BD, K, BATCH, INPUT_SIZE, SPLIT_VALID):
+    """
+    Load training and validation data.
+    
+    Args:
+        PATH_BD (str): Path to the dataset.
+        K (int): K-fold value.
+        BATCH (int): Batch size.
+        INPUT_SIZE (tuple): Input dimensions (height, width).
+        SPLIT_VALID (float): Portion to split the training data into training and validation sets.
+        
+    Returns:
+        tuple: Training and validation datasets.
+    """
+    train_dir = PATH_BD + '/Train/k' + str(K)
+    val_dir = PATH_BD + '/Val/k' + str(K)
+    print('Training directory: ', train_dir)
+    
+    idg = ImageDataGenerator(rescale=1. / 255)
+
+    train_generator = idg.flow_from_directory(
+        directory=train_dir,
+        target_size=INPUT_SIZE,
+        color_mode="rgb",
+        batch_size=BATCH,
+        class_mode="categorical",
+        shuffle=True,
+        seed=42
+    )
+
+    val_generator = idg.flow_from_directory(
+        directory=val_dir,
+        target_size=INPUT_SIZE,
+        color_mode="rgb",
+        batch_size=BATCH,
+        class_mode="categorical",
+        shuffle=True,
+        seed=42
+    )
+
+    return train_generator, val_generator
+
 def load_data_test(test_data, input_size):
   idg = ImageDataGenerator(rescale=1. / 255)
   test_data_generator = idg.flow_from_dataframe(test_data,
