@@ -33,8 +33,12 @@ def run_train(train_data, val_data, model_fine, train_config):
         train_data: Training dataset.
         val_data: Validation dataset.
         model_fine: Model to be trained.
+<<<<<<< HEAD
         train_config (dict): Dictionary containing training 
          configurations (batch_size, epochs, verbosity).
+=======
+        train_config (dict): Dictionary containing training configurations (batch_size, epochs, verbosity).
+>>>>>>> e929c9913101fa2771f1d5b3c9b817b2fe641ac5
 
     Returns:
         history: Training history.
@@ -77,12 +81,16 @@ def run_train(train_data, val_data, model_fine, train_config):
     if verbosity > 0 and best_epoch:
         print(f'Best epoch: {best_epoch} with validation loss: {min(val_loss):.4f}')
 
+<<<<<<< HEAD
     return {
         'history':history, 
         'start_time': start_time, 
         'end_time': end_time, 
         'duration':duration, 
         'best_epoch': best_epoch}
+=======
+    return history, start_time, end_time, duration, best_epoch
+>>>>>>> e929c9913101fa2771f1d5b3c9b817b2fe641ac5
 
 def load_model(path_model, verbose=0):
     """

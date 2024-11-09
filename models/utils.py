@@ -7,7 +7,10 @@ from tensorflow.python.keras.backend import set_session
 from tensorflow.python.keras.backend import clear_session
 from tensorflow.python.keras.backend import get_session
 import nvidia_smi
+<<<<<<< HEAD
 import csv
+=======
+>>>>>>> e929c9913101fa2771f1d5b3c9b817b2fe641ac5
 
 
 def create_dataSet(_path_data, _csv_data, CATEGORIES):
@@ -80,17 +83,24 @@ def criarTestes(_path, nmTeste):
   return _dir_test, nmTeste
 
 def renomear_path(conf, data_uns, verbose=0):
+<<<<<<< HEAD
   unlabels_path = f"{conf['path_base']}/images_unlabels/"
 
   print(data_uns.head())
 
+=======
+>>>>>>> e929c9913101fa2771f1d5b3c9b817b2fe641ac5
   for index, row in data_uns.iterrows():
     values=row['file']
     if verbose>0:
         print('[INFO] renomear_path')
         print(values)
     isp=values.split('/')
+<<<<<<< HEAD
     new_path=unlabels_path+'unlabels/'+isp[-1]
+=======
+    new_path=conf['unlabels']+'unlabels/'+isp[-1]
+>>>>>>> e929c9913101fa2771f1d5b3c9b817b2fe641ac5
     data_uns.at[index,'file']=new_path
     if verbose>0:
         print(new_path)
@@ -109,7 +119,74 @@ def bytes_to_mb(size_in_bytes):
     size_in_mb = size_in_bytes / (1024.0 ** 2)
     return size_in_mb
 
+<<<<<<< HEAD
 
+=======
+def use_memo():
+    nvidia_smi.nvmlInit()
+    handle = nvidia_smi.nvmlDeviceGetHandleByIndex(0)
+    info = nvidia_smi.nvmlDeviceGetMemoryInfo(handle)
+    use_memo=100*info.used/info.total
+    if use_memo>95:
+        print('para process')
+        reset_keras()
+        #sys.exit()
+    else:
+        print('continue')
+
+def reset_keras():
+    classifier=0
+    sess = get_session()
+    clear_session()
+    sess.close()
+    sess = get_session()
+
+    print("#"*30)
+
+    physical_devices = tf.config.experimental.list_physical_devices('GPU')
+    #print(tf.config.experimental.set_memory_growth('/device:GPU:0', True))
+    print(tf.config.experimental.get_memory_info('GPU:0'))
+    print(tf.config.experimental.reset_memory_stats('GPU:0'))
+
+    if tf.test.gpu_device_name():
+        print("Default GPU Device: {}".format(tf.test.gpu_device_name()))
+    else:
+        print("GPU not install")
+
+    try:
+        del classifier # this is from global space - change this as you need
+    except:
+        pass
+
+    print(gc.collect()) # if it's done something you should see a number being outputted
+    #print(torch.cuda.empty_cache())
+
+    # use the same config as you used to create the session
+    config = tf.compat.v1.ConfigProto()
+    config.gpu_options.per_process_gpu_memory_fraction = 1
+    config.gpu_options.visible_device_list = "0"
+    print(set_session(tf.compat.v1.Session(config=config)))
+    #set_session(tf.Session(config=config))
+    print("#"*30)
+    print('\n')
+    
+def get_menor(new_data_uns, CATEGORIES):
+    lista=[]
+    for cat in CATEGORIES:
+        df = new_data_uns[new_data_uns['labels'] == cat]
+        size=len(df)
+        print(cat, size)
+        lista.append(size)
+    menor=min(lista)
+
+    if menor<100:
+        menor=100
+    elif menor==0:
+        menor =100
+    print('menor', menor)
+
+    return menor
+>>>>>>> e929c9913101fa2771f1d5b3c9b817b2fe641ac5
 def select_pseudos(pseudos, CATEGORIES, menor, _tempo):
     df_sel=pd.DataFrame(columns= ['file','labels'])
 
@@ -127,6 +204,7 @@ def select_pseudos(pseudos, CATEGORIES, menor, _tempo):
             _size_selec=len(df_sel)
             print('Total de dados selecioandos ', _size_selec)
     return df_sel, df_cat_size
+<<<<<<< HEAD
 def add_row_csv(filename_csv, data):
     """
     Add a new row to a CSV file.
@@ -138,11 +216,17 @@ def add_row_csv(filename_csv, data):
     with open(filename_csv, 'a') as file:
         csvwriter = csv.writer(file)
         csvwriter.writerows(data)
+=======
+
+>>>>>>> e929c9913101fa2771f1d5b3c9b817b2fe641ac5
 
 if __name__=="__main__":
    help(create_dataSet)
    help(create_unlabelSet)
    help(create_folders)
    help(criarTestes)
+<<<<<<< HEAD
    help(add_row_csv)
+=======
+>>>>>>> e929c9913101fa2771f1d5b3c9b817b2fe641ac5
    
