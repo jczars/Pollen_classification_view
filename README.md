@@ -19,7 +19,7 @@ cd Pollen_classification_view
 npm install
 ```
 # Project Folder Structure
-'''
+```bash
 Below is the folder structure for the `Pollen_classification_view` project:
 
 Pollen_classification_view
@@ -46,7 +46,7 @@ Pollen_classification_view
 │       ├── polar_circular
 │       ├── polar_triangular
 │       └── polar_tricircular
-'''
+```
 ### Folder Description:
 - **0_pseudo_labels/**: Contains scripts and reports for the pseudo-labeling process.
   - **Reports/**: Reports generated during the pseudo-labeling process.
