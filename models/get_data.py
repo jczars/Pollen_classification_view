@@ -183,6 +183,29 @@ def load_data_test(test_data, input_size):
                                             class_mode = "categorical",
                                             shuffle = False)
   return test_data_generator
+
+def load_data_test_dir(PATH_BD, K, BATCH, INPUT_SIZE):
+    """
+    -->loading train data 
+    :param: PATH_BD: file name 
+    :param: K: k the kfolders values
+    :param: BATCH: batch size
+    :param: INPUT_SIZE: input dimensions, height and width, default=(224,224)
+    :return: test dataset
+    """
+    test_dir = PATH_BD + '/Test/k' + str(K)
+    print('test_dir ', test_dir)
+
+    idg = ImageDataGenerator(rescale=1. / 255)
+    test_generator = idg.flow_from_directory(
+        directory=test_dir,
+        target_size=INPUT_SIZE,
+        color_mode="rgb",
+        batch_size=BATCH,
+        class_mode="categorical",
+        shuffle=False,
+        seed=42)
+    return test_generator
                              
 def load_unlabels(conf):
     

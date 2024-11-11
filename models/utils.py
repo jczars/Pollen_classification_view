@@ -1,13 +1,10 @@
 # -*- coding: utf-8 -*-
-import gc
-import pandas as pd
-import tensorflow as tf
-import tqdm, os, sys
-from tensorflow.python.keras.backend import set_session
-from tensorflow.python.keras.backend import clear_session
-from tensorflow.python.keras.backend import get_session
-import nvidia_smi
+
 import csv
+import os
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 
 def create_dataSet(_path_data, _csv_data, CATEGORIES):
@@ -138,6 +135,34 @@ def add_row_csv(filename_csv, data):
         csvwriter = csv.writer(file)
         csvwriter.writerows(data)
 
+
+def graph_img_cat(data_dir):
+    """
+    Generates a bar chart showing the number of images per category.
+
+    Args:
+        data_dir (str): Directory where the category subfolders are located.
+
+    Returns:
+        matplotlib.figure.Figure: A figure object showing the number of images per category.
+    """
+    # Ensure the folders within the directory are indeed subfolders
+    category_names = [category for category in sorted(os.listdir(data_dir))
+                      if os.path.isdir(os.path.join(data_dir, category))]
+
+    img_pr_cat = []
+
+    # Count the number of images per category
+    for category in category_names:
+        category_path = os.path.join(data_dir, category)
+        img_pr_cat.append(len([f for f in os.listdir(category_path) if f.endswith(('jpg', 'png', 'jpeg'))]))
+
+    # Create the bar chart
+    fig = plt.figure(figsize=(15, 10))
+    sns.barplot(y=category_names, x=img_pr_cat).set_title("Number of training images per category:")
+
+    return fig
+   
 if __name__=="__main__":
    help(create_dataSet)
    help(create_unlabelSet)
