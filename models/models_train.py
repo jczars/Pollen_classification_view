@@ -33,12 +33,8 @@ def run_train(train_data, val_data, model_fine, train_config):
         train_data: Training dataset.
         val_data: Validation dataset.
         model_fine: Model to be trained.
-<<<<<<< HEAD
         train_config (dict): Dictionary containing training 
          configurations (batch_size, epochs, verbosity).
-=======
-        train_config (dict): Dictionary containing training configurations (batch_size, epochs, verbosity).
->>>>>>> e929c9913101fa2771f1d5b3c9b817b2fe641ac5
 
     Returns:
         history: Training history.

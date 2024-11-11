@@ -1,0 +1,9 @@
+input_shape : (224,224)
+batch_size : 16
+limiar : 20
+bd_src : "/media/jczars/4C22F02A22F01B22/Ensembler_pollen_classification/BD/CPD1_Is_Rc/"
+bd_dst : "/media/jczars/4C22F02A22F01B22/Ensembler_pollen_classification/BD/CPD1_Dn_VTcr_111124/"
+path_model : "/media/jczars/4C22F02A22F01B22/Ensembler_pollen_classification/Reports/3_DenseNet201_sem_BI_5/models/3_DenseNet201_bestLoss_8.keras"
+path_labels : "/media/jczars/4C22F02A22F01B22/Ensembler_pollen_classification/BD/BI_5/labels/"
+motivo : "Refazer a BD Vistas utilizando a base isolated"
+date : "21/08/24"

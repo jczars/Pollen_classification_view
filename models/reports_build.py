@@ -154,7 +154,6 @@ def plot_confusion_matrixV3(y_true, y_pred, categories, normalize=False):
 def plot_confusion_matrixV4(y_true, y_pred, categories, normalize=False):
     """
     Plots a confusion matrix for classification results, highlighting non-diagonal elements.
-    Adjusts text color based on background brightness (white for dark backgrounds, black for light backgrounds).
 
     Parameters:
         y_true (list): True labels.
@@ -182,7 +181,7 @@ def plot_confusion_matrixV4(y_true, y_pred, categories, normalize=False):
     
     # Plot the confusion matrix using seaborn
     sns.set(font_scale=0.8)
-    sns.heatmap(mat, cmap="Blues", annot=False, 
+    sns.heatmap(mat, cmap="Blues", annot=True, 
                 xticklabels=categories, yticklabels=categories, cbar=True, ax=ax, linewidths=0.5)
 
     # Set axis labels and title
@@ -194,37 +193,22 @@ def plot_confusion_matrixV4(y_true, y_pred, categories, normalize=False):
     ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right', fontsize=10)
     ax.set_yticklabels(ax.get_yticklabels(), rotation=0, ha='right', fontsize=10)
 
-    # Determine background brightness of the plot
-    fig.canvas.draw()
-    bg_color = fig.get_facecolor()
-    brightness = np.dot(np.array(bg_color[:3]), [0.299, 0.587, 0.114])  # Using luminosity formula
-    
-    # Set text color based on background brightness (light background -> black text, dark background -> white text)
-    text_color = 'black' if brightness > 0.5 else 'white'
-    
-    # Annotate cells with the data
+    # Annotate non-diagonal cells with custom background and text color
     for i in range(len(mat)):
         for j in range(len(mat)):
             value = mat[i, j]
-            
-            if i == j:  # Diagonal elements
-                # Always use white text for diagonal cells to ensure visibility
-                cell_text_color = 'white' if brightness < 0.5 else 'black'
-                ax.text(j + 0.5, i + 0.5, f'{value:.2f}' if normalize else f'{value}', 
-                        ha='center', va='center', color=cell_text_color, fontsize=10)
-            elif value > 0:  # Non-diagonal elements with value > 0
-                # Set text color based on background brightness (light background -> black text, dark background -> white text)
-                cell_text_color = 'white' if brightness < 0.5 else 'black'
+            if i != j:  # For off-diagonal elements
                 # Highlight non-diagonal elements > 0 with a lighter red color
-                ax.add_patch(plt.Rectangle((j, i), 1, 1, fill=True, color='lightcoral', alpha=0.5))
-                ax.text(j + 0.5, i + 0.5, f'{value:.2f}' if normalize else f'{value}', 
-                        ha='center', va='center', color=cell_text_color, fontsize=10)
-            else:  # For cells with 0 value, we do not highlight
+                if value > 0:
+                    ax.add_patch(plt.Rectangle((j, i), 1, 1, fill=True, color='lightcoral', alpha=0.5))
+                # Add text with black color for off-diagonal cells
                 ax.text(j + 0.5, i + 0.5, f'{value:.2f}' if normalize else f'{value}', 
                         ha='center', va='center', color='black', fontsize=10)
 
     plt.tight_layout()
     return fig, mat
+
+
 
 def predict_unlabeled_data(test_data_generator, model, batch_size, categories, verbose=2):
     """
@@ -431,7 +415,7 @@ def reports_gen(test_data_generator, model, categories, history, reports_config)
     )
     
     # Confusion matrix
-    matrix_fig, mat = plot_confusion_matrixV3(y_true, y_pred, categories)
+    matrix_fig, mat = plot_confusion_matrixV4(y_true, y_pred, categories)
     df_mat = pd.DataFrame(mat, index=categories, columns=categories)
     
     # Boxplot, classification report, and training metrics

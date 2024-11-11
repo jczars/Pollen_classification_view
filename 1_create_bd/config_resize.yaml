@@ -1,0 +1,6 @@
+tipo: "png"  # Tipo de arquivo de imagem (ex: 'jpg', 'png')
+bd_src: "/media/jczars/4C22F02A22F01B22/01_PROP_TESE/01_BD_CPD1_CR/Cropped Pollen Grains/"  # Diretório de origem das imagens
+bd_dst: "./BD/CPD1_Is_Rc/"  # Diretório de destino para salvar as imagens redimensionadas
+save_dir: "1_create_bd"  # Diretório para salvar o gráfico de distribuição
+save: 1  # 1 para salvar as imagens redimensionadas, 0 para não salvar
+verbose: 1  # 1 para saída detalhada, 0 para modo silencioso

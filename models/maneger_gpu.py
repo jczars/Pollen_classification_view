@@ -1,3 +1,4 @@
+import logging
 import os
 import psutil
 import nvidia_smi
@@ -59,6 +60,30 @@ def monitor_memory_and_run():
             return
 
     print("Sufficient GPU memory available. Proceeding with program execution.")
+
+# Setup logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s', filename='memory_log.log', filemode='w')
+
+def log_memory_usage(variable_name):
+    """
+    Log the memory usage before and after removing a variable.
+    
+    Args:
+        variable_name (str): The name of the variable being deleted.
+    """
+    # Get memory usage before
+    process = psutil.Process(os.getpid())
+    mem_before = process.memory_info().rss / (1024 * 1024)  # in MB
+    
+    logging.info(f"[INFO] Memory usage before deleting {variable_name}: {mem_before:.2f} MB")
+    
+    # Garbage collection and memory cleanup
+    gc.collect()
+    
+    # Get memory usage after
+    mem_after = process.memory_info().rss / (1024 * 1024)  # in MB
+    logging.info(f"[INFO] Memory usage after deleting {variable_name}: {mem_after:.2f} MB")
+
 
 if __name__ == "__main__":
     monitor_memory_and_run()
