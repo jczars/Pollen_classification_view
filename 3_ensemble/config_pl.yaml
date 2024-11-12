@@ -1,0 +1,9 @@
+base_model_dir: "/media/jczars/4C22F02A22F01B22/Ensembler_pollen_classification/Reports_FT/"
+data_base_dir: "/media/jczars/4C22F02A22F01B22/Ensembler_pollen_classification/BD/CPD1_Dn_VTcr_111124/POLAR_R/"
+committee_networks:
+  - 1_DenseNet201
+  - 3_MobileNet
+  - 5_InceptionV3
+excel_file: "3_ensemble/Reports/POLAR_ens_111124.xlsx"
+BATCH: 16
+INPUT_SIZE: [224, 224]

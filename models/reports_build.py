@@ -4,6 +4,7 @@ import pandas as pd
 from sklearn.metrics import classification_report, confusion_matrix, precision_recall_fscore_support, cohen_kappa_score
 import seaborn as sns
 
+
 def predict_data_generator(test_data_generator, model, categories, batch_size, verbose=2):
     """
     Generates predictions and evaluation metrics (accuracy, precision, recall, fscore, kappa) for test data.
@@ -163,11 +164,9 @@ def plot_confusion_matrixV4(y_true, y_pred, categories, normalize=False):
 
     Returns:
         tuple: fig (Matplotlib figure object of the confusion matrix) and mat (Confusion matrix as a NumPy array).
+        
     """
-    import matplotlib.pyplot as plt
-    import seaborn as sns
-    from sklearn.metrics import confusion_matrix
-    import numpy as np
+    
 
     # Compute confusion matrix
     mat = confusion_matrix(y_true, y_pred)

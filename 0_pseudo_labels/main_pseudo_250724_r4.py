@@ -5,25 +5,26 @@ import tensorflow as tf
 import pandas as pd
 import sys
 
-# Configuração do caminho para importar módulos personalizados
+# Configuring the path to import custom modules
 sys.path.append('/media/jczars/4C22F02A22F01B22/$WinREAgent/Pollen_classification_view/')
-print("Caminhos de sistema:", sys.path)
+print("System paths:", sys.path)
 
-# Importação de módulos e funções
+# Importing modules and functions
 from models import get_data, utils, models_pre, models_train, reports_build
 from models import get_calssifica, maneger_gpu
-# Configuração para reduzir a verbosidade do TensorFlow
+
+# Configuring TensorFlow to reduce verbosity
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
-tf.get_logger().setLevel('ERROR')  # Limita as mensagens do TensorFlow para erros somente
+tf.get_logger().setLevel('ERROR')  # Limits TensorFlow messages to errors only
 
-# Define o diretório de trabalho
+# Setting the working directory
 os.chdir('/media/jczars/4C22F02A22F01B22/$WinREAgent/Pollen_classification_view/0_pseudo_labels/')
-print("Diretório de trabalho atual:", os.getcwd())
+print("Current working directory:", os.getcwd())
 
 """
-Alteração a ser feita, tentar reduzir o cosnumo de memória!
-
+Modification to be made: attempt to reduce memory consumption!
 """
+
 
 def prepare_data(conf, root_path):
     """

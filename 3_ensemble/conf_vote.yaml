@@ -1,0 +1,5 @@
+excel_file: '/media/jczars/4C22F02A22F01B22/$WinREAgent/Pollen_classification_view/3_ensemble/Reports/POLAR_ens_111124.xlsx'
+model_names:
+  - '1_DenseNet201'
+  - '3_MobileNet'
+  - '5_InceptionV3'
