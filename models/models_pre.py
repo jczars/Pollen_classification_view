@@ -168,3 +168,95 @@ def hyper_model(config_model, verbose=0):
     if verbose>0:
         fine_model.summary()
     return fine_model
+
+def hyper_model_up(config_model, verbose=0):
+    """
+    Builds and configures a fine-tuned model based on a pre-trained base model.
+
+    Parameters
+    ----------
+    config_model : dict
+        Configuration dictionary with the following keys:
+            - 'model' : str
+                Name of the pre-trained model to be used (e.g., "VGG16").
+            - 'id_test' : str
+                Identifier for the test or specific model instance.
+            - 'num_classes' : int
+                Number of output classes for the classification task.
+            - 'last_activation' : str
+                Activation function for the final dense layer (e.g., "softmax").
+            - 'freeze' : int
+                Number of layers to freeze in the base model for transfer learning.
+            - 'save_dir' : str
+                Path to the directory where layer information will be saved.
+            - 'optimizer' : str
+                Name of the optimizer to use (e.g., "Adam", "SGD", "RMSprop", "Adagrad").
+            - 'learning_rate' : float
+                Learning rate for the optimizer.
+
+    Returns
+    -------
+    keras.Model
+        Compiled Keras model with fine-tuning and the specified configuration.
+    
+    Notes
+    -----
+    This function loads a pre-trained model (with 'imagenet' weights), freezes a certain number
+    of layers as specified, adds a custom dense layer for classification, and optionally unfreezes
+    some layers for further fine-tuning. The optimizer and learning rate are also set according 
+    to the provided configuration.
+    """
+    
+    # Load the specified pre-trained model
+    model_class = globals().get(config_model['model'], None)
+    if model_class is None:
+        raise ValueError(f"Model {config_model['model']} not found.")
+    
+    # Load the base model with 'imagenet' weights and without the top layer
+    base_model = model_class(include_top=True, weights='imagenet')
+
+    # Freeze layers based on the freeze index
+    for i, layer in enumerate(base_model.layers):
+        layer.trainable = i >= config_model['freeze']  # Freeze layers up to the 'freeze' index
+
+    # Connect a custom output layer to the base model
+    conv_output = base_model.layers[-2].output  # Use the second last layer as output
+    output = layers.Dense(config_model['num_classes'], name='predictions', 
+                          activation=config_model['last_activation'])(conv_output)
+    fine_model = Model(inputs=base_model.input, outputs=output)
+
+    # Save layer details
+    layers_params = {'id_test': config_model['id_test'], 
+                     'save_dir': config_model['save_dir'], 
+                     'model': config_model['model']}
+    
+    if verbose > 0:
+        # Function to print layer details (presumably defined elsewhere)
+        print_layer(fine_model, layers_params, 1)
+
+    # Configure the optimizer
+    optimizer_dict = {
+        'Adam': keras.optimizers.Adam,
+        'RMSprop': keras.optimizers.RMSprop,
+        'Adagrad': keras.optimizers.Adagrad,
+        'SGD': keras.optimizers.SGD
+    }
+    optimizer_name = config_model['optimizer']
+    optimizer_class = optimizer_dict.get(optimizer_name, None)
+    if optimizer_class is None:
+        raise ValueError(f"Optimizer {optimizer_name} is not supported.")
+    
+    opt = optimizer_class(learning_rate=config_model['learning_rate'])
+    
+    if verbose > 0:
+        print(opt)
+
+    # Compile the model with categorical crossentropy loss and accuracy metric
+    fine_model.compile(loss="categorical_crossentropy", optimizer=opt, metrics=["accuracy"])
+    
+    if verbose > 0:
+        fine_model.summary()
+    
+    return fine_model
+
+

@@ -17,9 +17,6 @@ from models import get_calssifica, maneger_gpu
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 tf.get_logger().setLevel('ERROR')  # Limits TensorFlow messages to errors only
 
-# Setting the working directory
-os.chdir('0_pseudo_labels/')
-print("Current working directory:", os.getcwd())
 
 """
 Modification to be made: attempt to reduce memory consumption!
@@ -212,7 +209,7 @@ def train_model(config, train_data, val_data, time_step):
     res_train : dict
         A dictionary containing the training history and metrics.
     """
-    model_inst = models_pre.hyper_model(config, verbose=1)
+    model_inst = models_pre.hyper_model_up(config, verbose=1)
     print('\n[INFO]--> time_step ', time_step)
     
     # Train the model with training and validation data
@@ -457,7 +454,7 @@ def rel_data(time_step, report_metrics, res_train, res_sel, workbook_path, confi
         if verbose > 0:
             print('[INFO] -rel_data- Saving test header.')
         cols_exe = ['Tempo', 'test_loss', 'test_accuracy', 'precision', 'recall', 'fscore', 
-                    'kappa', 'str_time', 'end_time', 'delay', 'epoch_finish', 
+                    'kappa', 'str_time', 'end_time', 'delay', 'best_epoch', 
                     'ini', 'select', 'rest', 'train', 'new_train', 'id_test']
         Met_page.append(cols_exe)  # Add header row with column names
     
@@ -594,7 +591,7 @@ if __name__ == "__main__":
     parser.add_argument(
         '--workbook_path', 
         type=str, 
-        default='0_pseudo_labels/Reports/config_pseudo_label_pre.xlsx', 
+        default='Reports/config_pseudo_label_pre.xlsx', 
         help="Path to the workbook. If not provided, the default path will be used."
     )
     parser.add_argument(
@@ -610,7 +607,7 @@ if __name__ == "__main__":
     if not os.path.exists(args.workbook_path):
         print(f"Warning: The provided workbook path '{args.workbook_path}' does not exist.")
         print("Using default workbook path.")
-        args.workbook_path = '0_pseudo_labels/Reports/config_pseudo_label_pre.xlsx'
+        args.workbook_path = 'Reports/config_pseudo_label_pre.xlsx'
 
     # Call the 'run' function with the arguments
     run(args.workbook_path, args.start_index)
