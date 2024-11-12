@@ -1,30 +1,23 @@
-import argparse
 import os
 import openpyxl
 import tensorflow as tf
 import pandas as pd
 import sys
 
-# Configuring the path to import custom modules
+# Configuração do caminho para importar módulos personalizados
 sys.path.append('/media/jczars/4C22F02A22F01B22/$WinREAgent/Pollen_classification_view/')
-print("System paths:", sys.path)
+print("Caminhos de sistema:", sys.path)
 
-# Importing modules and functions
+# Importação de módulos e funções
 from models import get_data, utils, models_pre, models_train, reports_build
 from models import get_calssifica, maneger_gpu
-
-# Configuring TensorFlow to reduce verbosity
+# Configuração para reduzir a verbosidade do TensorFlow
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
-tf.get_logger().setLevel('ERROR')  # Limits TensorFlow messages to errors only
+tf.get_logger().setLevel('ERROR')  # Limita as mensagens do TensorFlow para erros somente
 
-# Setting the working directory
-os.chdir('0_pseudo_labels/')
-print("Current working directory:", os.getcwd())
-
-"""
-Modification to be made: attempt to reduce memory consumption!
-"""
-
+# Define o diretório de trabalho
+os.chdir('/media/jczars/4C22F02A22F01B22/$WinREAgent/Pollen_classification_view/0_pseudo_labels/')
+print("Diretório de trabalho atual:", os.getcwd())
 
 def prepare_data(conf, root_path):
     """
@@ -42,39 +35,39 @@ def prepare_data(conf, root_path):
     Returns:
         dict: Dictionary with paths and experiment information.
     """
-    # Destructuring the configuration dictionary for clarity
+    # Desestruturação do dicionário de configuração para maior clareza
     id_test = conf['id_test']
     model = conf['model']
     aug = conf['aug']
     base = conf['base']
     base_path = conf['path_base']
 
-    # Label directory path
+    # Caminho do diretório de etiquetas
     labels_dir = os.path.join(base_path, "labels")
     categories = sorted(os.listdir(labels_dir))
 
-    # Experiment name and path
+    # Nome e caminho do experimento
     experiment_name = f"{id_test}_{model}_{aug}_{base}"
     experiment_path = os.path.join(root_path, experiment_name)
     pseudo_csv_dir = os.path.join(experiment_path, 'pseudo_csv')
 
-    # Creating the necessary folders in a more concise way
+    # Criação das pastas necessárias de forma mais concisa
     for directory in [root_path, experiment_path, pseudo_csv_dir]:
         utils.create_folders(directory, flag=0)
 
     print(f"Training save directory: {experiment_path}, ID: {experiment_name}")
     
-    # Path to CSV file
+    # Caminho para o arquivo CSV
     csv_file_path = os.path.join(base_path, f"{base}.csv")
     print('CSV data path:', csv_file_path)
     
-    # Creating the labeled dataset
+    # Criação do dataset rotulado
     labeled_data = utils.create_dataSet(labels_dir, csv_file_path, categories)
     
     num_labels = len(labeled_data)
     print('Total labeled data count:', num_labels)
     
-    # Splitting data into training, validation and testing
+    # Divisão dos dados em treino, validação e teste
     train_path, val_path, test_path = get_data.splitData(labeled_data, root_path, base)
 
     return {
@@ -108,39 +101,39 @@ def load_data_labels(conf):
     Raises:
         ValueError: If any required configuration is missing or data loading fails.
     """
-    # Check if the required keys are present in the configuration
+    # Verificar se as chaves necessárias estão presentes na configuração
     required_keys = ['path_train', 'path_val', 'img_size', 'aug']
     missing_keys = [key for key in required_keys if key not in conf]
     if missing_keys:
         raise ValueError(f"Missing required configuration keys: {', '.join(missing_keys)}")
 
-    # Load the training data
+    # Carregar os dados de treinamento
     try:
         training_data = pd.read_csv(conf['path_train'])
     except (FileNotFoundError, pd.errors.EmptyDataError) as e:
         raise ValueError(f"Error loading training data: {e}")
 
-    # Load validation data
+    # Carregar os dados de validação
     try:
         val_data = pd.read_csv(conf['path_val'])
     except (FileNotFoundError, pd.errors.EmptyDataError) as e:
         raise ValueError(f"Error loading validation data: {e}")
 
-    # Get image size
+    # Obter o tamanho da imagem
     img_size = conf['img_size']
     if not img_size:
         raise ValueError("img_size is not specified or invalid in the configuration")
 
-    # Set the input size for data generators
+    # Definir o tamanho da entrada para os geradores de dados
     input_size = (img_size, img_size)
 
-    # Load training and validation data with augmentation type
+    # Carregar os dados de treinamento e validação com o tipo de augmentação
     try:
         train, val = get_data.load_data_train(training_data, val_data, conf['aug'], input_size)
     except Exception as e:
         raise ValueError(f"Error during data loading and augmentation: {e}")
 
-    # Return the data generators and training data
+    # Retornar os geradores de dados e os dados de treinamento
     return train, val, training_data
 
 def build_train_config(row, res_pre, time_step):
@@ -160,16 +153,15 @@ def build_train_config(row, res_pre, time_step):
     config : dict
         A dictionary containing the configuration for model training.
     """
-    # Extract directories from res_pre
+    # Extrair diretórios do res_pre
     save_dir_train = res_pre["save_dir_train"]
     test_path = res_pre["path_test"]
     categories = res_pre["categories"]
 
-    # Path where the models will be saved
+    # Caminho onde os modelos serão salvos
     save_dir = os.path.join(save_dir_train, "models")
 
-    # Create the training configuration dictionary
-
+    # Criar o dicionário de configuração para o treinamento
     config = {
         "model": row["model"],
         "id_test": row["id_test"],
@@ -190,9 +182,10 @@ def build_train_config(row, res_pre, time_step):
 
     return config
 
+import os  # Certifique-se de que os módulos necessários estão importados.
 
 def train_model(config, train_data, val_data, time_step):
-    # Instantiate the model based on the provided configuration
+    # Instanciar o modelo com base na configuração fornecida
     """
     Train a model with the given configuration and data.
 
@@ -215,14 +208,14 @@ def train_model(config, train_data, val_data, time_step):
     model_inst = models_pre.hyper_model(config, verbose=1)
     print('\n[INFO]--> time_step ', time_step)
     
-    # Train the model with training and validation data
+    # Treinar o modelo com os dados de treinamento e validação
     res_train = models_train.run_train(train_data, val_data, model_inst, config)
     
-    # Build the path to save the model
+    # Construir o caminho para salvar o modelo
     model_name = f"{config['id_test']}_{config['model']}_bestLoss_{config['time_step']}.keras"
     save_path = os.path.join(config['save_dir'], model_name)
     
-    # Save the trained model
+    # Salvar o modelo treinado
     model_inst.save(save_path)
     
     return model_inst, res_train
@@ -417,6 +410,7 @@ def selection(pseudos_df, conf, res_pre, _tempo, training_data, verbose=0):
             print("[INFO] No unlabeled data available for processing.")
         return None
 
+import openpyxl
 
 def rel_data(time_step, report_metrics, res_train, res_sel, workbook_path, config_index, verbose=0):
     """
@@ -489,7 +483,6 @@ def rel_data(time_step, report_metrics, res_train, res_sel, workbook_path, confi
     if verbose > 0:
         print("Data saved successfully. Sheets available:", workbook.sheetnames)
 
-
 def run(workbook_path, start_index, verbose=0):
     """
     Executes the pseudo-labeling and training process based on configurations provided in an Excel sheet.
@@ -553,65 +546,32 @@ def run(workbook_path, start_index, verbose=0):
                 print('\n[STEP] Training phase')
             conf_train = build_train_config(config, res_pre, time_step)
             model_train, res_train = train_model(conf_train, train, val, time_step)
-            del conf_train
-            maneger_gpu.log_memory_usage('conf_train')
 
             report_metrics = build_reports_config(time_step, config, res_pre, model_train, res_train)
 
             if verbose > 0:
                 print('\n[STEP] Classification phase')
-            pseudos_df = classification(config, res_pre, model_train, time_step)  
-            del model_train 
-            maneger_gpu.log_memory_usage('model_train')          
+            pseudos_df = classification(config, res_pre, model_train, time_step)            
             
             if verbose > 0:
                 print('\n[STEP] Selection phase')
             res_sel = selection(pseudos_df, config, res_pre, time_step, training_data)
-            del pseudos_df
-            maneger_gpu.log_memory_usage('training_data')   
-
             if res_sel is None:
                 if verbose > 0:
                     print("[INFO] No more unlabeled data to process.")
                 break
 
             rel_data(time_step, report_metrics, res_train, res_sel, workbook_path, config_index)
-            del report_metrics, res_train
-            maneger_gpu.log_memory_usage('report_metrics')  
             
             # Reload data if necessary
             if time_step > 0:
                 train, val = get_data.reload_data_train(config, res_sel['_csv_New_TrainSet'])
-            del res_sel
-            maneger_gpu.log_memory_usage('res_sel')
 
             time_step += 1
 
 
 if __name__ == "__main__":
-    # Configuração do argparse para lidar com argumentos de linha de comando
-    parser = argparse.ArgumentParser(description="Run the pollen classification process.")
-    parser.add_argument(
-        '--workbook_path', 
-        type=str, 
-        default='0_pseudo_labels/Reports/config_pseudo_label_pre.xlsx', 
-        help="Path to the workbook. If not provided, the default path will be used."
-    )
-    parser.add_argument(
-        '--start_index', 
-        type=int, 
-        default=0, 
-        help="Starting index for the run. Default is 0."
-    )
-
-    args = parser.parse_args()
-    
-    # Check if the given path exists
-    if not os.path.exists(args.workbook_path):
-        print(f"Warning: The provided workbook path '{args.workbook_path}' does not exist.")
-        print("Using default workbook path.")
-        args.workbook_path = '0_pseudo_labels/Reports/config_pseudo_label_pre.xlsx'
-
-    # Call the 'run' function with the arguments
-    run(args.workbook_path, args.start_index)
+    workbook_path = '/media/jczars/4C22F02A22F01B22/$WinREAgent/Pollen_classification_view/0_pseudo_labels/Reports/config_pseudo_label_pre.xlsx'
+    start_index = 0
+    run(workbook_path, start_index)
 
