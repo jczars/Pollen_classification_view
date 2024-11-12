@@ -15,6 +15,9 @@ import  argparse, yaml
 sys.path.append('/media/jczars/4C22F02A22F01B22/$WinREAgent/Pollen_classification_view/')
 print("Caminhos de sistema:", sys.path)
 
+os.chdir("/media/jczars/4C22F02A22F01B22/$WinREAgent/Pollen_classification_view/")
+print("Working Directory:", os.getcwd())
+
 # Import custom modules and functions
 from models import get_data, utils, del_folders_limiar, listar_vistas, sound_test_finalizado
 
@@ -295,7 +298,6 @@ def run(params):
     csv_data=create_dataSet(params['bd_src'], params['bd_dst'], categories) 
     data = pd.read_csv(csv_data)
     test_data_generator = get_data.load_data_test(data, input_shape) 
-    print(params['input_shape'])
 
     df_vistas, df_quantidade = predict_data_generator(test_data_generator, model, categories_vistas, 
                            params['batch_size'], verbose=2)
@@ -316,7 +318,7 @@ def run(params):
     copy_images_by_vista(df_lm_vistas, params['bd_dst'])
 
     params_del={'tipo':'/*.png',
-        'bd_src': params['bd_src'],
+        'bd_dst': params['bd_dst'],
         'vistas':['EQUATORIAL','POLAR'],
         'flag': 1, #0-não deleta, 1-deleta
         'limiar': params['limiar'] # menor quantidade de exemplos por classes
@@ -326,15 +328,15 @@ def run(params):
 
     params_list={
         'vistas':params_del['vistas'],
-        'save_dir': params['bd_src'],
-        'path_data': params['bd_src'],
+        'save_dir': params['bd_dst'],
+        'path_data': params['bd_dst'],
         'tipo': 'png',
         'version':3  
     }
     listar_vistas.run(params_list)
 
-    EQUATORIAL_dir = os.path.join(params['bd_dst'], 'EQUATORIAL_R')
-    POLAR_dir = os.path.join(params['bd_dst'], 'POLAR_R')
+    EQUATORIAL_dir = os.path.join(params['bd_dst'], 'EQUATORIAL')
+    POLAR_dir = os.path.join(params['bd_dst'], 'POLAR')
 
     figEQ = utils.graph_img_cat(EQUATORIAL_dir)
     figPL = utils.graph_img_cat(POLAR_dir)
@@ -375,7 +377,7 @@ if __name__ == "__main__":
     args = parse_args()
 
     # Load configuration from YAML file
-    config_file = args.config if args.config else '1_create_bd/config_separeted.yaml'
+    config_file = args.config if args.config else '/media/jczars/4C22F02A22F01B22/$WinREAgent/Pollen_classification_view/1_create_bd/config_separeted.yaml'
     params = load_config(config_file)
 
     #run(params)
