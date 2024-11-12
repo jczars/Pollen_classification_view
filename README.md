@@ -37,15 +37,86 @@ Pollen_classification_view
 │   ├── utils.py
 ├── BD
 │   ├── BI_5
-│   ├── images_unlabels
-│   │   └── unlabeled
-│   └── labels
+│     ├── images_unlabels
+│     │   └── unlabeled
+│     └── labels
 │       ├── equatorial_alongada
 │       ├── equatorial_circular
 │       ├── equatorial_eliptica
 │       ├── polar_circular
 │       ├── polar_triangular
 │       └── polar_tricircular
+│   ├── Cropped Pollen Grains
+│       ├── 1.Thymbra
+│       ├── 2.Erica
+│       ├── 3.Castanea
+│       ├── 4.Eucalyptus
+│       ├── ...
+│   ├── CPD1_Cr_Rs
+│       ├── asphodelus
+│       ├── calicotome
+│       ├── castanea
+│       ├── ceratonia
+│       ├── ...
+│   ├── CPD1_Dn_VTcr_111124
+│       ├── EQUATORIAL
+│       │    ├── castanea
+│       │    ├── ceratonia
+│       │    ├── ebenus
+│       │    ├── ferula
+│       │    ├── myrtus
+│       │    ├── olea
+│       │    ├── ...
+│       ├── EQUATORIAL_R
+│       │    ├── csv
+│       │    ├── Test
+│       │    │    └── k1
+│       │    │        ├── castanea
+│       │    │        ├── ceratonia
+│       │    │        ├── ebenus
+│       │    │        ├── ...
+│       │    │    ├── k2
+│       │    │    ├── k3
+│       │    │    ├── ...
+│       │    ├── Train
+│       │    │    └── k1
+│       │    │        ├── castanea
+│       │    │        ├── ceratonia
+│       │    │        ├── ebenus
+│       │    │        ├── ...
+│       │    │    ├── k2
+│       │    │    ├── k3
+│       │    │    ├── ...
+│       ├── POLAR
+│       │    ├── asphodelus
+│       │    ├── calicotome
+│       │    ├── ceratonia
+│       │    ├── erica
+│       │    ├── eucalyptus
+│       │    ├── ferula
+│       │    ├── ...
+│       ├── POLAR_R
+│       │    ├── csv
+│       │    ├── Test
+│       │    │    └── k1
+│       │    │        ├── asphodelus
+│       │    │        ├── calicotome
+│       │    │        ├── erica
+│       │    │        ├── ...
+│       │    │    ├── k2
+│       │    │    ├── k3
+│       │    │    ├── ...
+│       │    ├── Train
+│       │    │    └── k1
+│       │    │        ├── asphodelus
+│       │    │        ├── calicotome
+│       │    │        ├── erica
+│       │    │        ├── ...
+│       │    │    ├── k2
+│       │    │    ├── k3
+│       │    │    ├── ...
+
+
 ```
 ### Folder Description:
 - **0_pseudo_labels/**: Contains scripts and reports for the pseudo-labeling process.
