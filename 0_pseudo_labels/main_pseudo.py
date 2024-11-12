@@ -595,7 +595,7 @@ if __name__ == "__main__":
     parser.add_argument(
         '--workbook_path', 
         type=str, 
-        default='/media/jczars/4C22F02A22F01B22/Ensembler_pollen_classification/Reports/config_pseudo_label_pre.xlsx', 
+        default='0_pseudo_labels/Reports/config_pseudo_label_pre.xlsx', 
         help="Path to the workbook. If not provided, the default path will be used."
     )
     parser.add_argument(
@@ -611,7 +611,7 @@ if __name__ == "__main__":
     if not os.path.exists(args.workbook_path):
         print(f"Warning: The provided workbook path '{args.workbook_path}' does not exist.")
         print("Using default workbook path.")
-        args.workbook_path = '/media/jczars/4C22F02A22F01B22/Ensembler_pollen_classification/Reports/config_pseudo_label_pre.xlsx'
+        args.workbook_path = '0_pseudo_labels/Reports/config_pseudo_label_pre.xlsx'
 
     # Chama a função `run` com os argumentos
     run(args.workbook_path, args.start_index)

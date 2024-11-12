@@ -26,15 +26,27 @@ Pollen_classification_view
 ├── 0_pseudo_labels
 │   ├── Reports
 │   │   └── config_pseudo_label_pre.xlsx
-│   ├── main_pseudo_250724_r3.py
-├── modulos
-│   ├── get_calssifica.py
-│   ├── get_data.py
-│   ├── maneger_gpu.py
-│   ├── models_pre.py
-│   ├── models_train.py
-│   ├── reports_build.py
-│   ├── utils.py
+│   ├── main_pseudo.py
+├── 1_create_bd
+│   ├── config_resize.yaml
+│   ├── config_separeted.yaml
+│   ├── resize.py
+│   ├── separeted_bd.py
+│   ├── split_BD_vistas_k.py
+├── 2_fine_tuned
+│   ├── Reports
+│       ├── 0_DenseNet201
+│       ├── 0_Test_reports_101124.xlsx
+│   ├── FT_DFT_K10_xlsx.py
+├── 3_ensemble
+│   ├── Reports
+│       ├── POLAR_ens_111124_reports
+│       ├── EQUATORIAL_ens_111124_reports
+│   ├── conf_vote.yaml
+│   ├── config_eq.yaml
+│   ├── config_pl.yaml
+│   ├── config.yaml
+│   ├── Ensemble.py
 ├── BD
 │   ├── BI_5
 │     ├── images_unlabels
@@ -115,6 +127,19 @@ Pollen_classification_view
 │       │    │    ├── k2
 │       │    │    ├── k3
 │       │    │    ├── ...
+├── modulos
+│   ├── del_folders_limiar.py
+│   ├── get_calssifica.py
+│   ├── get_data.py
+│   ├── listar vistas.py
+│   ├── maneger_gpu.py
+│   ├── models_pre.py
+│   ├── models_train.py
+│   ├── reports_build.py
+│   ├── reports_ens.py
+│   ├── sound_test_finalizado.py
+│   ├── utils.py
+│   ├── voto_majoritary.py
 
 
 ```
