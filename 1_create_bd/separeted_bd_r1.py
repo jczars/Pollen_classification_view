@@ -2,7 +2,6 @@
 import shutil
 import os, sys
 import numpy as np
-import cv2
 import pandas as pd
 from keras import models
 import numpy as np
@@ -12,21 +11,22 @@ from datetime import datetime
 from keras import models
 import  argparse, yaml
 
-# Configuração do caminho para importar módulos personalizados
+# Configure the path for importing custom modules
 sys.path.append('/media/jczars/4C22F02A22F01B22/$WinREAgent/Pollen_classification_view/')
 print("Caminhos de sistema:", sys.path)
 
-# Importação de módulos e funções
-from models import get_data, utils, sound_test_finalizado
+# Import custom modules and functions
+from models import get_data, utils, del_folders_limiar, listar_vistas, sound_test_finalizado
 
 """
-1 - função para ler as imagens do dataset criar um df que contém o nome da classe e as quantidades de imagens e salvar em um csv;
-2 - função para ler as classes vistas, as classes vistas são seis classes, três para a vista EQUATORIAL e tres para a vista POLAR;
-3 - funcao que ler o csv e carregar as imagens, utilizando imageDategenerator;
-4 - funcao que recebe as imagens carregadas  e fazer predições com um modelo treinado verificar qual classe o true label da 
-    imagem pertence a qual vista[EQUATORIAL, POLAR] e salvar as previsões em um csv, o csv deve guardar o caminho da imagem, 
-    caminho do ŕotulo previsto, o rotulo previsto, a probabilidade da previsão e a vista.
-    Exibir os resultados na tela.
+Script functions:
+
+1 - Function to read images from the dataset, create a DataFrame containing class names and image counts, and save it to a CSV.
+2 - Function to read the viewed classes, which include six classes: three for the EQUATORIAL view and three for the POLAR view.
+3 - Function to load the CSV and images, using ImageDataGenerator.
+4 - Function to make predictions using a trained model, identify the true label’s view (EQUATORIAL or POLAR), and save predictions in a CSV.
+    The CSV should store the image path, predicted label path, predicted label, prediction probability, and view.
+    Display results on the screen.
 """
 
 def initial(params):
@@ -185,71 +185,40 @@ def predict_data_generator(test_data_generator, model, categories, batch_size, v
     df['confidence'] = confidences
     df['predicted_label'] = [categories[i] for i in y_pred]
     
-    vistas = []   # Lista para armazenar as vistas correspondentes
-    classes = []  # Lista para armazenar as classes
+    vistas = []   # List to store views
+    classes = []  # List to store classes
 
     # Iterar sobre as linhas do DataFrame
     for i, row in df.iterrows():
-        # Acessar a previsão de categoria e o caminho do arquivo
+        # Access category prediction and file path
         vista = categories[row['y_pred']]  # Corrigido para acessar 'y_pred' da linha atual
         classe = row['file']
 
-        # Extrair a vista ("EQUATORIAL" ou "POLAR") e a classe a partir do caminho do arquivo
-        vt = vista.split('_')[0]         # Extrair "EQUATORIAL" ou "POLAR"
-        classe = classe.split('/')[-2]    # Extrair a classe
+        # Extract the view ("EQUATORIAL" or "POLAR") and class from the file path
+        vt = vista.split('_')[0]        
+        classe = classe.split('/')[-2]    
 
-        # Adicionar os valores às listas
         vistas.append(vt)
         classes.append(classe)
 
-    # Atribuir as listas como novas colunas ao DataFrame
     df['vista'] = vistas
     df['classe'] = classes
 
-    # Agrupar o DataFrame por 'vista' e 'classe' e contar o número de imagens em cada combinação
+    # Group DataFrame by 'vista' and 'classe' and count the number of images per combination
     quantidade_por_vista_classe = df.groupby(['vista', 'classe']).size().reset_index(name='quantidade')
 
     return df, quantidade_por_vista_classe
 
-import pandas as pd
-
-def quantificar_e_filtrar_classes0(df, limiar):
-    """
-    Quantifica a quantidade de classes por vista e filtra as linhas do DataFrame 
-    que pertencem às classes que possuem quantidade maior ou igual ao limiar.
-    
-    :param df: DataFrame contendo as colunas ['file', 'classe', 'vista']
-    :param limiar: valor mínimo de quantidade para filtrar as classes
-    :return: DataFrame com as linhas filtradas que atendem ao limiar
-    """
-    # Quantificar classes por vistas
-    quantidades_por_vista = df.groupby(['vista', 'classe']).size().reset_index(name='quantidade')
-
-    # Filtrar as classes que possuem quantidade maior ou igual ao limiar
-    classes_aceitas = quantidades_por_vista[quantidades_por_vista['quantidade'] >= limiar]
-    
-    # Criar uma lista das classes que atendem ao limiar
-    classes_aceitas_list = classes_aceitas['classe'].unique()
-    
-    # Filtrar o DataFrame original com base nas classes aceitas
-    df_filtrado = df[df['classe'].isin(classes_aceitas_list)]
-    
-    # Exibir o resultado
-    print(f"\nClasses que atendem ao limiar ({limiar}):")
-    print(classes_aceitas)
-    
-    return df_filtrado
-
 def filter_by_class_limiar(df, limiar):
     """
-    Filters classes in the dataframe based on the provided limiar and adds a summary of class distribution by vista.
+    Filters classes in the dataframe based on the provided threshold and adds a summary of class distribution by view.
     
     Parameters:
     - df (DataFrame): The dataframe containing 'file', 'classe', and 'vista'.
     - limiar (int): The minimum number of occurrences for a class to be retained.
     
     Returns:
-    - DataFrame: A filtered dataframe with rows where class counts exceed the limiar, 
+    - DataFrame: A filtered dataframe with rows where class counts exceed the threshold, 
       and a summary DataFrame appended at the end.
     """
     # Quantify the number of occurrences of each class per vista
@@ -320,10 +289,12 @@ def copy_images_by_vista(df_lm_vistas, destination_dir):
             print(f"Error copying {file_path}: {e}")
 
 def run(params):
+    image_size=params['image_size'] 
+    input_shape=(image_size, image_size)
     categories, categories_vistas, model = initial(params)
     csv_data=create_dataSet(params['bd_src'], params['bd_dst'], categories) 
     data = pd.read_csv(csv_data)
-    test_data_generator = get_data.load_data_test(data, (224,224)) 
+    test_data_generator = get_data.load_data_test(data, input_shape) 
     print(params['input_shape'])
 
     df_vistas, df_quantidade = predict_data_generator(test_data_generator, model, categories_vistas, 
@@ -344,8 +315,26 @@ def run(params):
 
     copy_images_by_vista(df_lm_vistas, params['bd_dst'])
 
-    EQUATORIAL_dir = os.path.join(params['bd_dst'], 'EQUATORIAL')
-    POLAR_dir = os.path.join(params['bd_dst'], 'POLAR')
+    params_del={'tipo':'/*.png',
+        'bd_src': params['bd_src'],
+        'vistas':['EQUATORIAL','POLAR'],
+        'flag': 1, #0-não deleta, 1-deleta
+        'limiar': params['limiar'] # menor quantidade de exemplos por classes
+        }
+    
+    del_folders_limiar.del_vistas(params_del)
+
+    params_list={
+        'vistas':params_del['vistas'],
+        'save_dir': params['bd_src'],
+        'path_data': params['bd_src'],
+        'tipo': 'png',
+        'version':3  
+    }
+    listar_vistas.run(params_list)
+
+    EQUATORIAL_dir = os.path.join(params['bd_dst'], 'EQUATORIAL_R')
+    POLAR_dir = os.path.join(params['bd_dst'], 'POLAR_R')
 
     figEQ = utils.graph_img_cat(EQUATORIAL_dir)
     figPL = utils.graph_img_cat(POLAR_dir)

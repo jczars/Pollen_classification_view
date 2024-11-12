@@ -15,7 +15,7 @@ from models import utils as utils_lib
 
 
 def listar(save_dir, path_data, tipo, version, vt):
-    _csv_qt_class = save_dir + '/ls_VISTAS_'+vt+'_qt_v'+str(version)+'.csv'
+    _csv_qt_class = save_dir + '/ls_vistas_'+vt+'_qt_v'+str(version)+'.csv'
     print(_csv_qt_class)
     path_vista=path_data+'/'+vt
     cat_names = sorted(os.listdir(path_vista))
@@ -35,19 +35,29 @@ def listar(save_dir, path_data, tipo, version, vt):
         #print(data)
         utils_lib.add_row_csv(_csv_qt_class, data)
 
-def run(save_dir, path_data, tipo, version):
+def run(params):
+    vistas=params['vistas']
+    save_dir=params['save_dir']
+    path_data=params['path_data']
+    tipo=params['tipo']
+    version=params['version']
+    
     for vt in vistas:
         path_vistas=path_data+'/'+vt
         print(path_vistas)
         listar(save_dir, path_data, tipo, version, vt)
-    
+
+params={
+        'vistas':['EQUATORIAL','POLAR'],
+        'save_dir': '/media/jczars/4C22F02A22F01B22/Ensembler_pollen_classification/BD/CPD1_Dn_VTcr_111124/',
+        'path_data': '/media/jczars/4C22F02A22F01B22/Ensembler_pollen_classification/BD/CPD1_Dn_VTcr_111124/',
+        'tipo': 'png',
+        'version':3  
+    }   
 
 if __name__=="__main__":
     # Sets the working directory
     os.chdir('/media/jczars/4C22F02A22F01B22/$WinREAgent/Pollen_classification_view/')
-    vistas=['EQUATORIAL','POLAR']
-    path_data='/media/jczars/4C22F02A22F01B22/Ensembler_pollen_classification/BD/CPD1_Dn_VTcr_111124/'
-    tipo='png'
-    version=3
-    run(path_data, path_data, tipo, version)
+    
+    run(params)
     
