@@ -3,11 +3,8 @@ import os
 import openpyxl
 import tensorflow as tf
 import pandas as pd
-import sys
 
-# Configuring the path to import custom modules
-sys.path.append('/media/jczars/4C22F02A22F01B22/$WinREAgent/Pollen_classification_view/')
-print("System paths:", sys.path)
+#Variables the environment
 
 # Importing modules and functions
 from models import get_data, utils, models_pre, models_train, reports_build
@@ -588,11 +585,12 @@ def run(workbook_path, start_index, verbose=0):
 
 if __name__ == "__main__":
     # Configuração do argparse para lidar com argumentos de linha de comando
+    default_path='0_pseudo_labels/Reports/config_pseudo_label_pre.xlsx'
     parser = argparse.ArgumentParser(description="Run the pollen classification process.")
     parser.add_argument(
-        '--workbook_path', 
+        '--path', 
         type=str, 
-        default='/media/jczars/4C22F02A22F01B22/$WinREAgent/Pollen_classification_view/0_pseudo_labels/Reports/config_pseudo_label_pre1.xlsx', 
+        default=default_path, 
         help="Path to the workbook. If not provided, the default path will be used."
     )
     parser.add_argument(
@@ -605,11 +603,11 @@ if __name__ == "__main__":
     args = parser.parse_args()
     
     # Check if the given path exists
-    if not os.path.exists(args.workbook_path):
-        print(f"Warning: The provided workbook path '{args.workbook_path}' does not exist.")
+    if not os.path.exists(args.path):
+        print(f"Warning: The provided workbook path '{args.path}' does not exist.")
         print("Using default workbook path.")
-        args.workbook_path = '/media/jczars/4C22F02A22F01B22/$WinREAgent/Pollen_classification_view/0_pseudo_labels/Reports/config_pseudo_label_pre1.xlsx'
+        args.path = default_path
 
     # Call the 'run' function with the arguments
-    run(args.workbook_path, args.start_index)
+    run(args.path, args.start_index)
 
