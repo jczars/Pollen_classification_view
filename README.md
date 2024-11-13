@@ -26,7 +26,6 @@ Pollen_classification_view
 ├── 0_pseudo_labels
 │   ├── Reports
 │   │   └── config_pseudo_label_pre.xlsx
-<<<<<<< HEAD
 │   ├── main_pseudo.py
 ├── 1_create_bd
 │   ├── config_resize.yaml
@@ -48,17 +47,6 @@ Pollen_classification_view
 │   ├── config_pl.yaml
 │   ├── config.yaml
 │   ├── Ensemble.py
-=======
-│   ├── main_pseudo_250724_r3.py
-├── modulos
-│   ├── get_calssifica.py
-│   ├── get_data.py
-│   ├── maneger_gpu.py
-│   ├── models_pre.py
-│   ├── models_train.py
-│   ├── reports_build.py
-│   ├── utils.py
->>>>>>> 0de9c01f2d001c43486f34e723fe09f28d6ae9e4
 ├── BD
 │   ├── BI_5
 │     ├── images_unlabels
