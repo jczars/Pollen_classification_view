@@ -40,7 +40,7 @@ def prepare_data(conf, root_path):
         dict: Dictionary with paths and experiment information.
     """
     # Destructuring the configuration dictionary for clarity
-    id_test = conf['id_test']
+    id_test = int(conf['id_test'])
     model = conf['model']
     aug = conf['aug']
     base = conf['base']
@@ -133,7 +133,8 @@ def load_data_labels(conf):
 
     # Load training and validation data with augmentation type
     try:
-        train, val = get_data.load_data_train(training_data, val_data, conf['aug'], input_size)
+        train, val = get_data.load_data_train_aug_param(training_data, val_data, conf['aug'], input_size)
+                             #load_data_train_aug_param(training_data, val_data, aug, input_size)
     except Exception as e:
         raise ValueError(f"Error during data loading and augmentation: {e}")
 
@@ -591,7 +592,7 @@ if __name__ == "__main__":
     parser.add_argument(
         '--workbook_path', 
         type=str, 
-        default='Reports/config_pseudo_label_pre.xlsx', 
+        default='/media/jczars/4C22F02A22F01B22/$WinREAgent/Pollen_classification_view/0_pseudo_labels/Reports/config_pseudo_label_pre1.xlsx', 
         help="Path to the workbook. If not provided, the default path will be used."
     )
     parser.add_argument(
@@ -607,7 +608,7 @@ if __name__ == "__main__":
     if not os.path.exists(args.workbook_path):
         print(f"Warning: The provided workbook path '{args.workbook_path}' does not exist.")
         print("Using default workbook path.")
-        args.workbook_path = 'Reports/config_pseudo_label_pre.xlsx'
+        args.workbook_path = '/media/jczars/4C22F02A22F01B22/$WinREAgent/Pollen_classification_view/0_pseudo_labels/Reports/config_pseudo_label_pre1.xlsx'
 
     # Call the 'run' function with the arguments
     run(args.workbook_path, args.start_index)

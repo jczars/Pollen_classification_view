@@ -38,7 +38,8 @@ os.environ["tf_gpu_allocator"]="cuda_malloc_async"
 sys.path.append('/media/jczars/4C22F02A22F01B22/$WinREAgent/Pollen_classification_view/')
 print(sys.path)
 
-from models import  utils, get_data, models_train, sound_test_finalizado, maneger_gpu, send_whatsApp_msn
+from models import  utils, get_data, models_train, models_pre 
+from models import  sound_test_finalizado, maneger_gpu, send_whatsApp_msn
 from models import reports_build as reports
 
 
@@ -104,104 +105,6 @@ def print_layer(conv_model, layers_params):
     if save_dir:
         utils.add_row_csv(_csv_layers, layers_arr)
     
-
-# In[3]:
-
-# ## hyper_model
-def hyper_model(config_model):
-    """
-    Builds and configures a fine-tuned model based on a pre-trained base model.
-
-    Parameters
-    ----------
-    config_model : dict
-        Configuration dictionary with the following keys:
-            - 'model' : str
-                Name of the pre-trained model to be used (e.g., "VGG16").
-            - 'id_test' : str
-                Identifier for the test or specific model instance.
-            - 'num_classes' : int
-                Number of output classes for the classification task.
-            - 'last_activation' : str
-                Activation function for the final dense layer (e.g., "softmax").
-            - 'freeze' : int
-                Number of layers to freeze in the base model for transfer learning.
-            - 'save_dir' : str
-                Path to the directory where layer information will be saved.
-            - 'optimizer' : str
-                Name of the optimizer to use (e.g., "Adam", "SGD", "RMSprop", "Adagrad").
-            - 'learning_rate' : float
-                Learning rate for the optimizer.
-
-    Returns
-    -------
-    keras.Model
-        Compiled Keras model with fine-tuning and the specified configuration.
-
-    Notes
-    -----
-    This function loads a pre-trained model (with 'imagenet' weights), freezes a certain number
-    of layers as specified, adds a custom dense layer for classification, and optionally unfreezes
-    some layers for further fine-tuning. The optimizer and learning rate are also set according 
-    to the provided configuration.
-
-    Documentation Style
-    -------------------
-    - Function documentation follows the **NumPy style** for readability and structured presentation.
-    - Code is refactored according to **PEP8** coding standards for Python, focusing on readability,
-      modularity, and clear comments.
-    """
-    
-    # Initialize the specified pre-trained model
-    model = eval(config_model['model'])
-    id_test = config_model['id_test']
-    
-    # Load the base model with 'imagenet' weights and no top layer
-    base_model = model(include_top=True, weights='imagenet')
-
-    # Freeze all layers in the base model initially
-    for layer in base_model.layers:
-        layer.trainable = False
-    base_model.summary()
-
-    # Connect a custom output layer to the base model
-    conv_output = base_model.layers[-2].output  # Use the second last layer as output
-    output = layers.Dense(config_model['num_classes'], name='predictions', 
-                          activation=config_model['last_activation'])(conv_output)
-    fine_model = Model(inputs=base_model.input, outputs=output)
-
-    # Unfreeze layers based on the 'freeze' index for fine-tuning
-    freeze = config_model['freeze']
-    for layer in base_model.layers[freeze:]:
-        layer.trainable = True
-
-    # Prepare parameters for saving layer information
-    layers_params = {'id_test': id_test, 'save_dir': config_model['save_dir'], 'model': config_model['model']}
-    
-    # Print and save layer details
-    print_layer(fine_model, layers_params)
-
-    # Set the optimizer based on configuration
-    optimizer_name = config_model['optimizer']
-    learning_rate = config_model['learning_rate']
-    if optimizer_name == 'Adam':
-        opt = keras.optimizers.Adam(learning_rate=learning_rate)
-    elif optimizer_name == 'RMSprop':
-        opt = keras.optimizers.RMSprop(learning_rate=learning_rate)
-    elif optimizer_name == 'Adagrad':
-        opt = keras.optimizers.Adagrad(learning_rate=learning_rate)
-    elif optimizer_name == 'SGD':
-        opt = keras.optimizers.SGD(learning_rate=learning_rate)
-    else:
-        raise ValueError(f"Unsupported optimizer: {optimizer_name}")
-    print(opt)
-
-    # Compile the model with categorical crossentropy loss and accuracy metric
-    fine_model.compile(loss="categorical_crossentropy", optimizer=opt, metrics=["accuracy"])
-    
-    fine_model.summary()
-    return fine_model
-
 
 # In[4]:
     
@@ -478,7 +381,7 @@ def process_train(_config_train, verbose=1):
         'freeze': _config_train['freeze']
     }
     
-    model_tl = hyper_model(_config_model)
+    model_tl = models_pre.hyper_model_up(_config_model)
 
     if verbose > 0:
         print("\n4-[INFO] Load train and validation data")
@@ -486,7 +389,7 @@ def process_train(_config_train, verbose=1):
     k = _config_train['k']
     split_valid = float(_config_train['split_valid'])
     
-    train, val = get_data.load_data_train(
+    train, val = get_data.load_data_train_aug(
         _config_train['path_data'],
         K=k,
         BATCH=_config_train['batch_size'],
@@ -909,7 +812,7 @@ if __name__ == "__main__":
     None
     """
     # Define the default path for the sheet
-    default_path_sheet = "/media/jczars/4C22F02A22F01B22/$WinREAgent/Pollen_classification_view/2_fine_tuned/Reports/config_FT_vistas_121124.xlsx"
+    default_path_sheet = "/media/jczars/4C22F02A22F01B22/$WinREAgent/Pollen_classification_view/2_fine_tuned/Reports/config_FT_vistas_aug_121124.xlsx"
 
     # Argument parser
     parser = argparse.ArgumentParser(description="Run the training and evaluation process.")
@@ -917,7 +820,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     """_exemple
 
-        python FT_DFT_K10_xlsx.py "/media/jczars/4C22F02A22F01B22/$WinREAgent/Pollen_classification_view/2_fine_tuned/Reports/config_FT_vistas_121124.xlsx"
+        python FT_DFT_K10_Aug_xlsx.py "/media/jczars/4C22F02A22F01B22/$WinREAgent/Pollen_classification_view/2_fine_tuned/Reports/config_FT_vistas_aug_121124.xlsx"
     """
     
 

@@ -15,11 +15,19 @@ def aug_param(_aug):
         aug=dict(rescale=1./255,
                  brightness_range=[0.2,0.8],
                  horizontal_flip = True)
+    if _aug== 'aug1':
+        aug=dict(width_shift_range=0.1,
+        height_shift_range=0.1,
+        zoom_range=0.3,
+        fill_mode='nearest',
+        horizontal_flip=True,
+        rescale=1./255,
+        )
 
     idg = ImageDataGenerator(**aug)
     return idg
 
-def load_data_train(training_data, val_data, aug, input_size):
+def load_data_train_aug_param(training_data, val_data, aug, input_size):
   """
     -->loading train data
     :param: training_data: ptah at dataset
@@ -104,6 +112,52 @@ def load_data_train_aug(PATH_BD, K, BATCH, INPUT_SIZE, SPLIT_VALID):
         zoom_range=0.3,
         fill_mode='nearest',
         horizontal_flip=True,
+        rescale=1./255,
+        validation_split=SPLIT_VALID
+    )
+
+    train_generator = idg.flow_from_directory(
+        directory=train_dir,
+        target_size=INPUT_SIZE,
+        color_mode="rgb",
+        batch_size=BATCH,
+        class_mode="categorical",
+        shuffle=True,
+        seed=42,
+        subset='training'
+    )
+
+    val_generator = idg.flow_from_directory(
+        directory=train_dir,
+        target_size=INPUT_SIZE,
+        color_mode="rgb",
+        batch_size=BATCH,
+        class_mode="categorical",
+        shuffle=True,
+        seed=42,
+        subset='validation'
+    )
+
+    return train_generator, val_generator
+
+def load_data_train(PATH_BD, K, BATCH, INPUT_SIZE, SPLIT_VALID):
+    """
+    Load training data with augmentation.
+    
+    Args:
+        PATH_BD (str): Path to the dataset.
+        K (int): K-fold value.
+        BATCH (int): Batch size.
+        INPUT_SIZE (tuple): Input dimensions (height, width).
+        SPLIT_VALID (float): Portion to split the training data into training and validation sets.
+        
+    Returns:
+        tuple: Training and validation datasets.
+    """
+    train_dir = PATH_BD + '/Train/k' + str(K)
+    print('Training directory: ', train_dir)
+    
+    idg = ImageDataGenerator(
         rescale=1./255,
         validation_split=SPLIT_VALID
     )
