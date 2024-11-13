@@ -139,7 +139,6 @@ Pollen_classification_view
 │       │    │    ├── k2
 │       │    │    ├── k3
 │       │    │    ├── ...
-<<<<<<< HEAD
 ├── modulos
 │   ├── del_folders_limiar.py
 │   ├── get_calssifica.py
@@ -153,8 +152,6 @@ Pollen_classification_view
 │   ├── sound_test_finalizado.py
 │   ├── utils.py
 │   ├── voto_majoritary.py
-=======
->>>>>>> 0de9c01f2d001c43486f34e723fe09f28d6ae9e4
 
 
 ```
