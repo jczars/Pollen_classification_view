@@ -28,24 +28,28 @@ Pollen_classification_view
 │   │   └── config_pseudo_label_pre.xlsx
 │   ├── main_pseudo.py
 ├── 1_create_bd
+│   ├── balanced_BD_vistas_k.py
+│   ├── config_balanced.yaml
 │   ├── config_resize.yaml
 │   ├── config_separeted.yaml
-│   ├── resize.py
+│   ├── config_split.yaml
+│   ├── rename_folders.py
+│   ├── resize_img_bd.py
 │   ├── separeted_bd.py
 │   ├── split_BD_vistas_k.py
 ├── 2_fine_tuned
 │   ├── Reports
 │       ├── 0_DenseNet201
 │       ├── 0_Test_reports_101124.xlsx
+│   ├── FT_DFT_K10_Aug_xlsx.py
 │   ├── FT_DFT_K10_xlsx.py
 ├── 3_ensemble
 │   ├── Reports
-│       ├── POLAR_ens_111124_reports
 │       ├── EQUATORIAL_ens_111124_reports
+│       ├── POLAR_ens_111124_reports
 │   ├── conf_vote.yaml
 │   ├── config_eq.yaml
 │   ├── config_pl.yaml
-│   ├── config.yaml
 │   ├── Ensemble.py
 ├── BD
 │   ├── BI_5
@@ -58,18 +62,6 @@ Pollen_classification_view
 │       ├── polar_circular
 │       ├── polar_triangular
 │       └── polar_tricircular
-│   ├── Cropped Pollen Grains
-│       ├── 1.Thymbra
-│       ├── 2.Erica
-│       ├── 3.Castanea
-│       ├── 4.Eucalyptus
-│       ├── ...
-│   ├── CPD1_Cr_Rs
-│       ├── asphodelus
-│       ├── calicotome
-│       ├── castanea
-│       ├── ceratonia
-│       ├── ...
 │   ├── CPD1_Dn_VTcr_111124
 │       ├── EQUATORIAL
 │       │    ├── castanea
@@ -127,6 +119,18 @@ Pollen_classification_view
 │       │    │    ├── k2
 │       │    │    ├── k3
 │       │    │    ├── ...
+│   ├── CPD1_Is_Rc
+│       ├── asphodelus
+│       ├── calicotome
+│       ├── castanea
+│       ├── ceratonia
+│       ├── ...
+│   ├── Cropped Pollen Grains
+│       ├── 1.Thymbra
+│       ├── 2.Erica
+│       ├── 3.Castanea
+│       ├── 4.Eucalyptus
+│       ├── ...
 ├── modulos
 │   ├── del_folders_limiar.py
 │   ├── get_calssifica.py
@@ -140,7 +144,6 @@ Pollen_classification_view
 │   ├── sound_test_finalizado.py
 │   ├── utils.py
 │   ├── voto_majoritary.py
-
 
 ```
 ### Folder Description:
