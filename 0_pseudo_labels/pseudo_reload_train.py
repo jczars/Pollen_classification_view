@@ -4,6 +4,7 @@ import openpyxl
 import tensorflow as tf
 import pandas as pd
 from memory_profiler import profile
+import os
 
 #Variables the environment
 
@@ -186,46 +187,6 @@ def build_train_config(row, res_pre, time_step):
 
     return config
 
-@profile
-def train_model0(config, train_data, val_data, time_step):
-    # Instantiate the model based on the provided configuration
-    """
-    Train a model with the given configuration and data.
-
-    Parameters
-    ----------
-    config : dict
-        A dictionary containing the configuration for model training.
-    train_data : tuple
-        A tuple containing the training data and labels.
-    val_data : tuple
-        A tuple containing the validation data and labels.
-
-    Returns
-    -------
-    model_inst : keras.Model
-        The trained model instance.
-    res_train : dict
-        A dictionary containing the training history and metrics.
-    """
-    model_inst = models_pre.hyper_model_up(config, verbose=1)
-    print('\n[INFO]--> time_step ', time_step)
-    
-    # Train the model with training and validation data
-    res_train = models_train.run_train(train_data, val_data, model_inst, config)
-    
-    # Build the path to save the model
-    model_name = f"{config['id_test']}_{config['model']}_bestLoss_{config['time_step']}.keras"
-    save_path = os.path.join(config['save_dir'], model_name)
-    
-    # Save the trained model
-    model_inst.save(save_path)
-    
-    return model_inst, res_train
-
-import os
-from tensorflow.keras.models import load_model
-
 def train_model(config, train_data, val_data, time_step):
     """
     Train a model with the given configuration and data. If time_step > 0, it will load a pre-trained model
@@ -263,7 +224,7 @@ def train_model(config, train_data, val_data, time_step):
         # Load the model from the previous time step
         if os.path.exists(save_path):
             print(f"[INFO]--> Loading model from {save_path}")
-            model_inst = load_model(save_path)
+            model_inst = tf.keras.models.load_model(save_path)
             
             # Explicitly freeze the layers again
             for layer in model_inst.layers:
