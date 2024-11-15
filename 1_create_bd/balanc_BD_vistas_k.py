@@ -3,15 +3,11 @@
 import numpy as np
 import os, glob
 import datetime
-import sys
 import imageio.v2 as imageio
 import imgaug as ia
 from imgaug import augmenters as iaa
 from imgaug import parameters as iap
 
-# Configure the path for importing custom modules
-sys.path.append('/media/jczars/4C22F02A22F01B22/$WinREAgent/Pollen_classification_view/')
-print("Caminhos de sistema:", sys.path)
 from models import utils 
 
 def log_message(message, verbose):
@@ -268,7 +264,7 @@ def process_augmentation(config):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run data augmentation with specified configuration.")
-    parser.add_argument("--config", type=str, default="/media/jczars/4C22F02A22F01B22/$WinREAgent/Pollen_classification_view/1_create_bd/config_balabce.yaml", help="Path to the configuration YAML file.")
+    parser.add_argument("--config", type=str, default="/media/jczars/4C22F02A22F01B22/Pollen_classification_view/1_create_bd/config_balabce.yaml", help="Path to the configuration YAML file.")
     args = parser.parse_args()
 
     # Load parameters from config file and process augmentation
