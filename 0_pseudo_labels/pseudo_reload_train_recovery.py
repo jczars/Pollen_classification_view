@@ -25,7 +25,7 @@ os.chdir(working_dir)
 # # Functions
 
 # ## rec
-@profile
+#@profile
 def rec_id(workbook_path, id_test):
     # Load configuration data from 'Sheet'
     """
@@ -52,7 +52,7 @@ def rec_id(workbook_path, id_test):
 # ## train_model
 
 
-@profile
+#@profile
 def train_model(config, train_data, val_data, time_step):
     """
     Train a model with the given configuration and data. If time_step > 0, it will load a pre-trained model
@@ -127,7 +127,7 @@ def train_model(config, train_data, val_data, time_step):
 # ## build_reports_config
 
 
-@profile
+#@profile
 def build_reports_config(time_step, config, res_pre, model_inst, res_train, verbose=0):
     """
     Generates evaluation reports for a model based on given configurations, test data, and training results.
@@ -193,7 +193,7 @@ def build_reports_config(time_step, config, res_pre, model_inst, res_train, verb
 # ## classification
 
 
-@profile
+#@profile
 def classification(config, res_pre, model, _tempo, verbose=0):
     """
     Classifies unlabeled images and generates pseudo-labels.
@@ -264,7 +264,7 @@ def classification(config, res_pre, model, _tempo, verbose=0):
 # ## selection
 
 
-@profile
+#@profile
 def selection(pseudos_df, conf, res_pre, _tempo, verbose=0):
     """
     Performs selection of pseudo-labels for training if unlabeled data is available.
@@ -336,7 +336,7 @@ def selection(pseudos_df, conf, res_pre, _tempo, verbose=0):
         return None
 
 
-@profile
+#@profile
 def rel_data(time_step, report_metrics, res_train, res_sel, workbook_path, config_index, verbose=0):
     """
     Saves data into an Excel workbook for reporting purposes.

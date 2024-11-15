@@ -20,7 +20,7 @@ tf.get_logger().setLevel('ERROR')  # Limits TensorFlow messages to errors only
 Modification to be made: attempt to reduce memory consumption!
 """
 
-@profile
+#@profile
 def prepare_data(conf, root_path):
     """
     Prepares the environment for the pollen classification experiment.
@@ -84,7 +84,7 @@ def prepare_data(conf, root_path):
 
 
 import pandas as pd
-@profile
+#@profile
 def load_data_labels(conf):
     """
     Load training and validation data from CSV files.
@@ -138,7 +138,7 @@ def load_data_labels(conf):
 
     # Return the data generators and training data
     return train, val
-@profile
+#@profile
 def build_train_config(row, res_pre, time_step):
     """Build a configuration dictionary for model training.
 
@@ -186,7 +186,7 @@ def build_train_config(row, res_pre, time_step):
 
     return config
 
-@profile
+#@profile
 def train_model(config, train_data, val_data, time_step):
     # Instantiate the model based on the provided configuration
     """
@@ -222,7 +222,7 @@ def train_model(config, train_data, val_data, time_step):
     model_inst.save(save_path)
     
     return model_inst, res_train
-@profile
+#@profile
 def build_reports_config(time_step, config, res_pre, model_inst, res_train, verbose=0):
     """
     Generates evaluation reports for a model based on given configurations, test data, and training results.
@@ -284,7 +284,7 @@ def build_reports_config(time_step, config, res_pre, model_inst, res_train, verb
     
     return report_metrics
 
-@profile
+#@profile
 def classification(config, res_pre, model, _tempo, verbose=0):
     """
     Classifies unlabeled images and generates pseudo-labels.
@@ -350,7 +350,7 @@ def classification(config, res_pre, model, _tempo, verbose=0):
 
     return pseudos_df
 
-@profile
+#@profile
 def selection(pseudos_df, conf, res_pre, _tempo, verbose=0):
     """
     Performs selection of pseudo-labels for training if unlabeled data is available.
@@ -421,7 +421,7 @@ def selection(pseudos_df, conf, res_pre, _tempo, verbose=0):
             print("[INFO] No unlabeled data available for processing.")
         return None
 
-@profile
+#@profile
 def rel_data(time_step, report_metrics, res_train, res_sel, workbook_path, config_index, verbose=0):
     """
     Saves data into an Excel workbook for reporting purposes.
@@ -493,7 +493,7 @@ def rel_data(time_step, report_metrics, res_train, res_sel, workbook_path, confi
     if verbose > 0:
         print("Data saved successfully. Sheets available:", workbook.sheetnames)
 
-@profile
+#@profile
 def run(workbook_path, start_index, end_index=None, verbose=0):
     """
     Executes the pseudo-labeling and training process based on configurations provided in an Excel sheet.
