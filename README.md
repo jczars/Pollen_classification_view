@@ -202,19 +202,78 @@ Pollen_classification_view
 
 ## Usage
 
-Follow these steps to use the project:
+The project is divided into phases, following the outline of phase 1.
+**Phase 1**: Separate pollen into views (Equatorial and Polar) using pseudo-labeling.
 
 1. **Unpack the BI_5 dataset**:
    First, extract the BI_5 dataset by running the following command:
 
 ```bash
    sudo tar -xzvf BD/BI_5.tar.gz
-´´´
+```
 
 2. **Perform pseudo-labeling**: To run the pseudo-labeling process, execute the following command. This will start the process based on the configuration in the specified Excel file:
 ```bash
   python 0_pseudo_labels/pseudo_reload_train.py --path 0_pseudo_labels/Reports/config_pseudo_label_pre.xlsx --start_index 5 --end_index 1
+```
+in this case only one test will be performed.
+```bash
+  python 0_pseudo_labels/pseudo_reload_train.py --path 0_pseudo_labels/Reports/config_pseudo_label_pre.xlsx --start_index 0
+```
+in this case all the tests configured in the spreadsheet will be executed.
 
+3. **`1_create_bd/`**: folder containing the algorithms used to prepare the datasets.
+**Cretan Pollen Dataset v1 (CPD-1)**
+Folder containing the algorithms used to prepare the datasets.
+Download the database available at: https://zenodo.org/records/4756361. Choose the Cropped Pollen Grains version and place it in the BD folder.
+```bash
+    wget -P BD/ https://zenodo.org/record/4756361/files/Cropped%20Pollen%20Grains.rar?download=1
+```
 
+```bash
+    curl -L https://zenodo.org/record/4756361/files/Cropped%20Pollen%20Grains.rar?download=1 -o BD/Cropped_Pollen_Grains.rar
+```
+To extract the .rar file, you need to install the unrar tool (if not already installed):
+```bash
+  sudo apt-get install unrar
+```
+This installs the unrar tool, which is necessary for extracting .rar files.
+```bash
+    unrar x BD/Cropped\ Pollen\ Grains.rar BD/
+```
 
+**Renaming Dataset Classes**
+The database class names follow the syntax “1.Thymbra” (e.g., "1.Thymbra", "2.Erica"). We will rename the folders to follow a simpler format like “thymbra”.
+Use the rename_folders.py script to rename the classes:
 
+```bash
+    python 1_create_bd/rename_folders.py --path_data BD/Cropped\ Pollen\ Grains/
+```
+This command runs the rename_folders.py script to rename the class folders inside the Cropped Pollen Grains directory. Each folder name will be converted to lowercase for consistency.
+
+**resize_img_bd.py:**
+This script reads the images from the Cropped Pollen Grains dataset and checks if they are in the standard size of 224 x 224. If any images do not meet these dimensions, the script creates a new dataset with all images resized to the specified size.
+
+The resizing process uses a configuration file (config_resize.yaml) to define input and output paths, along with other parameters.
+
+Expected Result:
+A new dataset folder containing all images resized to 224 x 224, ensuring consistency across the dataset.
+
+Usage: To run the resizing script with the configuration file, use the following command:
+
+```bash
+    python 1_create_bd/resize_img_bd.py --config 1_create_bd/config_resize.yaml
+```
+
+**separeted_bd_r1.py**:
+This script separates the Cropped Pollen Grains dataset into two distinct views: Equatorial and Polar. It uses a configuration file (config_separeted.yaml) to define the input and output paths, along with other processing parameters.
+
+Expected Results:
+At the end of the execution, the script generates reports and separates images into the specified views (Equatorial and Polar), saving them in the respective folders within the database.
+
+Usage:
+To run the script, ensure that the configuration file is properly set up, then execute the following command:
+```bash
+    python 1_create_bd/separeted_bd_r1.py --config 1_create_bd/config_separeted.yaml
+```
+Ensure that the classes are correctly specified in the config_separeted.yaml file before running the script.
