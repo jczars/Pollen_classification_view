@@ -28,12 +28,13 @@ pip install -r requirements.txt
 This step is required if you face issues with the module imports.
 To include the project path:
 ```bash
-    export PYTHONPATH=/media/jczars/4C22F02A22F01B22/Pollen_classification_view/:$PYTHONPATH
+export PYTHONPATH=/media/jczars/4C22F02A22F01B22/Pollen_classification_view/:$PYTHONPATH
 ```
 
 To remove the project path
 ```bash
 unset PYTHONPATH
+```
 
 # Project Folder Structure
 Below is the folder structure for the `Pollen_classification_view` project:
@@ -209,16 +210,16 @@ The project is divided into phases, following the outline of phase 1.
    First, extract the BI_5 dataset by running the following command:
 
 ```bash
-   sudo tar -xzvf BD/BI_5.tar.gz
+sudo tar -xzvf BD/BI_5.tar.gz
 ```
 
 2. **Perform pseudo-labeling**: To run the pseudo-labeling process, execute the following command. This will start the process based on the configuration in the specified Excel file:
 ```bash
-  python 0_pseudo_labels/pseudo_reload_train.py --path 0_pseudo_labels/Reports/config_pseudo_label_pre.xlsx --start_index 5 --end_index 1
+python 0_pseudo_labels/pseudo_reload_train.py --path 0_pseudo_labels/Reports/config_pseudo_label_pre.xlsx --start_index 5 --end_index 1
 ```
 in this case only one test will be performed.
 ```bash
-  python 0_pseudo_labels/pseudo_reload_train.py --path 0_pseudo_labels/Reports/config_pseudo_label_pre.xlsx --start_index 0
+python 0_pseudo_labels/pseudo_reload_train.py --path 0_pseudo_labels/Reports/config_pseudo_label_pre.xlsx --start_index 0
 ```
 in this case all the tests configured in the spreadsheet will be executed.
 
@@ -227,19 +228,19 @@ in this case all the tests configured in the spreadsheet will be executed.
 Folder containing the algorithms used to prepare the datasets.
 Download the database available at: https://zenodo.org/records/4756361. Choose the Cropped Pollen Grains version and place it in the BD folder.
 ```bash
-    wget -P BD/ https://zenodo.org/record/4756361/files/Cropped%20Pollen%20Grains.rar?download=1
+wget -P BD/ https://zenodo.org/record/4756361/files/Cropped%20Pollen%20Grains.rar?download=1
 ```
 
 ```bash
-    curl -L https://zenodo.org/record/4756361/files/Cropped%20Pollen%20Grains.rar?download=1 -o BD/Cropped_Pollen_Grains.rar
+curl -L https://zenodo.org/record/4756361/files/Cropped%20Pollen%20Grains.rar?download=1 -o BD/Cropped_Pollen_Grains.rar
 ```
 To extract the .rar file, you need to install the unrar tool (if not already installed):
 ```bash
-  sudo apt-get install unrar
+sudo apt-get install unrar
 ```
 This installs the unrar tool, which is necessary for extracting .rar files.
 ```bash
-    unrar x BD/Cropped\ Pollen\ Grains.rar BD/
+unrar x BD/Cropped\ Pollen\ Grains.rar BD/
 ```
 
 **Renaming Dataset Classes**
@@ -247,7 +248,7 @@ The database class names follow the syntax “1.Thymbra” (e.g., "1.Thymbra", "
 Use the rename_folders.py script to rename the classes:
 
 ```bash
-    python 1_create_bd/rename_folders.py --path_data BD/Cropped\ Pollen\ Grains/
+python 1_create_bd/rename_folders.py --path_data BD/Cropped\ Pollen\ Grains/
 ```
 This command runs the rename_folders.py script to rename the class folders inside the Cropped Pollen Grains directory. Each folder name will be converted to lowercase for consistency.
 
@@ -262,7 +263,7 @@ A new dataset folder containing all images resized to 224 x 224, ensuring consis
 Usage: To run the resizing script with the configuration file, use the following command:
 
 ```bash
-    python 1_create_bd/resize_img_bd.py --config 1_create_bd/config_resize.yaml
+python 1_create_bd/resize_img_bd.py --config 1_create_bd/config_resize.yaml
 ```
 
 **separeted_bd_r1.py**:
@@ -274,6 +275,6 @@ At the end of the execution, the script generates reports and separates images i
 Usage:
 To run the script, ensure that the configuration file is properly set up, then execute the following command:
 ```bash
-    python 1_create_bd/separeted_bd_r1.py --config 1_create_bd/config_separeted.yaml
+python 1_create_bd/separeted_bd_r1.py --config 1_create_bd/config_separeted.yaml
 ```
 Ensure that the classes are correctly specified in the config_separeted.yaml file before running the script.
