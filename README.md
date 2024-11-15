@@ -306,3 +306,15 @@ To run the script, ensure that the configuration file (`config_balanced.yaml`) i
 ```bash
 python 1_create_bd/balanc_BD_vistas_k.py --config 1_create_bd/config_balabce.yaml 
 ```
+## Phase 2
+**fine-tuning**
+Phase 2: Refine selected models and classify datasets generated in Phase 1.
+This script performs fine-tuning on pre-trained networks, with selected networks including DenseNet201, MobileNet, ResNet152V2, Xception, and ResNet50. The fine-tuning is done using the DFT strategy to train the networks.
+
+To run the tests, a spreadsheet with the necessary configurations for the experiments is required. The spreadsheet can be found in the folder: 2_fine_tuned/Reports/config_FT_vistas_121124.xlsx.
+
+Usage:
+To execute the script, use the following command:
+``bash
+python 2_fine_tuned/FT_DFT_K10_xlsx.py 2_fine_tuned/Reports/config_FT_vistas_121124.xlsx
+```
