@@ -223,12 +223,12 @@ python 0_pseudo_labels/pseudo_reload_train.py --path 0_pseudo_labels/Reports/con
 ```
 in this case all the tests configured in the spreadsheet will be executed.
 
-3. **`1_create_bd/`**: folder containing the algorithms used to prepare the datasets.
+3. **1_create_bd**: folder containing the algorithms used to prepare the datasets.
 **Cretan Pollen Dataset v1 (CPD-1)**
 Folder containing the algorithms used to prepare the datasets.
 Download the database available at: https://zenodo.org/records/4756361. Choose the Cropped Pollen Grains version and place it in the BD folder.
 ```bash
-wget -P BD/ https://zenodo.org/record/4756361/files/Cropped%20Pollen%20Grains.rar?download=1
+wget -P BD/ https://zenodo.org/record/4756361/files/Cropped%20Pollen%20Grains.rar?download=1 -O BD/Cropped_Pollen_Grains.rar
 ```
 or
 ```bash
@@ -240,7 +240,7 @@ sudo apt-get install unrar
 ```
 This installs the unrar tool, which is necessary for extracting .rar files.
 ```bash
-unrar x BD/Cropped\ Pollen\ Grains.rar BD/
+sudo unrar x BD/Cropped_Pollen_Grains.rar BD/
 ```
 
 **Renaming Dataset Classes**
