@@ -315,6 +315,6 @@ To run the tests, a spreadsheet with the necessary configurations for the experi
 
 Usage:
 To execute the script, use the following command:
-``bash
+```bash
 python 2_fine_tuned/FT_DFT_K10_xlsx.py 2_fine_tuned/Reports/config_FT_vistas_121124.xlsx
 ```
