@@ -381,6 +381,85 @@ def plot_training_metricsV1(history):
 
     return fig
 
+import matplotlib.pyplot as plt
+import pandas as pd
+
+def plot_training_metricsV2(history):
+    """
+    Plots training metrics (loss, accuracy) from the training history.
+
+    Parameters:
+        history (History): The training history returned by the Keras fit method.
+
+    Returns:
+        fig: Matplotlib figure object of the training metrics.
+    """
+    # Verifica se as chaves de métricas existem no histórico
+    if not all(metric in history.history for metric in ['loss', 'accuracy']):
+        raise KeyError("The training history is missing required metrics ('loss', 'accuracy').")
+    
+    # Converte o histórico para um DataFrame
+    pd_history = pd.DataFrame(history.history)
+
+    # Define o tamanho da figura
+    fig, axes = plt.subplots(1, 2, figsize=(14, 6))  # 1 linha, 2 colunas de gráficos
+
+    # Gráfico de Perda (Loss)
+    axes[0].plot(pd_history['loss'], label='Loss', color='r', linestyle='-', linewidth=2)
+    if 'val_loss' in pd_history.columns:
+        axes[0].plot(pd_history['val_loss'], label='Validation Loss', color='orange', linestyle='--', linewidth=2)
+    
+    # Encontrar o menor valor de loss e val_loss
+    best_loss_idx = pd_history['loss'].idxmin()
+    best_loss = pd_history['loss'].min()
+    
+    axes[0].plot(best_loss_idx, best_loss, 'bo', label=f'Best Loss: {best_loss:.4f}')
+    axes[0].annotate(f'{best_loss:.4f}', xy=(best_loss_idx, best_loss), 
+                     xytext=(best_loss_idx, best_loss + 0.1),
+                     arrowprops=dict(facecolor='black', shrink=0.05), fontsize=10)
+
+    if 'val_loss' in pd_history.columns:
+        best_val_loss_idx = pd_history['val_loss'].idxmin()
+        best_val_loss = pd_history['val_loss'].min()
+        
+        axes[0].plot(best_val_loss_idx, best_val_loss, 'go', label=f'Best Val Loss: {best_val_loss:.4f}')
+        axes[0].annotate(f'{best_val_loss:.4f}', xy=(best_val_loss_idx, best_val_loss), 
+                         xytext=(best_val_loss_idx, best_val_loss + 0.1),
+                         arrowprops=dict(facecolor='black', shrink=0.05), fontsize=10)
+    
+    axes[0].set_title("Training Loss", fontsize=16)
+    axes[0].set_xlabel('Epochs', fontsize=12)
+    axes[0].set_ylabel('Loss', fontsize=12)
+    axes[0].legend(loc='upper right')
+    axes[0].grid(True)
+
+    # Gráfico de Acurácia (Accuracy)
+    axes[1].plot(pd_history['accuracy'], label='Accuracy', color='b', linestyle='-', linewidth=2)
+    if 'val_accuracy' in pd_history.columns:
+        axes[1].plot(pd_history['val_accuracy'], label='Validation Accuracy', color='green', linestyle='--', linewidth=2)
+    
+    # Encontrar o melhor valor de acurácia (opcional)
+    best_acc_idx = pd_history['accuracy'].idxmax()
+    best_acc = pd_history['accuracy'].max()
+    axes[1].plot(best_acc_idx, best_acc, 'bo', label=f'Best Acc: {best_acc:.4f}')
+    
+    if 'val_accuracy' in pd_history.columns:
+        best_val_acc_idx = pd_history['val_accuracy'].idxmax()
+        best_val_acc = pd_history['val_accuracy'].max()
+        axes[1].plot(best_val_acc_idx, best_val_acc, 'go', label=f'Best Val Acc: {best_val_acc:.4f}')
+    
+    axes[1].set_title("Training Accuracy", fontsize=16)
+    axes[1].set_xlabel('Epochs', fontsize=12)
+    axes[1].set_ylabel('Accuracy', fontsize=12)
+    axes[1].legend(loc='lower right')
+    axes[1].grid(True)
+
+    # Ajuste do layout
+    plt.tight_layout()
+
+    return fig
+
+
 def reports_gen(test_data_generator, model, categories, history, reports_config):
     """
     Generate and save evaluation reports for the trained model.
@@ -421,7 +500,7 @@ def reports_gen(test_data_generator, model, categories, history, reports_config)
     boxplot_fig = plot_confidence_boxplot(df_correct)
     class_report = generate_classification_report(y_true, y_pred, categories)
     metrics = calculate_metrics(y_true, y_pred)
-    figTrain = plot_training_metricsV1(history)
+    figTrain = plot_training_metricsV2(history)
 
     metrics_all = {
         'test_loss': test_loss,
