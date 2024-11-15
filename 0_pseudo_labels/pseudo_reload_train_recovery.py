@@ -511,7 +511,7 @@ def run(workbook_path: str, id_test: int, verbose=1):
                 print("[INFO] No more unlabeled data to process.")
             break
         print('\n[STEP] save reports')
-        rel_data(time_step, report_metrics, res_train, res_sel, workbook_path, time_step)
+        rel_data(time_step, report_metrics, res_train, res_sel, workbook_path, id_test)
         
         time_step += 1
         print(f'*'*30)   
