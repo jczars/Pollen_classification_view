@@ -1,6 +1,11 @@
 # Pollen_classification_view
 
-Pollen classification taking into account the characteristic view of the pollen. This system is phased, where the first is responsible for separating the pollen into views [Equatorial, Polar]. The second phase is responsible for refining the selected networks and classifying the bases generated in phase 1. The third phase is responsible for assembling committees using the networks from phase 2.
+This project focuses on the classification of pollen grains by taking into account their characteristic views (Equatorial, Polar). The system is divided into three phases:
+
+Phase 1: Separate pollen into views (Equatorial and Polar) using pseudo-labeling.
+Phase 2: Refine selected models and classify datasets generated in Phase 1.
+Phase 3: Assemble ensembles using models from Phase 2 for more accurate classification.
+
 
 ## Installation
 
@@ -19,10 +24,20 @@ cd Pollen_classification_view
 ```bash
 pip install -r requirements.txt
 ```
-# Project Folder Structure
+4. Adjust Python Path (if needed):
+This step is required if you face issues with the module imports.
+To include the project path:
 ```bash
-Below is the folder structure for the `Pollen_classification_view` project:
 
+export PYTHONPATH=/media/jczars/4C22F02A22F01B22/Pollen_classification_view/:$PYTHONPATH
+
+To remove the project path
+```bash
+unset PYTHONPATH
+
+# Project Folder Structure
+Below is the folder structure for the `Pollen_classification_view` project:
+```bash
 Pollen_classification_view
 ├── 0_pseudo_labels
 │   ├── Reports
@@ -147,34 +162,59 @@ Pollen_classification_view
 │   ├── voto_majoritary.py
 
 ```
-### Folder Description:
-- **0_pseudo_labels/**: Contains scripts and reports for the pseudo-labeling process.
-  - **Reports/**: Reports generated during the pseudo-labeling process.
-  - **main_pseudo.py**: Main script used to generate pseudo-labels.
+### Description of Key Folders:
 
-- **modulos/**: Contains the modules and scripts used in the project, organized by functionality.
-  - **get_calssifica.py**: Script responsible for classification.
-  - **get_data.py**: Script for data acquisition and manipulation.
-  - **maneger_gpu.py**: Script for managing GPU resources.
-  - **models_pre.py**: Models used for data preprocessing.
-  - **models_train.py**: Models for training neural networks.
-  - **reports_build.py**: Script for report generation.
-  - **utils.py**: Utility functions for the project.
+- **`0_pseudo_labels/`**: Contains scripts and reports for the pseudo-labeling process.
+  - **`Reports/`**: Reports generated during the pseudo-labeling process.
+  - **`pseudo_reload_train.py`**: Main script used to generate pseudo-labels.
 
-- **BD/**: Contains the database with images and labels.
-  - **BI_5**: The `BI_5` dataset.
-  - **images_unlabels/**: Unlabeled images for classification.
-    - **unlabeled**: Folder containing unlabeled images.
-  - **labels/**: Classification labels.
-    - Each folder inside **labels/** contains label files for a specific class.
+- **`1_create_bd/`**: Scripts for creating balanced and resized datasets.
+  - **`balanced_BD_views.py`**: Script to create balanced datasets for equatorial and polar views.
+  - **`config_balanced.yaml`**: Configuration file for balancing datasets.
+  - **`config_resize.yaml`**: Configuration file for resizing images.
+  - **`resize_img_bd.py`**: Script for resizing the dataset images.
+  - **`split_BD_views.py`**: Script for splitting datasets based on views.
 
-This structure can be included in your `README.md` to provide a clear overview of the project's organization and make it easier to navigate.
+- **`2_fine_tuned/`**: Contains scripts for fine-tuning pre-trained models and generating reports.
+  - **`FT_DFT_K10_Aug_xlsx.py`**: Script for fine-tuning models with data augmentation.
+  - **`FT_DFT_K10_xlsx.py`**: Script for fine-tuning models without data augmentation.
 
+- **`3_ensemble/`**: Contains scripts for creating ensemble models using trained networks.
+  - **`Ensemble.py`**: Main script for generating ensemble models.
+  - **`conf_vote.yaml`**: Configuration file for ensemble voting strategies.
+
+- **`modules/`**: Contains various utility scripts and modules for data handling, model training, and GPU management.
+  - **`get_classifica.py`**: Script responsible for classification.
+  - **`get_data.py`**: Script for data loading and preprocessing.
+  - **`manage_gpu.py`**: Script for managing GPU resources.
+  - **`models_pre.py`**: Models used for data preprocessing.
+  - **`models_train.py`**: Models for training neural networks.
+  - **`reports_build.py`**: Script for generating reports.
+  - **`utils.py`**: Utility functions for various tasks.
+
+- **`BD/`**: Database folder containing labeled and unlabeled pollen grain images.
+  - **`BI_5/`**: The primary dataset with raw images and labels.
+  - **`images_unlabels/`**: Contains unlabeled images for classification.
+    - **`unlabeled/`**: Folder with unlabeled images for pseudo-labeling.
+  - **`labels/`**: Classification labels categorized by classes.
+    - Each folder inside **`labels/`** contains images for specific classes (e.g., `equatorial_circular`, `polar_triangular`, etc.).
 
 
 ## Usage
 
-Here are some examples of how to use the project:
+Follow these steps to use the project:
+
+1. **Unpack the BI_5 dataset**:
+   First, extract the BI_5 dataset by running the following command:
 
 ```bash
-npm start
+   sudo tar -xzvf BD/BI_5.tar.gz
+´´´
+
+2. **Perform pseudo-labeling**: To run the pseudo-labeling process, execute the following command. This will start the process based on the configuration in the specified Excel file:
+```bash
+  python 0_pseudo_labels/pseudo_reload_train.py --path 0_pseudo_labels/Reports/config_pseudo_label_pre.xlsx --start_index 5 --end_index 1
+
+
+
+
