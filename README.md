@@ -163,7 +163,7 @@ Pollen_classification_view
 │   ├── voto_majoritary.py
 
 ```
-### Description of Key Folders:
+## Description of Key Folders:
 
 - **`0_pseudo_labels/`**: Contains scripts and reports for the pseudo-labeling process.
   - **`Reports/`**: Reports generated during the pseudo-labeling process.
@@ -201,8 +201,8 @@ Pollen_classification_view
     - Each folder inside **`labels/`** contains images for specific classes (e.g., `equatorial_circular`, `polar_triangular`, etc.).
 
 
-## Usage
-
+# Usage
+## Phase 1
 The project is divided into phases, following the outline of phase 1.
 **Phase 1**: Separate pollen into views (Equatorial and Polar) using pseudo-labeling.
 
@@ -210,7 +210,7 @@ The project is divided into phases, following the outline of phase 1.
    First, extract the BI_5 dataset by running the following command:
 
 ```bash
-sudo tar -xzvf BD/BI_5.tar.gz
+sudo tar -xzvf BD/BI_5.tar.gz -C BD/
 ```
 
 2. **Perform pseudo-labeling**: To run the pseudo-labeling process, execute the following command. This will start the process based on the configuration in the specified Excel file:
@@ -230,7 +230,7 @@ Download the database available at: https://zenodo.org/records/4756361. Choose t
 ```bash
 wget -P BD/ https://zenodo.org/record/4756361/files/Cropped%20Pollen%20Grains.rar?download=1
 ```
-
+or
 ```bash
 curl -L https://zenodo.org/record/4756361/files/Cropped%20Pollen%20Grains.rar?download=1 -o BD/Cropped_Pollen_Grains.rar
 ```
