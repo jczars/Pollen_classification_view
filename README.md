@@ -8,7 +8,8 @@ Follow the steps below to install the project.
 
 1. Clone the repository:
 ```bash
-https://github.com/jczars/Pollen_classification_view.git
+git clone https://github.com/jczars/Pollen_classification_view.git
+
 ```
 2. Navigate to the directory:
 ```bash
@@ -16,7 +17,7 @@ cd Pollen_classification_view
 ```
 3. Install the dependencies:
 ```bash
-npm install
+pip install -r requirements.txt
 ```
 # Project Folder Structure
 ```bash
@@ -149,7 +150,7 @@ Pollen_classification_view
 ### Folder Description:
 - **0_pseudo_labels/**: Contains scripts and reports for the pseudo-labeling process.
   - **Reports/**: Reports generated during the pseudo-labeling process.
-  - **main_pseudo_250724_r3.py**: Main script used to generate pseudo-labels.
+  - **main_pseudo.py**: Main script used to generate pseudo-labels.
 
 - **modulos/**: Contains the modules and scripts used in the project, organized by functionality.
   - **get_calssifica.py**: Script responsible for classification.
