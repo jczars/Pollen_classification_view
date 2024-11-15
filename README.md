@@ -275,6 +275,6 @@ At the end of the execution, the script generates reports and separates images i
 Usage:
 To run the script, ensure that the configuration file is properly set up, then execute the following command:
 ```bash
-python 1_create_bd/separeted_bd_r1.py --config 1_create_bd/config_separeted.yaml
+python python 1_create_bd/separeted_bd.py --config 1_create_bd/config_separeted.yaml
 ```
 Ensure that the classes are correctly specified in the config_separeted.yaml file before running the script.
