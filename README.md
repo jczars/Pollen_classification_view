@@ -278,3 +278,18 @@ To run the script, ensure that the configuration file is properly set up, then e
 python python 1_create_bd/separeted_bd.py --config 1_create_bd/config_separeted.yaml
 ```
 Ensure that the classes are correctly specified in the config_separeted.yaml file before running the script.
+
+**split_BD_vistas_k**
+This script splits the dataset into separate folders to perform cross-validation.
+
+Inputs:
+A YAML configuration file (example: config_split.yaml) that defines the parameters for the script execution.
+Expected Outputs:
+Two generated folders: EQUATORIAL_R and POLAR_R.
+Reports generated as CSV files (split_*.csv) containing information about the splits.
+Example of Execution
+Ensure that the config_split.yaml file is correctly configured before running the script. Then, use the following command:
+
+```bash
+python 1_create_bd/split_BD_vistas_k.py --config 1_create_bd/config_split.yaml
+```

@@ -1,4 +1,4 @@
 tipo: "/*.png"  # File type pattern to process
-bd_src: "/media/jczars/4C22F02A22F01B22/$WinREAgent/Pollen_classification_view/BD/CPD1_Dn_VTcr_111124/"  # Source directory containing the image dataset
-nm_new_base: "CPD1_Dn_VTcr_111124_k10"  # Name for the new base dataset or output directory
+bd_src: "/media/jczars/4C22F02A22F01B22/Pollen_classification_view/BD/CPD1_Dn_VTcr_151124/"  # Source directory containing the image dataset
+nm_new_base: "CPD1_Dn_VTcr_151124_k10"  # Name for the new base dataset or output directory
 k: 10  # Some integer parameter used in processing, e.g., for splitting data
