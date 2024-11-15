@@ -28,8 +28,8 @@ pip install -r requirements.txt
 This step is required if you face issues with the module imports.
 To include the project path:
 ```bash
-
-export PYTHONPATH=/media/jczars/4C22F02A22F01B22/Pollen_classification_view/:$PYTHONPATH
+    export PYTHONPATH=/media/jczars/4C22F02A22F01B22/Pollen_classification_view/:$PYTHONPATH
+```
 
 To remove the project path
 ```bash
