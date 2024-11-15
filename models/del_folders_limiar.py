@@ -39,8 +39,6 @@ def del_vistas(params):
 # In[3]:
 
 """# Main"""
-# Sets the working directory
-os.chdir('/media/jczars/4C22F02A22F01B22/Ensembler_pollen_classification/')
 params={'tipo':'/*.png',
         'bd_src': "/media/jczars/4C22F02A22F01B22/Ensembler_pollen_classification/BD/CPD1_Dn_VTcr_111124/",
         'vistas':['EQUATORIAL','POLAR'],

@@ -1,6 +1,6 @@
 
 import shutil
-import os, sys
+import os
 import numpy as np
 import pandas as pd
 from keras import models
@@ -11,12 +11,6 @@ from datetime import datetime
 from keras import models
 import  argparse, yaml
 
-# Configure the path for importing custom modules
-sys.path.append('/media/jczars/4C22F02A22F01B22/$WinREAgent/Pollen_classification_view/')
-print("Caminhos de sistema:", sys.path)
-
-os.chdir("/media/jczars/4C22F02A22F01B22/$WinREAgent/Pollen_classification_view/")
-print("Working Directory:", os.getcwd())
 
 # Import custom modules and functions
 from models import get_data, utils, del_folders_limiar, listar_vistas, sound_test_finalizado
@@ -381,7 +375,7 @@ if __name__ == "__main__":
     params = load_config(config_file)
 
     #run(params)
-    #python separeted_bd_r1.py --config 1_create_bd/config_separeted.yaml
+    #python 1_create_bd/separeted_bd.py --config 1_create_bd/config_separeted.yaml
     
     debug = True
     
