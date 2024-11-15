@@ -641,7 +641,7 @@ def reports_gen(test_data_generator, model, categories, history, reports_config)
     boxplot_fig = reports.plot_confidence_boxplot(df_correct)
     class_report = reports.generate_classification_report(y_true, y_pred, categories)
     print(history)
-    figTrain = reports.plot_training_metricsV1(history)
+    figTrain = reports.plot_training_metricsV2(history)
     
     # Save files if directory is specified
     if save_dir:
