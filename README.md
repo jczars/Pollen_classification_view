@@ -9,6 +9,11 @@
   - [Phase 1](#phase-1)
   - [Phase 2](#phase-2)
   - [Phase 3](#phase-3)
+- [Interpretation of results](#interpretation-of-results)
+  - [Interpretation of Phase 1](#interpretation-of-phase-1)
+  - [Interpretation of Phase 2](#interpretation-of-phase-2)
+  - [Interpretation of Phase 3](#interpretation-of-phase-3)
+
 
 # Pollen_classification_view
 
@@ -177,6 +182,8 @@ Pollen_classification_view
 │   ├── voto_majoritary.py
 
 ```
+[Table of contentes](#table-of-contents)
+
 ## Description of Key Folders:
 
 - **`0_pseudo_labels/`**: Contains scripts and reports for the pseudo-labeling process.
@@ -491,5 +498,92 @@ The output includes:
 * Training performance plot
 * Boxplot of probabilities
 This structure ensures organized storage and easy access to the results of each test.
+
+[Table of contentes](#table-of-contents)
+
+# Interpretation of results
+
+## Interpretation of Phase 1
+
+1. **Distribuição Geral das Classes (data_summary.csv)**
+
+| Classe        | Quantidade |
+|---------------|------------|
+| asphodelus    | 34         |
+| calicotome    | 298        |
+| castanea      | 218        |
+| ceratonia     | 100        |
+| ebenus        | 22         |
+| erica         | 181        |
+| eucalyptus    | 170        |
+| ferula        | 83         |
+| myrtus        | 786        |
+| olea          | 790        |
+| origanum      | 171        |
+| oxalis        | 139        |
+| pinus         | 29         |
+| pistacia      | 34         |
+| salvia        | 178        |
+| satureja      | 71         |
+| sinapis       | 197        |
+| thymbra       | 146        |
+| urginea       | 109        |
+| vitis         | 269        |
+
+2. **Distribuição por Vistas (df_qde_vistas.csv)**
+
+| Classe        | Equatorial | Polar   |
+|---------------|------------|---------|
+| asphodelus    | 5          | 29      |
+| calicotome    | 7          | 291     |
+| castanea      | 195        | 23      |
+| ceratonia     | 62         | 38      |
+| ebenus        | 6          | 16      |
+| erica         | -          | 181     |
+| eucalyptus    | 2          | 168     |
+| ferula        | 21         | 62      |
+| myrtus        | -          | 786     |
+| olea          | 699        | 91      |
+| origanum      | 98         | 73      |
+| oxalis        | 8          | 131     |
+| pinus         | 25         | 4       |
+| pistacia      | 23         | 11      |
+| salvia        | 71         | 107     |
+| satureja      | 36         | 35      |
+| sinapis       | 182        | 15      |
+| thymbra       | 52         | 94      |
+| urginea       | 107        | 2       |
+| vitis         | 216        | 53      |
+
+3. **Distribuição Após o Filtro por Limiar (df_summary_filtered.csv)**
+
+| Classe        | Equatorial | Polar   |
+|---------------|------------|---------|
+| castanea      | 195        | 23      |
+| ceratonia     | 62         | 38      |
+| ferula        | 21         | 62      |
+| olea          | 699        | 91      |
+| origanum      | 98         | 73      |
+| pinus         | 25         | -       |
+| pistacia      | 23         | -       |
+| salvia        | 71         | 107     |
+| satureja      | 36         | 35      |
+| sinapis       | 182        | -       |
+| thymbra       | 52         | 94      |
+| urginea       | 107        | -       |
+| vitis         | 216        | 53      |
+| asphodelus    | -          | 29      |
+| calicotome    | -          | 291     |
+| erica         | -          | 181     |
+| eucalyptus    | -          | 168     |
+| myrtus        | -          | 786     |
+| oxalis        | -          | 131     |
+
+
+[Table of contentes](#table-of-contents)
+## Interpretation of Phase 2
+
+[Table of contentes](#table-of-contents)
+## Interpretation of Phase 3
 
 [Table of contentes](#table-of-contents)
