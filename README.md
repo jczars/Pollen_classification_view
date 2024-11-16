@@ -505,9 +505,9 @@ This structure ensures organized storage and easy access to the results of each 
 
 ## Interpretation of Phase 1
 
-1. **Distribuição Geral das Classes (data_summary.csv)**
+1. **Overall Class Distribution (data_summary.csv)**
 
-| Classe        | Quantidade |
+| Class         | Count      |
 |---------------|------------|
 | asphodelus    | 34         |
 | calicotome    | 298        |
@@ -530,9 +530,9 @@ This structure ensures organized storage and easy access to the results of each 
 | urginea       | 109        |
 | vitis         | 269        |
 
-2. **Distribuição por Vistas (df_qde_vistas.csv)**
+2. **Distribution by Views (df_qde_vistas.csv)**
 
-| Classe        | Equatorial | Polar   |
+| Class         | Equatorial | Polar   |
 |---------------|------------|---------|
 | asphodelus    | 5          | 29      |
 | calicotome    | 7          | 291     |
@@ -555,9 +555,9 @@ This structure ensures organized storage and easy access to the results of each 
 | urginea       | 107        | 2       |
 | vitis         | 216        | 53      |
 
-3. **Distribuição Após o Filtro por Limiar (df_summary_filtered.csv)**
+3. **Distribution After Threshold Filtering (df_summary_filtered.csv)**
 
-| Classe        | Equatorial | Polar   |
+| Class         | Equatorial | Polar   |
 |---------------|------------|---------|
 | castanea      | 195        | 23      |
 | ceratonia     | 62         | 38      |
@@ -578,6 +578,7 @@ This structure ensures organized storage and easy access to the results of each 
 | eucalyptus    | -          | 168     |
 | myrtus        | -          | 786     |
 | oxalis        | -          | 131     |
+
 
 
 [Table of contentes](#table-of-contents)
