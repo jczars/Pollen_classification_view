@@ -627,11 +627,8 @@ The table below presents detailed metrics for each class:
 
 
 
-### 4.5 Summary
-The results demonstrate high classification accuracy and balanced performance across all classes, with most classes achieving perfect precision, recall, and F1-scores.
-
-
-
+4.5 **Summary**
+These are the tools used to interpret the test results.
 
 [Table of contentes](#table-of-contents)
 ## Interpretation of Phase 3
