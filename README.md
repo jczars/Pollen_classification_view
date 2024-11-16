@@ -372,6 +372,7 @@ The output includes:
 * Confusion matrix
 * Training performance plot
 * Boxplot of probabilities
+
 This structure ensures organized storage and easy access to the results of each test.
 
 ## Phase 2
