@@ -361,6 +361,18 @@ To resume tests after a failure:
 python 0_pseudo_labels/pseudo_reload_train_recovery.py --path 0_pseudo_labels/Reports/config_pseudo_label_pre.xlsx --start_index 0
 ```
 
+**Expected Results**
+The results are stored in the "Reports" folder where the spreadsheet is located. The folder naming convention follows the pattern: id_test, model_name, and reports.
+
+The output includes:
+
+1. **CSV** files containing detailed metrics and predictions.
+2. **Graphs** in JPG format, such as:
+* Confusion matrix
+* Training performance plot
+* Boxplot of probabilities
+This structure ensures organized storage and easy access to the results of each test.
+
 ## Phase 2
 **Fine-tuning**:
 In this phase, pre-trained models are refined to classify the datasets generated in Phase 1. The selected models include DenseNet201, MobileNet, ResNet152V2, Xception, and ResNet50. The fine-tuning process follows the DFT (Dynamic Fine-Tuning) strategy to optimize the network performance.
