@@ -348,3 +348,15 @@ num_k_folds = 1
 num_tests = 1
 ```
 This setup ensures the tests are resumed in a controlled and efficient manner.
+
+**Expected Results**:
+The results are stored in the "Reports" folder where the spreadsheet is located. The folder naming convention follows the pattern: id_test, model_name, and reports.
+
+The output includes:
+
+1. **CSV** files containing detailed metrics and predictions.
+2. **Graphs** in JPG format, such as:
+* Confusion matrix
+* Training performance plot
+* Boxplot of probabilities
+This structure ensures organized storage and easy access to the results of each test.
