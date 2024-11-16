@@ -168,21 +168,31 @@ Pollen_classification_view
 - **`0_pseudo_labels/`**: Contains scripts and reports for the pseudo-labeling process.
   - **`Reports/`**: Reports generated during the pseudo-labeling process.
   - **`pseudo_reload_train.py`**: Main script used to generate pseudo-labels.
+  - **'pseudo_reload_train_recovery.py'**: script recovery. to continue pseudo-labels
 
 - **`1_create_bd/`**: Scripts for creating balanced and resized datasets.
   - **`balanced_BD_views.py`**: Script to create balanced datasets for equatorial and polar views.
   - **`config_balanced.yaml`**: Configuration file for balancing datasets.
   - **`config_resize.yaml`**: Configuration file for resizing images.
+  - **`config_separeted.yaml`**: Configuration file for separeted dataset.
+  - **`config_split.yaml`**: Configuration file for split dataset.
+  - **`rename_folders.py`**: Script for renaming the folders the dataset images.
   - **`resize_img_bd.py`**: Script for resizing the dataset images.
-  - **`split_BD_views.py`**: Script for splitting datasets based on views.
+  - **`separeted_bd.py`**: Script to exclude from the dataset classes that have amounts of images below the chosen threshold.
+  - **`split_BD_views.py`**: Script for splitting datasets based on views[EQUATORIAL, POLAR].
 
 - **`2_fine_tuned/`**: Contains scripts for fine-tuning pre-trained models and generating reports.
-  - **`FT_DFT_K10_Aug_xlsx.py`**: Script for fine-tuning models with data augmentation.
-  - **`FT_DFT_K10_xlsx.py`**: Script for fine-tuning models without data augmentation.
+  - **`Reports`**: Folder that stores the test results.
+    - **`config_FT_vistas_121124.xlsx`**: spreadsheet containing the experiment settings.
+  - **`FT_DFT_K10_Aug_xlsx.py`**: script for fine-tuned models that works with data augmentation passed as a parameter at runtime.
+  - **`FT_DFT_K10_xlsx.py`**: script for fine-tuned models that work with increased stored data.
 
 - **`3_ensemble/`**: Contains scripts for creating ensemble models using trained networks.
+- **`Reports`**: Folder that stores the test results.
   - **`Ensemble.py`**: Main script for generating ensemble models.
   - **`conf_vote.yaml`**: Configuration file for ensemble voting strategies.
+  - **`config_eq.yaml`**: Configuration file for ensemble to viwes EQUATORIAL.
+  - **`config_pl.yaml`**: Configuration file for ensemble to viwes POLAR.
 
 - **`modules/`**: Contains various utility scripts and modules for data handling, model training, and GPU management.
   - **`get_classifica.py`**: Script responsible for classification.
@@ -192,13 +202,14 @@ Pollen_classification_view
   - **`models_train.py`**: Models for training neural networks.
   - **`reports_build.py`**: Script for generating reports.
   - **`utils.py`**: Utility functions for various tasks.
+  - **`..`**: other complementary scripts.
 
-- **`BD/`**: Database folder containing labeled and unlabeled pollen grain images.
-  - **`BI_5/`**: The primary dataset with raw images and labels.
-  - **`images_unlabels/`**: Contains unlabeled images for classification.
-    - **`unlabeled/`**: Folder with unlabeled images for pseudo-labeling.
-  - **`labels/`**: Classification labels categorized by classes.
-    - Each folder inside **`labels/`** contains images for specific classes (e.g., `equatorial_circular`, `polar_triangular`, etc.).
+- **`BD/`**: Folder used to store the datasets used in the project.
+  - **`BI_5/`**: Database folder containing labeled and unlabeled pollen grain images.
+    - **`images_unlabels/`**: Contains unlabeled images for classification.
+      - **`unlabeled/`**: Folder with unlabeled images for pseudo-labeling.
+    - **`labels/`**: Folder with images labeled by a palynology expert.
+      - Each folder inside **`labels/`** contains images for specific classes (e.g., `equatorial_circular`, `polar_triangular`, etc.).
 
 
 # Usage
