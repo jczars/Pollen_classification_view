@@ -223,7 +223,7 @@ python 0_pseudo_labels/pseudo_reload_train.py --path 0_pseudo_labels/Reports/con
 ```
 in this case all the tests configured in the spreadsheet will be executed.
 
-3. **create_bd**: folder containing the algorithms used to prepare the datasets.
+3. **Create dataset**: folder containing the algorithms used to prepare the datasets.
 **Cretan Pollen Dataset v1 (CPD-1)**
 Folder containing the algorithms used to prepare the datasets.
 Download the database available at: https://zenodo.org/records/4756361. Choose the Cropped Pollen Grains version and place it in the BD folder.
@@ -252,7 +252,7 @@ python 1_create_bd/rename_folders.py --path_data BD/Cropped\ Pollen\ Grains/
 ```
 This command runs the rename_folders.py script to rename the class folders inside the Cropped Pollen Grains directory. Each folder name will be converted to lowercase for consistency.
 
-5. **resize image dataset**
+5. **Resize images dataset**
 This script reads the images from the Cropped Pollen Grains dataset and checks if they are in the standard size of 224 x 224. If any images do not meet these dimensions, the script creates a new dataset with all images resized to the specified size.
 
 The resizing process uses a configuration file (config_resize.yaml) to define input and output paths, along with other parameters.
@@ -266,7 +266,7 @@ Usage: To run the resizing script with the configuration file, use the following
 python 1_create_bd/resize_img_bd.py --config 1_create_bd/config_resize.yaml
 ```
 
-6. **separeted dataset**:
+6. **Separeted dataset**:
 This script separates the Cropped Pollen Grains dataset into two distinct views: Equatorial and Polar. It uses a configuration file (config_separeted.yaml) to define the input and output paths, along with other processing parameters.
 
 **Expected Results**:
@@ -279,7 +279,7 @@ python python 1_create_bd/separeted_bd.py --config 1_create_bd/config_separeted.
 ```
 Ensure that the classes are correctly specified in the config_separeted.yaml file before running the script.
 
-7. **split the dataset into views and prepare for cross-validation**:
+7. **Split the dataset into views and prepare for cross-validation**:
 This script splits the dataset into separate folders to perform cross-validation.
 
 **Inputs**:
@@ -295,7 +295,7 @@ Ensure that the config_split.yaml file is correctly configured before running th
 python 1_create_bd/split_BD_vistas_k.py --config 1_create_bd/config_split.yaml
 ```
 
-8. **data augmentation with balancing**:
+8. **Data augmentation with balancing**:
 
 This script performs data augmentation using a balancing strategy, where the **goal** variable specifies the target number of images per class. The script counts the samples in each class, and any class below the defined goal is augmented until it reaches the target size.
 
@@ -308,7 +308,7 @@ To run the script, ensure that the configuration file (`config_balanced.yaml`) i
 python 1_create_bd/balanc_BD_vistas_k.py --config 1_create_bd/config_balabce.yaml 
 ```
 ## Phase 2
-**fine-tuning**:
+**Fine-tuning**:
 In this phase, pre-trained models are refined to classify the datasets generated in Phase 1. The selected models include DenseNet201, MobileNet, ResNet152V2, Xception, and ResNet50. The fine-tuning process follows the DFT (Dynamic Fine-Tuning) strategy to optimize the network performance.
 
 **Required Configuration**:
