@@ -259,6 +259,7 @@ Linux jczars-gamer 6.8.0-47-generic #47~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Wed O
 - **Memory**: 12.000 GiB  
 - **Driver Version**: 535.183.01  
 - **CUDA Version**: 12.2  
+
 [Table of contentes](#table-of-contents)
 
 # Usage
@@ -489,4 +490,5 @@ The output includes:
 * Training performance plot
 * Boxplot of probabilities
 This structure ensures organized storage and easy access to the results of each test.
+
 [Table of contentes](#table-of-contents)
