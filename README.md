@@ -1,3 +1,15 @@
+## Table of Contents
+
+- [Pollen_classification_view](#pollen_classification_view)
+  - [Installation](#installation)
+- [Project Folder Structure](#project-Folder-Structure)
+  - [Description of Key Folders](#description-of-Key-Folders)
+  - [Resources](#resources)
+- [Usage](#usage)
+  - [Phase 1](#phase-1)
+  - [Phase 2](#phase-2)
+  - [Phase 3](#phase-3)
+  
 # Pollen_classification_view
 
 This project focuses on the classification of pollen grains by taking into account their characteristic views (Equatorial, Polar). The system is divided into three phases:
@@ -5,7 +17,6 @@ This project focuses on the classification of pollen grains by taking into accou
 Phase 1: Separate pollen into views (Equatorial and Polar) using pseudo-labeling.
 Phase 2: Refine selected models and classify datasets generated in Phase 1.
 Phase 3: Assemble ensembles using models from Phase 2 for more accurate classification.
-
 
 ## Installation
 
@@ -212,7 +223,39 @@ Pollen_classification_view
       - **`unlabeled/`**: Folder with unlabeled images for pseudo-labeling.
     - **`labels/`**: Folder with images labeled by a palynology expert.
       - Each folder inside **`labels/`** contains images for specific classes (e.g., `equatorial_circular`, `polar_triangular`, etc.).
+## Resources
 
+The experiments were conducted on a Linux-based system with the following hardware and software specifications:
+ **Operating System**
+```bash
+Linux jczars-gamer 6.8.0-47-generic #47~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Wed Oct 2 16:16:55 UTC 2 x86_64 x86_64 x86_64 GNU/Linux
+```
+**Processor (CPU)**:
+
+- **Architecture**: x86_64  
+- **Operational Mode**: 32-bit, 64-bit  
+- **Address Sizes**: 39 bits physical, 48 bits virtual  
+- **Byte Order**: Little Endian  
+- **Total CPUs**: 16  
+- **Online CPUs**: 0-15  
+- **Vendor ID**: GenuineIntel  
+- **Model Name**: Intel(R) Core(TM) i7-10700F CPU @ 2.90GHz  
+- **Family**: 6  
+- **Model**: 165  
+- **Threads per Core**: 2  
+- **Cores per Socket**: 8  
+- **Sockets**: 1  
+- **Step**: 5  
+- **Max CPU MHz**: 4800 MHz  
+- **Min CPU MHz**: 800 MHz  
+- **BogoMIPS**: 5799.77  
+
+**Graphics Card (GPU)**
+
+- **Model**: NVIDIA GeForce RTX 3060  
+- **Memory**: 12.000 GiB  
+- **Driver Version**: 535.183.01  
+- **CUDA Version**: 12.2  
 
 # Usage
 ## Phase 1
