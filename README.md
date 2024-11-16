@@ -9,7 +9,7 @@
   - [Phase 1](#phase-1)
   - [Phase 2](#phase-2)
   - [Phase 3](#phase-3)
-  
+
 # Pollen_classification_view
 
 This project focuses on the classification of pollen grains by taking into account their characteristic views (Equatorial, Polar). The system is divided into three phases:
@@ -17,6 +17,8 @@ This project focuses on the classification of pollen grains by taking into accou
 Phase 1: Separate pollen into views (Equatorial and Polar) using pseudo-labeling.
 Phase 2: Refine selected models and classify datasets generated in Phase 1.
 Phase 3: Assemble ensembles using models from Phase 2 for more accurate classification.
+
+[Table of contentes](#table-of-contents)
 
 ## Installation
 
@@ -46,6 +48,7 @@ To remove the project path
 ```bash
 unset PYTHONPATH
 ```
+[Table of contentes](#table-of-contents)
 
 # Project Folder Structure
 Below is the folder structure for the `Pollen_classification_view` project:
@@ -256,6 +259,7 @@ Linux jczars-gamer 6.8.0-47-generic #47~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Wed O
 - **Memory**: 12.000 GiB  
 - **Driver Version**: 535.183.01  
 - **CUDA Version**: 12.2  
+[Table of contentes](#table-of-contents)
 
 # Usage
 ## Phase 1
@@ -430,6 +434,7 @@ The output includes:
 * Boxplot of probabilities
 
 This structure ensures organized storage and easy access to the results of each test.
+[Table of contentes](#table-of-contents)
 
 ## Phase 2
 **Fine-tuning**:
@@ -484,3 +489,4 @@ The output includes:
 * Training performance plot
 * Boxplot of probabilities
 This structure ensures organized storage and easy access to the results of each test.
+[Table of contentes](#table-of-contents)
