@@ -803,11 +803,11 @@ def execute_test(params, tests, test_index, start_index, num_partitions, start_k
         config_train = build_train_config(row, params, save_dir, k, categories, split_valid)
         model_tl, val_loss, val_accuracy, history, start_time, end_time, duration, best_epoch = process_train(config_train)
         
+        reset_environment()
         config_eval = build_eval_config(row, params, save_dir, k)
         me = evaluate_model(model_tl, categories, history, config_eval)
-        
-        #maneger_gpu.monitor_memory_usage_before_after(model_tl, val_loss, val_accuracy, config_eval, start_time, end_time, duration, best_epoch, val_loss, val_accuracy)
-        maneger_gpu.reset_keras()
+        del model_tl, history  # Libera as variáveis
+        reset_environment()
         
         save_results(row, k, val_loss, val_accuracy, me, start_time, end_time, duration, best_epoch, path_xlsx)
 
