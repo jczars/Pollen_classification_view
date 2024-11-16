@@ -257,7 +257,7 @@ This script reads the images from the Cropped Pollen Grains dataset and checks i
 
 The resizing process uses a configuration file (config_resize.yaml) to define input and output paths, along with other parameters.
 
-Expected Result:
+**Expected Result**:
 A new dataset folder containing all images resized to 224 x 224, ensuring consistency across the dataset.
 
 Usage: To run the resizing script with the configuration file, use the following command:
@@ -269,10 +269,10 @@ python 1_create_bd/resize_img_bd.py --config 1_create_bd/config_resize.yaml
 6. **separeted dataset**:
 This script separates the Cropped Pollen Grains dataset into two distinct views: Equatorial and Polar. It uses a configuration file (config_separeted.yaml) to define the input and output paths, along with other processing parameters.
 
-Expected Results:
+**Expected Results**:
 At the end of the execution, the script generates reports and separates images into the specified views (Equatorial and Polar), saving them in the respective folders within the database.
 
-Usage:
+**Usage**:
 To run the script, ensure that the configuration file is properly set up, then execute the following command:
 ```bash
 python python 1_create_bd/separeted_bd.py --config 1_create_bd/config_separeted.yaml
@@ -282,9 +282,10 @@ Ensure that the classes are correctly specified in the config_separeted.yaml fil
 7. **split the dataset into views and prepare for cross-validation**:
 This script splits the dataset into separate folders to perform cross-validation.
 
-Inputs:
+**Inputs**:
 A YAML configuration file (example: config_split.yaml) that defines the parameters for the script execution.
-Expected Outputs:
+
+**Expected Outputs**:
 Two generated folders: EQUATORIAL_R and POLAR_R.
 Reports generated as CSV files (split_*.csv) containing information about the splits.
 Example of Execution
