@@ -606,26 +606,26 @@ The confusion matrix generated from the test dataset classification is shown bel
 ### 4.4 Classification Report
 The table below presents detailed metrics for each class:
 
-| Class       | Precision | Recall | F1-Score | Support |
-|-------------|-----------|--------|----------|---------|
-| castanea    | 0.9524   | 1.0    | 0.9756   | 20      |
-| ceratonia   | 1.0      | 1.0    | 1.0      | 6       |
-| ferula      | 1.0      | 1.0    | 1.0      | 2       |
-| olea        | 0.9859   | 1.0    | 0.9929   | 70      |
-| origanum    | 1.0      | 0.9    | 0.9474   | 10      |
-| pinus       | 1.0      | 1.0    | 1.0      | 2       |
-| pistacia    | 1.0      | 1.0    | 1.0      | 3       |
-| salvia      | 1.0      | 1.0    | 1.0      | 7       |
-| satureja    | 1.0      | 1.0    | 1.0      | 3       |
-| sinapis     | 1.0      | 0.9474 | 0.9730   | 19      |
-| thymbra     | 1.0      | 1.0    | 1.0      | 5       |
-| urginea     | 1.0      | 1.0    | 1.0      | 11      |
-| vitis       | 1.0      | 1.0    | 1.0      | 21      |
+|    Class     | Precision | Recall | F1-Score | Support |
+|--------------|-----------|--------|----------|---------|
+| castanea     | 0.952     | 1.000  | 0.976    | 20      |
+| ceratonia    | 1.000     | 1.000  | 1.000    | 6       |
+| ferula       | 1.000     | 1.000  | 1.000    | 2       |
+| olea         | 0.986     | 1.000  | 0.993    | 70      |
+| origanum     | 1.000     | 0.900  | 0.947    | 10      |
+| pinus        | 1.000     | 1.000  | 1.000    | 2       |
+| pistacia     | 1.000     | 1.000  | 1.000    | 3       |
+| salvia       | 1.000     | 1.000  | 1.000    | 7       |
+| satureja     | 1.000     | 1.000  | 1.000    | 3       |
+| sinapis      | 1.000     | 0.947  | 0.973    | 19      |
+| thymbra      | 1.000     | 1.000  | 1.000    | 5       |
+| urginea      | 1.000     | 1.000  | 1.000    | 11      |
+| vitis        | 1.000     | 1.000  | 1.000    | 21      |
+| **accuracy** |           |        | 0.989    | 179     |
+| **macro avg**| 0.995     | 0.988  | 0.992    | 179     |
+| **weighted avg** | 0.989 | 0.989  | 0.989    | 179     |
 
-| **Accuracy**      | **0.989** |
-|-------------------|------------|
-| **Macro Avg**     | Precision: 0.9953 | Recall: 0.9883 | F1-Score: 0.9915 | Support: 179 |
-| **Weighted Avg**  | Precision: 0.9892 | Recall: 0.9888 | F1-Score: 0.9887 | Support: 179 |
+
 
 ### 4.5 Summary
 The results demonstrate high classification accuracy and balanced performance across all classes, with most classes achieving perfect precision, recall, and F1-scores.
