@@ -361,7 +361,8 @@ To resume tests after a failure:
 python 0_pseudo_labels/pseudo_reload_train_recovery.py --path 0_pseudo_labels/Reports/config_pseudo_label_pre.xlsx --start_index 0
 ```
 
-**Expected Results**
+**Expected Results**:
+
 The results are stored in the "Reports" folder where the spreadsheet is located. The folder naming convention follows the pattern: id_test, model_name, and reports.
 
 The output includes:
