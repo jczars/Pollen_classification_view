@@ -308,7 +308,7 @@ To run the script, ensure that the configuration file (`config_balanced.yaml`) i
 ```bash
 python 1_create_bd/balanc_BD_vistas_k.py --config 1_create_bd/config_balabce.yaml 
 ```
-**Running Pseudo-Labeling**
+9. **Running Pseudo-Labeling**:
 After preparing the dataset, the next step is to train pre-trained networks to separate the dataset into "EQUATORIAL" and "POLAR" views.
 
 **Main Scripts**:
@@ -341,7 +341,8 @@ The entire unlabeled dataset has been labeled.
 The pseudo-label selection phase does not identify any additional images from the unlabeled dataset.
 Thresholds used in the tests include: 0.95, 0.99, and 0.995.
 
-**Execution Examples**
+**Execution Examples**:
+
 __Single Test__
 To execute a single test, specify the start_index and end_index parameters:
 ```bash
