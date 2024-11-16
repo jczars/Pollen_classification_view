@@ -189,6 +189,8 @@ Pollen_classification_view
 
 - **`3_ensemble/`**: Contains scripts for creating ensemble models using trained networks.
   - **`Reports`**: Folder that stores the test results.
+    - **`EQUATORIAL_ens_131124.xlsx`**: spreadsheet containing the experiment settings to views EQUATORIAL.
+    - **`POLAR_ens_131124.xlsx`**: spreadsheet containing the experiment settings to views POLAR.
   - **`Ensemble.py`**: Main script for generating ensemble models.
   - **`conf_vote.yaml`**: Configuration file for ensemble voting strategies.
   - **`config_eq.yaml`**: Configuration file for ensemble to viwes EQUATORIAL.
