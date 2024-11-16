@@ -584,6 +584,55 @@ This structure ensures organized storage and easy access to the results of each 
 [Table of contentes](#table-of-contents)
 ## Interpretation of Phase 2
 
+## 4. Classification Report for DenseNet201 (k=1, Equatorial View)
+
+This section presents the results obtained using the DenseNet201 classifier on the **k=1 fold** with **equatorial views**. The evaluation includes training performance metrics, a boxplot of prediction probabilities, a confusion matrix, and a classification report.
+
+### 4.1 Training Metrics
+The following graph illustrates the **loss and accuracy** progression during training:
+
+![Training Loss and Accuracy](images/Test_0_0_DenseNet201_TrainLoss_k1.jpg)
+
+### 4.2 Prediction Confidence Analysis
+The boxplot below displays the **distribution of prediction probabilities** for correctly classified samples:
+
+![Boxplot of Prediction Probabilities](/images/Test_0_0_DenseNet201_boxplot_k1.jpg)
+
+### 4.3 Confusion Matrix
+The confusion matrix generated from the test dataset classification is shown below:
+
+![Confusion Matrix](images/Test_0_0_DenseNet201_mat_conf_k1.jpg)
+
+### 4.4 Classification Report
+The table below presents detailed metrics for each class:
+
+| Class       | Precision | Recall | F1-Score | Support |
+|-------------|-----------|--------|----------|---------|
+| castanea    | 0.9524   | 1.0    | 0.9756   | 20      |
+| ceratonia   | 1.0      | 1.0    | 1.0      | 6       |
+| ferula      | 1.0      | 1.0    | 1.0      | 2       |
+| olea        | 0.9859   | 1.0    | 0.9929   | 70      |
+| origanum    | 1.0      | 0.9    | 0.9474   | 10      |
+| pinus       | 1.0      | 1.0    | 1.0      | 2       |
+| pistacia    | 1.0      | 1.0    | 1.0      | 3       |
+| salvia      | 1.0      | 1.0    | 1.0      | 7       |
+| satureja    | 1.0      | 1.0    | 1.0      | 3       |
+| sinapis     | 1.0      | 0.9474 | 0.9730   | 19      |
+| thymbra     | 1.0      | 1.0    | 1.0      | 5       |
+| urginea     | 1.0      | 1.0    | 1.0      | 11      |
+| vitis       | 1.0      | 1.0    | 1.0      | 21      |
+
+| **Accuracy**      | **0.989** |
+|-------------------|------------|
+| **Macro Avg**     | Precision: 0.9953 | Recall: 0.9883 | F1-Score: 0.9915 | Support: 179 |
+| **Weighted Avg**  | Precision: 0.9892 | Recall: 0.9888 | F1-Score: 0.9887 | Support: 179 |
+
+### 4.5 Summary
+The results demonstrate high classification accuracy and balanced performance across all classes, with most classes achieving perfect precision, recall, and F1-scores.
+
+
+
+
 [Table of contentes](#table-of-contents)
 ## Interpretation of Phase 3
 
