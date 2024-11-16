@@ -188,7 +188,7 @@ Pollen_classification_view
   - **`FT_DFT_K10_xlsx.py`**: script for fine-tuned models that work with increased stored data.
 
 - **`3_ensemble/`**: Contains scripts for creating ensemble models using trained networks.
-- **`Reports`**: Folder that stores the test results.
+  - **`Reports`**: Folder that stores the test results.
   - **`Ensemble.py`**: Main script for generating ensemble models.
   - **`conf_vote.yaml`**: Configuration file for ensemble voting strategies.
   - **`config_eq.yaml`**: Configuration file for ensemble to viwes EQUATORIAL.
