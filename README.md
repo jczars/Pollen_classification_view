@@ -279,7 +279,7 @@ python python 1_create_bd/separeted_bd.py --config 1_create_bd/config_separeted.
 ```
 Ensure that the classes are correctly specified in the config_separeted.yaml file before running the script.
 
-7. **split the dataset into views and prepare for cross-validation: **
+7. **split the dataset into views and prepare for cross-validation**:
 This script splits the dataset into separate folders to perform cross-validation.
 
 Inputs:
@@ -294,7 +294,7 @@ Ensure that the config_split.yaml file is correctly configured before running th
 python 1_create_bd/split_BD_vistas_k.py --config 1_create_bd/config_split.yaml
 ```
 
-8. **data augmentation with balancing**
+8. **data augmentation with balancing**:
 
 This script performs data augmentation using a balancing strategy, where the **goal** variable specifies the target number of images per class. The script counts the samples in each class, and any class below the defined goal is augmented until it reaches the target size.
 
@@ -307,24 +307,24 @@ To run the script, ensure that the configuration file (`config_balanced.yaml`) i
 python 1_create_bd/balanc_BD_vistas_k.py --config 1_create_bd/config_balabce.yaml 
 ```
 ## Phase 2
-**fine-tuning**
+**fine-tuning**:
 In this phase, pre-trained models are refined to classify the datasets generated in Phase 1. The selected models include DenseNet201, MobileNet, ResNet152V2, Xception, and ResNet50. The fine-tuning process follows the DFT (Dynamic Fine-Tuning) strategy to optimize the network performance.
 
-**Required Configuration**
+**Required Configuration**:
 To execute the tests, a spreadsheet containing the experimental configurations is required. The default configuration file can be found in the folder:
 
 ```bash
 2_fine_tuned/Reports/config_FT_vistas_121124.xlsx
 ```
-Execution
+**Execution**:
 Use the following command to run the fine-tuning script:
 ```bash
 python 2_fine_tuned/FT_DFT_K10_xlsx.py 2_fine_tuned/Reports/config_FT_vistas_121124.xlsx
 ```
-**Failure Management**
+**Failure Management**:
 During the tests, especially when using memory-intensive networks like DenseNet201, failures may occur due to full memory consumption. To address this, a spreadsheet with control variables tracks the progress of the tests, allowing for recovery.
 
-**Control Variables**
+**Control Variables**:
 last_test_index: Index of the last completed test.
 k_fold_number: Number of the current k-fold to be executed.
 num_k_folds: Number of remaining k-folds to complete the cycle.
@@ -338,7 +338,7 @@ num_tests = 11
 ```
 This configuration runs 11 tests, covering all k-folds (k=1 to k=10) for each test.
 
-Recovery Example
+**Recovery Example**:
 If a test fails at index 6 with k=9, use the following configuration to resume:
 ```bash
 last_test_index = 6
