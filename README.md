@@ -308,13 +308,42 @@ python 1_create_bd/balanc_BD_vistas_k.py --config 1_create_bd/config_balabce.yam
 ```
 ## Phase 2
 **fine-tuning**
-Phase 2: Refine selected models and classify datasets generated in Phase 1.
-This script performs fine-tuning on pre-trained networks, with selected networks including DenseNet201, MobileNet, ResNet152V2, Xception, and ResNet50. The fine-tuning is done using the DFT strategy to train the networks.
+In this phase, pre-trained models are refined to classify the datasets generated in Phase 1. The selected models include DenseNet201, MobileNet, ResNet152V2, Xception, and ResNet50. The fine-tuning process follows the DFT (Dynamic Fine-Tuning) strategy to optimize the network performance.
 
-To run the tests, a spreadsheet with the necessary configurations for the experiments is required. The spreadsheet can be found in the folder: 2_fine_tuned/Reports/config_FT_vistas_121124.xlsx.
+**Required Configuration**
+To execute the tests, a spreadsheet containing the experimental configurations is required. The default configuration file can be found in the folder:
 
-Usage:
-To execute the script, use the following command:
+```bash
+2_fine_tuned/Reports/config_FT_vistas_121124.xlsx
+```
+Execution
+Use the following command to run the fine-tuning script:
 ```bash
 python 2_fine_tuned/FT_DFT_K10_xlsx.py 2_fine_tuned/Reports/config_FT_vistas_121124.xlsx
 ```
+**Failure Management**
+During the tests, especially when using memory-intensive networks like DenseNet201, failures may occur due to full memory consumption. To address this, a spreadsheet with control variables tracks the progress of the tests, allowing for recovery.
+
+**Control Variables**
+last_test_index: Index of the last completed test.
+k_fold_number: Number of the current k-fold to be executed.
+num_k_folds: Number of remaining k-folds to complete the cycle.
+num_tests: Number of tests remaining to be executed.
+Default Configuration
+```bash
+last_test_index = 0
+k_fold_number = 1
+num_k_folds = 10
+num_tests = 11
+```
+This configuration runs 11 tests, covering all k-folds (k=1 to k=10) for each test.
+
+Recovery Example
+If a test fails at index 6 with k=9, use the following configuration to resume:
+```bash
+last_test_index = 6
+k_fold_number = 10
+num_k_folds = 1
+num_tests = 1
+```
+This setup ensures the tests are resumed in a controlled and efficient manner.
