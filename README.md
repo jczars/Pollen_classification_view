@@ -62,8 +62,8 @@ Pollen_classification_view
 │   ├── FT_DFT_K10_xlsx.py
 ├── 3_ensemble
 │   ├── Reports
-│       ├── EQUATORIAL_ens_111124_reports
-│       ├── POLAR_ens_111124_reports
+│       ├── EQUATORIAL_ens_111124.xlsx
+│       ├── POLAR_ens_111124.xlsx
 │   ├── conf_vote.yaml
 │   ├── config_eq.yaml
 │   ├── config_pl.yaml
