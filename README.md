@@ -435,6 +435,7 @@ The output includes:
 * Boxplot of probabilities
 
 This structure ensures organized storage and easy access to the results of each test.
+
 [Table of contentes](#table-of-contents)
 
 ## Phase 2
