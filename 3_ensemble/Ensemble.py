@@ -15,11 +15,10 @@ import pandas as pd
 from openpyxl import Workbook
 import argparse
 os.environ["tf_gpu_allocator"]="cuda_malloc_async"
-sys.path.append('/media/jczars/4C22F02A22F01B22/$WinREAgent/Pollen_classification_view/')
-print(sys.path)
+
 
 from models import voto_majoritary_041124 as vote
-from models import sound_test_finalizado
+from models import sound_test_finalizado, models_train
 #from models import reports_build as reports
 
 def list_model_dirs(base_model_dir: str) -> list:
@@ -49,27 +48,25 @@ def list_model_dirs(base_model_dir: str) -> list:
 def load_model(model_path: str, verbose: int = 0) -> tf.keras.Model | None:
     """
     Carrega um modelo específico a partir do caminho fornecido.
-
-    Parameters
-    ----------
-    model_path : str
-        Caminho para o arquivo do modelo.
-    verbose : int, optional
-        Modo de verbosidade. Se > 0, imprime mensagens de progresso.
-
-    Returns
-    -------
-    model : tf.keras.Model ou None
-        O modelo carregado, se bem-sucedido; None caso contrário.
     """
     try:
-        model = tf.keras.models.load_model(model_path)
+        print(f"Verificando modelo: {model_path}")
+        
+        if 'vit' in model_path.lower():
+            if verbose > 0:
+                print(f"[INFO] Carregando modelo ViT de {model_path}")
+            model = models_train.load_model_vit(model_path, verbose=verbose)  # Não passa safe_mode
+        else:
+            print(f"[INFO] Carregando modelo padrão de {model_path}")
+            model = models_train.load_model(model_path, verbose=verbose)  # Para modelos padrão, o safe_mode é útil
+
         if verbose > 0:
-            print(f'Modelo carregado de {model_path}')
+            print(f"Modelo carregado de {model_path}")
         return model
     except Exception as e:
         print(f"Erro ao carregar o modelo de '{model_path}': {e}")
         return None
+
 
 def load_data_test(data_base_dir: str, K: int, BATCH: int, INPUT_SIZE: tuple, verbose: int = 0) -> tf.keras.utils.Sequence | None:
     """
