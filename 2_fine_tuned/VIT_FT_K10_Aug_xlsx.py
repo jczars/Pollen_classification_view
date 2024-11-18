@@ -27,8 +27,10 @@ import keras
 
 from keras.models import Model
 from keras import layers
-from keras.applications import DenseNet201, MobileNet,  InceptionV3
-from keras.applications import ResNet152V2, InceptionResNetV2, Xception
+import tensorflow as tf
+import tensorflow_addons as tfa
+from vit_keras import vit
+from keras import models, losses
 import pandas as pd
 import openpyxl
 import sys,os
@@ -153,54 +155,42 @@ def hyper_model(config_model):
     """
     
     # Initialize the specified pre-trained model
-    model = eval(config_model['model'])
-    id_test = config_model['id_test']
+    vit_model = vit.vit_b16(
+        image_size = config_model['img_size'],
+        activation = config_model['last_activation'],
+        pretrained = True,
+        include_top = False,
+        pretrained_top = False,
+        classes = config_model['num_classes'])
     
-    # Load the base model with 'imagenet' weights and no top layer
-    base_model = model(include_top=True, weights='imagenet')
+    #block std
+    model = models.Sequential()
+    model.add(vit_model)
+    model.add(layers.Flatten())
+    model.add(layers.BatchNormalization())
+    model.add(layers.Dense(config_model['dense_size'], activation=config_model['activation']))
+    model.add(layers.BatchNormalization())
+    model.add(layers.Dense(config_model['num_classes'], activation=config_model['last_activation']))
 
-    # Freeze all layers in the base model initially
-    for layer in base_model.layers:
-        layer.trainable = False
-    base_model.summary()
+    optimizer = tfa.optimizers.RectifiedAdam(learning_rate = config_model['learning_rate'])
 
-    # Connect a custom output layer to the base model
-    conv_output = base_model.layers[-2].output  # Use the second last layer as output
-    output = layers.Dense(config_model['num_classes'], name='predictions', 
-                          activation=config_model['last_activation'])(conv_output)
-    fine_model = Model(inputs=base_model.input, outputs=output)
-
-    # Unfreeze layers based on the 'freeze' index for fine-tuning
+    model.compile(optimizer = optimizer, 
+              loss = losses.CategoricalCrossentropy(label_smoothing = 0.2), 
+              metrics = ['accuracy'])
+    
+    depth=len(vit_model.layers)
+    print('depth ', depth)
+    
     freeze = config_model['freeze']
-    for layer in base_model.layers[freeze:]:
+    for layer in vit_model.layers[freeze:]:
         layer.trainable = True
-
-    # Prepare parameters for saving layer information
-    layers_params = {'id_test': id_test, 'save_dir': config_model['save_dir'], 'model': config_model['model']}
     
     # Print and save layer details
-    print_layer(fine_model, layers_params)
-
-    # Set the optimizer based on configuration
-    optimizer_name = config_model['optimizer']
-    learning_rate = config_model['learning_rate']
-    if optimizer_name == 'Adam':
-        opt = keras.optimizers.Adam(learning_rate=learning_rate)
-    elif optimizer_name == 'RMSprop':
-        opt = keras.optimizers.RMSprop(learning_rate=learning_rate)
-    elif optimizer_name == 'Adagrad':
-        opt = keras.optimizers.Adagrad(learning_rate=learning_rate)
-    elif optimizer_name == 'SGD':
-        opt = keras.optimizers.SGD(learning_rate=learning_rate)
-    else:
-        raise ValueError(f"Unsupported optimizer: {optimizer_name}")
-    print(opt)
-
-    # Compile the model with categorical crossentropy loss and accuracy metric
-    fine_model.compile(loss="categorical_crossentropy", optimizer=opt, metrics=["accuracy"])
+    layers_params={'id_test':config_model['id_test'],'save_dir':config_model['save_dir'], 'model':config_model['model']}
+    print_layer(model, layers_params)
     
-    fine_model.summary()
-    return fine_model
+    model.summary()
+    return model
 
 
 # In[4]:
@@ -475,7 +465,11 @@ def process_train(_config_train, verbose=1):
         'save_dir': _config_train['save_dir'],
         'learning_rate': _config_train['learning_rate'],
         'optimizer': _config_train['optimizer'],
-        'freeze': _config_train['freeze']
+        'freeze': _config_train['freeze'],
+        'img_size': int(_config_train['img_size']),
+        'dense_size': _config_train['dense_size'],
+        'activation': _config_train['activation']
+
     }
     
     model_tl = hyper_model(_config_model)
@@ -827,6 +821,8 @@ def build_train_config(row, params, save_dir, k, categories, split_valid):
         'optimizer': row['optimizer'],
         'epochs': params['epochs'],
         'freeze': row['freeze'],
+        'dense_size': row['dense_size'],
+        'activation': row['activation'],
         'k': k
     }
 

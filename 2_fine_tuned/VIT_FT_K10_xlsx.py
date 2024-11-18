@@ -156,7 +156,7 @@ def hyper_model(config_model):
     
     # Initialize the specified pre-trained model
     vit_model = vit.vit_b16(
-        image_size = config_model['image_size'],
+        image_size = config_model['img_size'],
         activation = config_model['last_activation'],
         pretrained = True,
         include_top = False,
@@ -180,7 +180,16 @@ def hyper_model(config_model):
     
     depth=len(vit_model.layers)
     print('depth ', depth)
-    print_layer(vit_model)
+    
+    freeze = config_model['freeze']
+    for layer in vit_model.layers[freeze:]:
+        layer.trainable = True
+    
+    # Print and save layer details
+    layers_params={'id_test':config_model['id_test'],'save_dir':config_model['save_dir'], 'model':config_model['model']}
+    print_layer(model, layers_params)
+    
+    model.summary()
     return model
 
 
@@ -456,7 +465,11 @@ def process_train(_config_train, verbose=1):
         'save_dir': _config_train['save_dir'],
         'learning_rate': _config_train['learning_rate'],
         'optimizer': _config_train['optimizer'],
-        'freeze': _config_train['freeze']
+        'freeze': _config_train['freeze'],
+        'img_size': int(_config_train['img_size']),
+        'dense_size': _config_train['dense_size'],
+        'activation': _config_train['activation']
+
     }
     
     model_tl = hyper_model(_config_model)
@@ -808,6 +821,8 @@ def build_train_config(row, params, save_dir, k, categories, split_valid):
         'optimizer': row['optimizer'],
         'epochs': params['epochs'],
         'freeze': row['freeze'],
+        'dense_size': row['dense_size'],
+        'activation': row['activation'],
         'k': k
     }
 
