@@ -1,3 +1,1 @@
-*.tar.gz filter=lfs diff=lfs merge=lfs -text
-BD/BI_5.tar.gz filter=lfs diff=lfs merge=lfs -text
 BD/BI_5.zip filter=lfs diff=lfs merge=lfs -text

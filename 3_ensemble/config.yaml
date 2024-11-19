@@ -1,9 +1,0 @@
-base_model_dir: "/media/jczars/4C22F02A22F01B22/Ensembler_pollen_classification/1_Fine_tuned/Test_031124"
-data_base_dir: "/media/jczars/4C22F02A22F01B22/01_PROP_TESE/01_BD_CPD1_VISTAS/CPD1_Dn_VTcr_220824_sem/EQUATORIAL_R/"
-committee_networks:
-  - 0_DenseNet201
-  - 2_MobileNet
-  - 4_InceptionV3
-excel_file: "test_results.xlsx"
-BATCH: 32
-INPUT_SIZE: [224, 224]
