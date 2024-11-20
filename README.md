@@ -290,15 +290,74 @@ After downloading, extract the contents of the .zip file using the following com
 unzip BI_5.zip -d ./BD/
 ```
 
-2. **Perform pseudo-labeling**: To run the pseudo-labeling process, execute the following command. This will start the process based on the configuration in the specified Excel file:
+2. **Running Pseudo-Labeling**:
+After preparing the dataset, the next step is to train pre-trained networks to separate the dataset into "EQUATORIAL" and "POLAR" views.
+
+**Main Scripts**:
+**Strategy 1**: pseudo_reload_train.py
+Path:
+./Pollen_classification_view/0_pseudo_labels/pseudo_reload_train.py
+
+**Behavior:**
+
+During the first training session, named "time_step 0," a pre-trained network is loaded, fine-tuned using the DFT strategy, and trained with random initialization.
+For subsequent time_steps, the model from the previous time_step is reloaded and retrained.
+
+**Strategy 2**: pseudo_train.py
+Path:
+
+./Pollen_classification_view/0_pseudo_labels/pseudo_train.py
+
+**Behavior**:
+
+All training sessions are initialized with random weights.
+
+**Recovery Script**:
+If the training process fails due to memory consumption or other issues, use the recovery script:
+
+pseudo_reload_train_recovery.py
+
+This script detects the last completed time_step and resumes training from that point.
+Stopping Rules for Pseudo-Labeling
+
+**Pseudo-labeling stops when**:
+The entire unlabeled dataset has been labeled.
+The pseudo-label selection phase does not identify any additional images from the unlabeled dataset.
+Thresholds used in the tests include: 0.95, 0.99, and 0.995.
+
+**Execution Examples**:
+
+__Single Test__
+To execute a single test, specify the start_index and end_index parameters:
 ```bash
 python 0_pseudo_labels/pseudo_reload_train.py --path 0_pseudo_labels/Reports/config_pseudo_label_pre.xlsx --start_index 5 --end_index 1
 ```
-in this case only one test will be performed.
+This command will execute only test index 5.
+
+**All Tests**
+To execute all tests configured in the spreadsheet, starting from index 0:
 ```bash
 python 0_pseudo_labels/pseudo_reload_train.py --path 0_pseudo_labels/Reports/config_pseudo_label_pre.xlsx --start_index 0
 ```
-in this case all the tests configured in the spreadsheet will be executed.
+**Recovery**
+To resume tests after a failure:
+```bash
+python 0_pseudo_labels/pseudo_reload_train_recovery.py --path 0_pseudo_labels/Reports/config_pseudo_label_pre.xlsx --start_index 0
+```
+
+**Expected Results**:
+
+The results are stored in the "Reports" folder where the spreadsheet is located. The folder naming convention follows the pattern: id_test, model_name, and reports.
+
+The output includes:
+
+1. **CSV** files containing detailed metrics and predictions.
+2. **Graphs** in JPG format, such as:
+* Confusion matrix
+* Training performance plot
+* Boxplot of probabilities
+
+This structure ensures organized storage and easy access to the results of each test.
 
 3. **Create dataset**: folder containing the algorithms used to prepare the datasets.
 **Cretan Pollen Dataset v1 (CPD-1)**
@@ -461,7 +520,7 @@ This structure ensures organized storage and easy access to the results of each 
 
 ## Phase 2
 **Fine-tuning**:
-In this phase, pre-trained models are refined to classify the datasets generated in Phase 1. The selected models include DenseNet201, MobileNet, ResNet152V2, Xception, and ResNet50. The fine-tuning process follows the DFT (Dynamic Fine-Tuning) strategy to optimize the network performance.
+In this phase, pre-trained models are refined to classify the datasets generated in Phase 1. The selected models include DenseNet201, MobileNet, ResNet152V2, Xception, and ResNet50. The fine-tuning process follows the DFT (Deep Fine-Tuning) strategy to optimize the network performance.
 
 **Required Configuration**:
 To execute the tests, a spreadsheet containing the experimental configurations is required. The default configuration file can be found in the folder:
