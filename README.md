@@ -305,19 +305,22 @@ in this case all the tests configured in the spreadsheet will be executed.
 Folder containing the algorithms used to prepare the datasets.
 Download the database available at: https://zenodo.org/records/4756361. Choose the Cropped Pollen Grains version and place it in the BD folder.
 ```bash
-wget -P BD/ https://zenodo.org/record/4756361/files/Cropped%20Pollen%20Grains.rar?download=1 -O BD/Cropped_Pollen_Grains.rar
+wget -O Cropped_Pollen_Grains.rar "https://zenodo.org/records/4756361/files/Cropped%20Pollen%20Grains.rar?download=1"
+
 ```
 or
 ```bash
-curl -L https://zenodo.org/record/4756361/files/Cropped%20Pollen%20Grains.rar?download=1 -o BD/Cropped_Pollen_Grains.rar
+curl -L -o Cropped_Pollen_Grains.rar "https://zenodo.org/records/4756361/files/Cropped%20Pollen%20Grains.rar?download=1"
 ```
 To extract the .rar file, you need to install the unrar tool (if not already installed):
 ```bash
-sudo apt-get install unrar
+sudo apt install unrar   # Ubuntu/Debian
+brew install unrar       # macOS (Homebrew)
+
 ```
 This installs the unrar tool, which is necessary for extracting .rar files.
 ```bash
-sudo unrar x BD/Cropped_Pollen_Grains.rar BD/
+unrar x Cropped_Pollen_Grains.rar
 ```
 
 4. **Renaming Dataset Classes**
@@ -352,7 +355,7 @@ At the end of the execution, the script generates reports and separates images i
 **Usage**:
 To run the script, ensure that the configuration file is properly set up, then execute the following command:
 ```bash
-python python 1_create_bd/separeted_bd.py --config 1_create_bd/config_separeted.yaml
+python 1_create_bd/separeted_bd.py --config 1_create_bd/config_separeted.yaml
 ```
 Ensure that the classes are correctly specified in the config_separeted.yaml file before running the script.
 
