@@ -403,6 +403,7 @@ For subsequent time_steps, the model from the previous time_step is reloaded and
 
 **Strategy 2**: pseudo_train.py
 Path:
+
 ./Pollen_classification_view/0_pseudo_labels/pseudo_train.py
 
 **Behavior**:
@@ -413,6 +414,7 @@ All training sessions are initialized with random weights.
 If the training process fails due to memory consumption or other issues, use the recovery script:
 
 pseudo_reload_train_recovery.py
+
 This script detects the last completed time_step and resumes training from that point.
 Stopping Rules for Pseudo-Labeling
 
