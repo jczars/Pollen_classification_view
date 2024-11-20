@@ -34,14 +34,15 @@ Follow the steps below to install the project.
 git clone https://github.com/jczars/Pollen_classification_view.git
 
 ```
-2. Navigate to the directory:
-```bash
-cd Pollen_classification_view
-```
-3. Install the dependencies:
+2. Install the dependencies:
 ```bash
 pip install -r requirements.txt
 ```
+3. Navigate to the directory:
+```bash
+cd Pollen_classification_view
+```
+
 4. Adjust Python Path (if needed):
 This step is required if you face issues with the module imports.
 To include the project path:
@@ -275,10 +276,18 @@ The project is divided into phases, following the outline of phase 1.
 **Phase 1**: Separate pollen into views (Equatorial and Polar) using pseudo-labeling.
 
 1. **Unpack the BI_5 dataset**:
-   First, extract the BI_5 dataset by running the following command:
+   Dataset: BI_5.zip
+The dataset BI_5.zip is used in this project and contains labeled and unlabeled images for pollen classification tasks.
+
+You can download the dataset using the following command:
 
 ```bash
-sudo tar -xzvf BD/BI_5.tar.gz -C BD/
+wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1h4-WdPeCxCTZ45mLxDCesyDjn8VMYv5A' -O BI_5.zip
+```
+Extracting the Dataset
+After downloading, extract the contents of the .zip file using the following command:
+```bash
+unzip BI_5.zip -d ./BD/
 ```
 
 2. **Perform pseudo-labeling**: To run the pseudo-labeling process, execute the following command. This will start the process based on the configuration in the specified Excel file:
