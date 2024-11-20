@@ -1,0 +1,8 @@
+base_model_dir: "/media/jczars/4C22F02A22F01B22/Pollen_classification_view/2_fine_tuned/Reports_vit/"
+data_base_dir: "/media/jczars/4C22F02A22F01B22/Pollen_classification_view/BD/CPD1_Dn_VTcr_151124/POLAR_R/"
+committee_networks:
+  - 1_DenseNet201
+  - 1_vit_b16
+excel_file: "3_ensemble/Reports_vit/POLAR_ens_161124.xlsx"
+BATCH: 16
+INPUT_SIZE: [224, 224]

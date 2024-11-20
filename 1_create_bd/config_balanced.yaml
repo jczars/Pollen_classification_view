@@ -1,0 +1,19 @@
+# Tipo de arquivo de imagem a ser utilizado nas operações de augmentação
+tipo: 'png'
+
+# Quantidade alvo de imagens por categoria
+goal: 192
+
+# Número de pastas de dobras (k-folds) no dataset
+k_folds: 10
+
+# Diretório base onde estão armazenados os dados de imagens
+base_dir: '/media/jczars/4C22F02A22F01B22/Pollen_classification_view/BD/CPD1_Dn_VTcr_151124/'
+
+# Lista das vistas (por exemplo, EQUATORIAL e POLAR) a serem processadas
+vistas:
+  - 'EQUATORIAL'
+  - 'POLAR'
+
+# Nível de verbosidade para logs no console (0 = silencioso, 1 ou mais = verboso)
+verbose: 1
