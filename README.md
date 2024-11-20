@@ -394,7 +394,7 @@ After preparing the dataset, the next step is to train pre-trained networks to s
 **Main Scripts**:
 **Strategy 1**: pseudo_reload_train.py
 Path:
-/media/jczars/4C22F02A22F01B22/$WinREAgent/Pollen_classification_view/0_pseudo_labels/pseudo_reload_train.py
+./Pollen_classification_view/0_pseudo_labels/pseudo_reload_train.py
 
 **Behavior:**
 
@@ -403,7 +403,7 @@ For subsequent time_steps, the model from the previous time_step is reloaded and
 
 **Strategy 2**: pseudo_train.py
 Path:
-/media/jczars/4C22F02A22F01B22/$WinREAgent/Pollen_classification_view/0_pseudo_labels/pseudo_train.py
+./Pollen_classification_view/0_pseudo_labels/pseudo_train.py
 
 **Behavior**:
 
