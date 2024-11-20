@@ -279,10 +279,10 @@ The project is divided into phases, following the outline of phase 1.
    Dataset: BI_5.zip
 The dataset BI_5.zip is used in this project and contains labeled and unlabeled images for pollen classification tasks.
 
-You can download the dataset using the following command:
+download directly in the browser
 
 ```bash
-wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1h4-WdPeCxCTZ45mLxDCesyDjn8VMYv5A' -O BI_5.zip
+https://drive.google.com/file/d/1YKr26i6et_ducSg_lRTfntsx1o2XBcdw/view?usp=sharing
 ```
 Extracting the Dataset
 After downloading, extract the contents of the .zip file using the following command:
