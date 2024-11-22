@@ -29,31 +29,46 @@ Phase 3: Assemble ensembles using models from Phase 2 for more accurate classifi
 
 Follow the steps below to set up the project environment and dependencies.
 
-```bash
+
 # 1. Create and activate the virtual environment
 # It is recommended to create a virtual environment named `tfGpu` for this project:
+```bash
 python -m venv tfGpu
+```
 
 # Activate the virtual environment:
+```bash
 source tfGpu/bin/activate
+```
 
 # 2. Clone the repository
+```bash
 git clone https://github.com/jczars/Pollen_classification_view.git
+```
 
 # 3. Install dependencies
+```bash
 pip install -r requirements.txt
+```
 
 # 4. Navigate to the project directory
+```bash
 cd Pollen_classification_view
+```
 
 # 5. Adjust the Python Path (if needed)
 # If you encounter issues with module imports, you can manually adjust the `PYTHONPATH`:
 
 # To include the project path:
+```bash
 export PYTHONPATH=/media/jczars/4C22F02A22F01B22/Pollen_classification_view/:$PYTHONPATH
+```
 
 # To remove the project path:
+```bash
 unset PYTHONPATH
+```
+
 
 [Table of contentes](#table-of-contents)
 
