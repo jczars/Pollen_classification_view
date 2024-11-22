@@ -532,7 +532,6 @@ Pollen_classification_view
 │       ├── 3.Castanea
 │       ├── 4.Eucalyptus
 │       ├── ...
-
 ├── images
 │   ├── Test_0_0_DenseNet201_boxplot_k1.jpg
 │   ├── Test_0_0_DenseNet201_mat_conf_k1.jpg
@@ -552,7 +551,6 @@ Pollen_classification_view
 │   ├── sound_test_finalizado.py
 │   ├── utils.py
 │   ├── voto_majoritary.py
-
 ├── phase1
 │   ├── pseudo_reload_train_recovery.py
 │   ├── pseudo_reload_train.py
