@@ -2,9 +2,6 @@
 
 - [Pollen_classification_view](#pollen_classification_view)
   - [Installation](#installation)
-- [Project Folder Structure](#project-Folder-Structure)
-  - [Description of Key Folders](#description-of-Key-Folders)
-  - [Resources](#resources)
 - [Usage](#usage)
   - [Phase 1](#phase-1)
   - [Phase 2](#phase-2)
@@ -13,6 +10,9 @@
   - [Interpretation of Phase 1](#interpretation-of-phase-1)
   - [Interpretation of Phase 2](#interpretation-of-phase-2)
   - [Interpretation of Phase 3](#interpretation-of-phase-3)
+- [Project Folder Structure](#project-Folder-Structure)
+  - [Description of Key Folders](#description-of-Key-Folders)
+  - [Resources](#resources)
 
 
 # Pollen_classification_view
