@@ -166,9 +166,9 @@ This structure ensures organized storage and easy access to the results of each 
 
 
 ## Phase 2
-###Preprocess
+### Preprocess
 
-1. **dowload dataset**:
+**1. dowload dataset**:
 **Cretan Pollen Dataset v1 (CPD-1)**
 This is the selected dataset. Download the dataset to the BD folder. If the BD folder does not exist, create it in the root directory of the project.
 Download the database available at: https://zenodo.org/records/4756361. Choose the Cropped Pollen Grains version and place it in the BD folder.
@@ -190,7 +190,7 @@ This installs the unrar tool, which is necessary for extracting .rar files.
 unrar x Cropped_Pollen_Grains.rar
 ```
 
-2. **Renaming Dataset Classes**
+**2. Renaming Dataset Classes**
 The database class names follow the syntax “1.Thymbra” (e.g., "1.Thymbra", "2.Erica"). We will rename the folders to follow a simpler format like “thymbra”.
 Use the rename_folders.py script to rename the classes:
 
@@ -199,7 +199,7 @@ python preprocess/rename_folders.py --path_data BD/Cropped\ Pollen\ Grains/
 ```
 This command runs the rename_folders.py script to rename the class folders inside the Cropped Pollen Grains directory. Each folder name will be converted to lowercase for consistency.
 
-3. **Resize images dataset**
+**3. Resize images dataset**
 This script reads the images from the Cropped Pollen Grains dataset and checks if they are in the standard size of 224 x 224. If any images do not meet these dimensions, the script creates a new dataset with all images resized to the specified size.
 
 The resizing process uses a configuration file (config_resize.yaml) to define input and output paths, along with other parameters.
@@ -213,7 +213,7 @@ Usage: To run the resizing script with the configuration file, use the following
 python preprocess/resize_img_bd.py --config preprocess/config_resize.yaml
 ```
 
-4. **Separeted dataset**:
+**4. Separated dataset**:
 This script separates the Cropped Pollen Grains dataset into two distinct views: Equatorial and Polar. It uses a configuration file (config_separeted.yaml) to define the input and output paths, along with other processing parameters.
 
 **Expected Results**:
@@ -226,7 +226,7 @@ python preprocess/separeted_bd.py --config preprocess/config_separeted.yaml
 ```
 Ensure that the classes are correctly specified in the config_separeted.yaml file before running the script.
 
-5. **Split the dataset into views and prepare for cross-validation**:
+**5. Split the dataset into views and prepare for cross-validation**:
 This script splits the dataset into separate folders to perform cross-validation.
 
 **Inputs**:
@@ -243,7 +243,7 @@ Ensure that the config_split.yaml file is correctly configured before running th
 python preprocess/split_BD_vistas_k.py --config preprocess/config_split.yaml
 ```
 
-6. **Data augmentation with balancing**:
+**6. Data augmentation with balancing**:
 
 This script performs data augmentation using a balancing strategy, where the **goal** variable specifies the target number of images per class. The script counts the samples in each class, and any class below the defined goal is augmented until it reaches the target size.
 
@@ -259,20 +259,19 @@ python preprocess/balanc_BD_vistas_k.py --config preprocess/config_balabce.yaml
 [Table of contentes](#table-of-contents)
 
 
-## Phase 2
-**Fine-tuning**:
-In this phase, pre-trained models are refined to classify the datasets generated in Phase 1. The selected models include DenseNet201, MobileNet, ResNet152V2, Xception, and ResNet50. The fine-tuning process follows the DFT (Deep Fine-Tuning) strategy to optimize the network performance.
+### Fine-tuning
+In this steps, pre-trained models are refined to classify the datasets generated in preprocess. The selected models include DenseNet201, MobileNet, InceptionV3, ResNet152V2 and Xception. The fine-tuning process follows the DFT (Deeply Fine-Tuning) strategy to optimize the network performance.
 
 **Required Configuration**:
 To execute the tests, a spreadsheet containing the experimental configurations is required. The default configuration file can be found in the folder:
 
 ```bash
-2_fine_tuned/Reports/config_FT_vistas_121124.xlsx
+results/phase2/reports/config_FT_vistas_121124.xlsx
 ```
 **Execution**:
 Use the following command to run the fine-tuning script:
 ```bash
-python 2_fine_tuned/FT_DFT_K10_xlsx.py 2_fine_tuned/Reports/config_FT_vistas_121124.xlsx
+python phase2/FT_DFT_K10_xlsx.py results/phase2/reports/config_FT_vistas_121124.xlsx
 ```
 **Failure Management**:
 During the tests, especially when using memory-intensive networks like DenseNet201, failures may occur due to full memory consumption. To address this, a spreadsheet with control variables tracks the progress of the tests, allowing for recovery.
@@ -302,7 +301,7 @@ num_tests = 1
 This setup ensures the tests are resumed in a controlled and efficient manner.
 
 **Expected Results**:
-The results are stored in the "Reports" folder where the spreadsheet is located. The folder naming convention follows the pattern: id_test, model_name, and reports.
+The results are stored in the "reports" folder where the spreadsheet is located. The folder naming convention follows the pattern: id_test, model_name, and reports.
 
 The output includes:
 
@@ -314,6 +313,7 @@ The output includes:
 This structure ensures organized storage and easy access to the results of each test.
 
 [Table of contentes](#table-of-contents)
+
 
 # Interpretation of results
 
