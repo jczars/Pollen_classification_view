@@ -93,7 +93,7 @@ unzip BI_5.zip -d ./BD/
 ```
 
 2. **Running Pseudo-Labeling**:
-After preparing the dataset, the next step is to train pre-trained networks to separate the dataset into "EQUATORIAL" and "POLAR" views.
+After preparing the initial dataset BI_5, the next step is to train pre-trained networks with pseudo-labeling.
 
 **Main Scripts**:
 **Strategy 1**: pseudo_reload_train.py
@@ -132,20 +132,21 @@ Thresholds used in the tests include: 0.95, 0.99, and 0.995.
 __Single Test__
 To execute a single test, specify the start_index and end_index parameters:
 ```bash
-python 0_pseudo_labels/pseudo_reload_train.py --path 0_pseudo_labels/Reports/config_pseudo_label_pre.xlsx --start_index 5 --end_index 1
+python phase1/pseudo_reload_train.py --path results/phase1/reports/config_pseudo_label_pre.xlsx --start_index 5 --end_index 1
 ```
 This command will execute only test index 5.
 
 **All Tests**
 To execute all tests configured in the spreadsheet, starting from index 0:
 ```bash
-python 0_pseudo_labels/pseudo_reload_train.py --path 0_pseudo_labels/Reports/config_pseudo_label_pre.xlsx --start_index 0
+python 0_pseudo_labels/pseudo_reload_train.py --path results/phase1/reports/config_pseudo_label_pre.xlsx --start_index 0
 ```
 **Recovery**
 To resume tests after a failure:
 ```bash
-python 0_pseudo_labels/pseudo_reload_train_recovery.py --path 0_pseudo_labels/Reports/config_pseudo_label_pre.xlsx --start_index 0
+python phase1/pseudo_reload_train_recovery.py --path results/phase1/reports/config_pseudo_label_pre.xlsx --start_index 0
 ```
+Neste caso, o teste 0, travou! Para reiniciar o treinamento executamos o scritp acima.
 
 **Expected Results**:
 
@@ -160,6 +161,8 @@ The output includes:
 * Boxplot of probabilities
 
 This structure ensures organized storage and easy access to the results of each test.
+[Table of contentes](#table-of-contents)
+
 
 3. **Create dataset**: folder containing the algorithms used to prepare the datasets.
 **Cretan Pollen Dataset v1 (CPD-1)**
