@@ -77,7 +77,7 @@ unset PYTHONPATH
 The project is divided into phases, following the outline of phase 1.
 **Phase 1**: Separate pollen into views (Equatorial and Polar) using pseudo-labeling.
 
-1. **Unpack the BI_5 dataset**:
+**1. Unpack the BI_5 dataset**:
    Dataset: BI_5.zip
 The dataset BI_5.zip is used in this project and contains labeled and unlabeled images for pollen classification tasks.
 
@@ -92,7 +92,7 @@ After downloading, extract the contents of the .zip file using the following com
 unzip BI_5.zip -d ./BD/
 ```
 
-2. **Running Pseudo-Labeling**:
+**2. Running Pseudo-Labeling**:
 After preparing the initial dataset BI_5, the next step is to train pre-trained networks with pseudo-labeling.
 
 **Main Scripts**:
@@ -125,7 +125,7 @@ Stopping Rules for Pseudo-Labeling
 **Pseudo-labeling stops when**:
 The entire unlabeled dataset has been labeled.
 The pseudo-label selection phase does not identify any additional images from the unlabeled dataset.
-Thresholds used in the tests include: 0.95, 0.99, and 0.995.
+Thresholds used in the tests include 0.95, 0.99, and 0.995.
 
 **Execution Examples**:
 
