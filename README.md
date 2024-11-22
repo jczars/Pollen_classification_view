@@ -161,12 +161,16 @@ The output includes:
 * Boxplot of probabilities
 
 This structure ensures organized storage and easy access to the results of each test.
+
 [Table of contentes](#table-of-contents)
 
 
-3. **Create dataset**: folder containing the algorithms used to prepare the datasets.
+## Phase 2
+###Preprocess
+
+1. **dowload dataset**:
 **Cretan Pollen Dataset v1 (CPD-1)**
-Folder containing the algorithms used to prepare the datasets.
+This is the selected dataset. Download the dataset to the BD folder. If the BD folder does not exist, create it in the root directory of the project.
 Download the database available at: https://zenodo.org/records/4756361. Choose the Cropped Pollen Grains version and place it in the BD folder.
 ```bash
 wget -O Cropped_Pollen_Grains.rar "https://zenodo.org/records/4756361/files/Cropped%20Pollen%20Grains.rar?download=1"
@@ -179,7 +183,6 @@ curl -L -o Cropped_Pollen_Grains.rar "https://zenodo.org/records/4756361/files/C
 To extract the .rar file, you need to install the unrar tool (if not already installed):
 ```bash
 sudo apt install unrar   # Ubuntu/Debian
-brew install unrar       # macOS (Homebrew)
 
 ```
 This installs the unrar tool, which is necessary for extracting .rar files.
@@ -187,16 +190,16 @@ This installs the unrar tool, which is necessary for extracting .rar files.
 unrar x Cropped_Pollen_Grains.rar
 ```
 
-4. **Renaming Dataset Classes**
+2. **Renaming Dataset Classes**
 The database class names follow the syntax “1.Thymbra” (e.g., "1.Thymbra", "2.Erica"). We will rename the folders to follow a simpler format like “thymbra”.
 Use the rename_folders.py script to rename the classes:
 
 ```bash
-python 1_create_bd/rename_folders.py --path_data BD/Cropped\ Pollen\ Grains/
+python preprocess/rename_folders.py --path_data BD/Cropped\ Pollen\ Grains/
 ```
 This command runs the rename_folders.py script to rename the class folders inside the Cropped Pollen Grains directory. Each folder name will be converted to lowercase for consistency.
 
-5. **Resize images dataset**
+3. **Resize images dataset**
 This script reads the images from the Cropped Pollen Grains dataset and checks if they are in the standard size of 224 x 224. If any images do not meet these dimensions, the script creates a new dataset with all images resized to the specified size.
 
 The resizing process uses a configuration file (config_resize.yaml) to define input and output paths, along with other parameters.
@@ -207,10 +210,10 @@ A new dataset folder containing all images resized to 224 x 224, ensuring consis
 Usage: To run the resizing script with the configuration file, use the following command:
 
 ```bash
-python 1_create_bd/resize_img_bd.py --config 1_create_bd/config_resize.yaml
+python preprocess/resize_img_bd.py --config preprocess/config_resize.yaml
 ```
 
-6. **Separeted dataset**:
+4. **Separeted dataset**:
 This script separates the Cropped Pollen Grains dataset into two distinct views: Equatorial and Polar. It uses a configuration file (config_separeted.yaml) to define the input and output paths, along with other processing parameters.
 
 **Expected Results**:
@@ -219,11 +222,11 @@ At the end of the execution, the script generates reports and separates images i
 **Usage**:
 To run the script, ensure that the configuration file is properly set up, then execute the following command:
 ```bash
-python 1_create_bd/separeted_bd.py --config 1_create_bd/config_separeted.yaml
+python preprocess/separeted_bd.py --config preprocess/config_separeted.yaml
 ```
 Ensure that the classes are correctly specified in the config_separeted.yaml file before running the script.
 
-7. **Split the dataset into views and prepare for cross-validation**:
+5. **Split the dataset into views and prepare for cross-validation**:
 This script splits the dataset into separate folders to perform cross-validation.
 
 **Inputs**:
@@ -237,10 +240,10 @@ Reports generated as CSV files (split_*.csv) containing information about the sp
 Ensure that the config_split.yaml file is correctly configured before running the script. Then, use the following command:
 
 ```bash
-python 1_create_bd/split_BD_vistas_k.py --config 1_create_bd/config_split.yaml
+python preprocess/split_BD_vistas_k.py --config preprocess/config_split.yaml
 ```
 
-8. **Data augmentation with balancing**:
+6. **Data augmentation with balancing**:
 
 This script performs data augmentation using a balancing strategy, where the **goal** variable specifies the target number of images per class. The script counts the samples in each class, and any class below the defined goal is augmented until it reaches the target size.
 
@@ -250,10 +253,11 @@ At the end of the execution, the script generates a balanced dataset with additi
 **Usage**:  
 To run the script, ensure that the configuration file (`config_balanced.yaml`) is properly set up, then execute the following command:
 ```bash
-python 1_create_bd/balanc_BD_vistas_k.py --config 1_create_bd/config_balabce.yaml 
+python preprocess/balanc_BD_vistas_k.py --config preprocess/config_balabce.yaml 
 ```
 
 [Table of contentes](#table-of-contents)
+
 
 ## Phase 2
 **Fine-tuning**:
