@@ -30,7 +30,7 @@ Phase 3: Assemble ensembles using models from Phase 2 for more accurate classifi
 Follow the steps below to set up the project environment and dependencies.
 
 
-1. **Create and activate the virtual environment**
+**1. Create and activate the virtual environment**
 It is recommended to create a virtual environment named `tfGpu` for this project:
 ```bash
 python -m venv tfGpu
