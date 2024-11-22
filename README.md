@@ -452,34 +452,6 @@ These are the tools used to interpret the test results.
 Below is the folder structure for the `Pollen_classification_view` project:
 ```bash
 Pollen_classification_view
-├── 0_pseudo_labels
-│   ├── Reports
-│   │   └── config_pseudo_label_pre.xlsx
-│   ├── main_pseudo.py
-├── 1_create_bd
-│   ├── balanced_BD_vistas_k.py
-│   ├── config_balanced.yaml
-│   ├── config_resize.yaml
-│   ├── config_separeted.yaml
-│   ├── config_split.yaml
-│   ├── rename_folders.py
-│   ├── resize_img_bd.py
-│   ├── separeted_bd.py
-│   ├── split_BD_vistas_k.py
-├── 2_fine_tuned
-│   ├── Reports
-│       ├── 0_DenseNet201
-│       ├── 0_Test_reports_101124.xlsx
-│   ├── FT_DFT_K10_Aug_xlsx.py
-│   ├── FT_DFT_K10_xlsx.py
-├── 3_ensemble
-│   ├── Reports
-│       ├── EQUATORIAL_ens_111124.xlsx
-│       ├── POLAR_ens_111124.xlsx
-│   ├── conf_vote.yaml
-│   ├── config_eq.yaml
-│   ├── config_pl.yaml
-│   ├── Ensemble.py
 ├── BD
 │   ├── BI_5
 │     ├── images_unlabels
@@ -548,7 +520,7 @@ Pollen_classification_view
 │       │    │    ├── k2
 │       │    │    ├── k3
 │       │    │    ├── ...
-│   ├── CPD1_Is_Rc
+│   ├── CPD1_Cr_Rc
 │       ├── asphodelus
 │       ├── calicotome
 │       ├── castanea
@@ -560,7 +532,14 @@ Pollen_classification_view
 │       ├── 3.Castanea
 │       ├── 4.Eucalyptus
 │       ├── ...
-├── modulos
+
+├── images
+│   ├── Test_0_0_DenseNet201_boxplot_k1.jpg
+│   ├── Test_0_0_DenseNet201_mat_conf_k1.jpg
+│   ├── Test_0_0_DenseNet201_TrainLoss_k1.jpg
+├── interpretation
+│   ├── radar_chart.ipynb
+├── models
 │   ├── del_folders_limiar.py
 │   ├── get_calssifica.py
 │   ├── get_data.py
@@ -574,7 +553,34 @@ Pollen_classification_view
 │   ├── utils.py
 │   ├── voto_majoritary.py
 
+├── phase1
+│   ├── pseudo_reload_train_recovery.py
+│   ├── pseudo_reload_train.py
+│   ├── pseudo_train.py
+├── phase2
+│   ├── FT_DFT_K10_xlsx.py
+├── preprocess
+│   ├── balanced_BD_vistas_k.py
+│   ├── config_balanced.yaml
+│   ├── config_resize.yaml
+│   ├── config_separeted.yaml
+│   ├── config_split.yaml
+│   ├── rename_folders.py
+│   ├── resize_img_bd.py
+│   ├── separeted_bd.py
+│   ├── split_BD_vistas_k.py
+├── results
+│   ├── phase 1
+│       ├── reports
+│            ├── 5_DenseNet201_sem_BI_5
+│            ├── config_pseudo_label_pre.xlsx
+│   ├── phase 2
+│       ├── reports
+│            ├── 0_DenseNet201
+│            ├── 0_DenseNet201_reports
+│            ├── config_FT_vistas_Aug400_181124.xlsx
 ```
+
 [Table of contentes](#table-of-contents)
 
 ## Description of Key Folders:
