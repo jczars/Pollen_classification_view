@@ -30,37 +30,68 @@ Follow the steps below to set up the project environment and dependencies.
 
 
 **1. Create and activate the virtual environment**
-It is recommended to create a virtual environment named `tfGpu` for this project:
+There are several ways to create a virtual environment. In this project, the conda package was used, but you can also choose other tools such as venv or virtualenv based on your preference.
+
+To create the virtual environment using conda, run the following command:
 ```bash
-python -m venv tfGpu
+conda create --name tfGpu python=3.10.13
 ```
 
 **Activate the virtual environment**:
 ```bash
-source tfGpu/bin/activate
+conda activate tfGpu
 ```
 
 **2. Clone the repository**
 ```bash
 git clone https://github.com/jczars/Pollen_classification_view.git
 ```
-
 **3. Install dependencies**
 ```bash
+cd Pollen_classification_view/
 pip install -r requirements.txt
 ```
 
-**4. Navigate to the project directory**
+**4. Verify the Installation**
+After installing the dependencies, you can check if everything was set up correctly. Use the following commands to check the installed packages and the Python version:
+```bash
+pip list
+python3 --version
+
+```
+5. Deactivate the Virtual Environment
+Once you’re done working on the project, deactivate the virtual environment with the command:
+```bash
+conda deactivate
+```
+This will return you to the global system environment.
+
+**6. Re-activate the Virtual Environment**
+Whenever you continue working on the project, remember to reactivate the virtual environment:
+```bash
+conda activate tfGpu
+```
+By following these steps, you’ll have an isolated environment for the project using conda to manage dependencies and avoid conflicts with other Python installations on your system.
+
+**7. Navigate to the project directory**
 ```bash
 cd Pollen_classification_view
 ```
 
-**5. Adjust the Python Path (if needed)**
+**8. Adjust the Python Path (if needed)**
 If you encounter issues with module imports, you can manually adjust the `PYTHONPATH`:
+
+Find the current directory:
+Run the following command in the terminal to get the current working directory:
 
 To include the project path:
 ```bash
-export PYTHONPATH=/media/jczars/4C22F02A22F01B22/Pollen_classification_view/:$PYTHONPATH
+pwd
+```
+Build the export PYTHONPATH command:
+Combine the result of pwd with the rest of the command to set PYTHONPATH. Assuming the current directory is the desired one:
+```bash
+export PYTHONPATH=$(pwd):$PYTHONPATH
 ```
 
 To remove the project path:
@@ -76,28 +107,52 @@ unset PYTHONPATH
 The project is divided into phases, following the outline of phase 1.
 **Phase 1**: Separate pollen into views (Equatorial and Polar) using pseudo-labeling.
 
-**1. Unpack the BI_5 dataset**:
-   Dataset: BI_5.zip
-The dataset BI_5.zip is used in this project and contains labeled and unlabeled images for pollen classification tasks.
+## Prepare the BI_5 Dataset
+The BI_5 dataset is the primary dataset used in this phase. It contains labeled and unlabeled images, essential for the pseudo-labeling and classification tasks.
 
-download directly in the browser
+**Steps to Obtain and Prepare the Dataset**
+
+**1. Create the BD Folder:**
+Before downloading the dataset, ensure the BD folder exists in the project root directory. Use the following command to create it:
 
 ```bash
-https://drive.google.com/file/d/1YKr26i6et_ducSg_lRTfntsx1o2XBcdw/view?usp=sharing
-```
-Extracting the Dataset
-After downloading, extract the contents of the .zip file using the following command:
-```bash
-unzip BI_5.zip -d ./BD/
+mkdir -p ./BD
+cd ./BD
 ```
 
-**2. Running Pseudo-Labeling**:
+**2. Download the Dataset:**
+Download the dataset directly using the link below. If gdown is not installed, you can install it using pip install gdown.
+
+```bash
+pip install gdown
+```
+
+```bash
+gdown "https://drive.google.com/uc?id=1YKr26i6et_ducSg_lRTfntsx1o2XBcdw" -O BI_5.zip
+```
+
+**3. Extracting the Dataset:**
+After downloading, extract the dataset into the ./BD/ directory:
+```bash
+unzip BI_5.zip
+```
+
+**4. Verify the Dataset:**
+After extraction, ensure that the dataset is correctly organized as described in the Project Folder Structure section. Check if the folder structure matches the expected layout for proper use in the project. [Project Folder Structure](#project-Folder-Structure)
+
+**5. Return to the Project's Root Directory**
+After verifying the dataset, return to the project's root directory to proceed with the next steps:
+```bash
+cd ..
+```
+
+## Running Pseudo-Labeling:
 After preparing the initial dataset BI_5, the next step is to train pre-trained networks with pseudo-labeling.
 
 **Main Scripts**:
 **Strategy 1**: pseudo_reload_train.py
 Path:
-./Pollen_classification_view/0_pseudo_labels/pseudo_reload_train.py
+./Pollen_classification_view/phase1/pseudo_reload_train.py
 
 **Behavior:**
 
@@ -107,7 +162,7 @@ For subsequent time_steps, the model from the previous time_step is reloaded and
 **Strategy 2**: pseudo_train.py
 Path:
 
-./Pollen_classification_view/0_pseudo_labels/pseudo_train.py
+./Pollen_classification_view/phase1/pseudo_train.py
 
 **Behavior**:
 
@@ -131,19 +186,19 @@ Thresholds used in the tests include 0.95, 0.99, and 0.995.
 __Single Test__
 To execute a single test, specify the start_index and end_index parameters:
 ```bash
-python phase1/pseudo_reload_train.py --path results/phase1/reports/config_pseudo_label_pre.xlsx --start_index 5 --end_index 1
+python3 phase1/pseudo_reload_train.py --path results/phase1/Reports/config_pseudo_label_pre.xlsx --start_index 5 --end_index 1
 ```
 This command will execute only test index 5.
 
 **All Tests**
 To execute all tests configured in the spreadsheet, starting from index 0:
 ```bash
-python phase1/pseudo_reload_train.py --path results/phase1/reports/config_pseudo_label_pre.xlsx --start_index 0
+python3 phase1/pseudo_reload_train.py --path results/phase1/Reports/config_pseudo_label_pre.xlsx --start_index 0
 ```
 **Recovery**
 To resume tests after a failure:
 ```bash
-python phase1/pseudo_reload_train_recovery.py --path results/phase1/reports/config_pseudo_label_pre.xlsx --start_index 0
+python3 phase1/pseudo_reload_train_recovery.py --path results/phase1/Reports/config_pseudo_label_pre.xlsx --start_index 0
 ```
 Neste caso, o teste 0, travou! Para reiniciar o treinamento executamos o scritp acima.
 
