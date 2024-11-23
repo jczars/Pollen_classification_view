@@ -57,9 +57,17 @@ cd Pollen_classification_view
 **5. Adjust the Python Path (if needed)**
 If you encounter issues with module imports, you can manually adjust the `PYTHONPATH`:
 
+Find the current directory:
+Run the following command in the terminal to get the current working directory:
+
 To include the project path:
 ```bash
-export PYTHONPATH=/media/jczars/4C22F02A22F01B22/Pollen_classification_view/:$PYTHONPATH
+pwd
+```
+Build the export PYTHONPATH command:
+Combine the result of pwd with the rest of the command to set PYTHONPATH. Assuming the current directory is the desired one:
+```bash
+export PYTHONPATH=$(pwd):$PYTHONPATH
 ```
 
 To remove the project path:
