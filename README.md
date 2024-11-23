@@ -122,7 +122,7 @@ After preparing the initial dataset BI_5, the next step is to train pre-trained 
 **Main Scripts**:
 **Strategy 1**: pseudo_reload_train.py
 Path:
-./Pollen_classification_view/0_pseudo_labels/pseudo_reload_train.py
+./Pollen_classification_view/phase1/pseudo_reload_train.py
 
 **Behavior:**
 
@@ -132,7 +132,7 @@ For subsequent time_steps, the model from the previous time_step is reloaded and
 **Strategy 2**: pseudo_train.py
 Path:
 
-./Pollen_classification_view/0_pseudo_labels/pseudo_train.py
+./Pollen_classification_view/phase1/pseudo_train.py
 
 **Behavior**:
 
