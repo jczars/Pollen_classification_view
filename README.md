@@ -83,7 +83,7 @@ unset PYTHONPATH
 The project is divided into phases, following the outline of phase 1.
 **Phase 1**: Separate pollen into views (Equatorial and Polar) using pseudo-labeling.
 
-### Prepare the BI_5 Dataset
+## Prepare the BI_5 Dataset
 The BI_5 dataset is the primary dataset used in this phase. It contains labeled and unlabeled images, essential for the pseudo-labeling and classification tasks.
 
 **Steps to Obtain and Prepare the Dataset**
@@ -116,7 +116,7 @@ unzip BI_5.zip
 **4. Verify the Dataset:**
 After extraction, ensure that the dataset is correctly organized as described in the Project Folder Structure section. Check if the folder structure matches the expected layout for proper use in the project. [Project Folder Structure](#project-Folder-Structure)
 
-### Running Pseudo-Labeling:
+## Running Pseudo-Labeling:
 After preparing the initial dataset BI_5, the next step is to train pre-trained networks with pseudo-labeling.
 
 **Main Scripts**:
