@@ -30,14 +30,16 @@ Follow the steps below to set up the project environment and dependencies.
 
 
 **1. Create and activate the virtual environment**
-It is recommended to create a virtual environment named `tfGpu` for this project:
+There are several ways to create a virtual environment. In this project, the conda package was used, but you can also choose other tools such as venv or virtualenv based on your preference.
+
+To create the virtual environment using conda, run the following command:
 ```bash
-python -m venv tfGpu
+conda create --name tfGpu python=3.8
 ```
 
 **Activate the virtual environment**:
 ```bash
-source tfGpu/bin/activate
+conda activate tfGpu
 ```
 
 **2. Clone the repository**
@@ -46,15 +48,36 @@ git clone https://github.com/jczars/Pollen_classification_view.git
 ```
 **3. Install dependencies**
 ```bash
-pip install -r requirements.txt
+conda install --file requirements.txt
 ```
 
-**4. Navigate to the project directory**
+**4. Verify the Installation**
+After installing the dependencies, you can check if everything was set up correctly. Use the following commands to check the installed packages and the Python version:
+```bash
+pip list
+python --version
+
+```
+5. Deactivate the Virtual Environment
+Once you’re done working on the project, deactivate the virtual environment with the command:
+```bash
+conda deactivate
+```
+This will return you to the global system environment.
+
+**6. Re-activate the Virtual Environment**
+Whenever you continue working on the project, remember to reactivate the virtual environment:
+```bash
+conda activate tfGpu
+```
+By following these steps, you’ll have an isolated environment for the project using conda to manage dependencies and avoid conflicts with other Python installations on your system.
+
+**7. Navigate to the project directory**
 ```bash
 cd Pollen_classification_view
 ```
 
-**5. Adjust the Python Path (if needed)**
+**8. Adjust the Python Path (if needed)**
 If you encounter issues with module imports, you can manually adjust the `PYTHONPATH`:
 
 Find the current directory:
