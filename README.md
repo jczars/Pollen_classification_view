@@ -56,7 +56,7 @@ pip install -r requirements.txt
 After installing the dependencies, you can check if everything was set up correctly. Use the following commands to check the installed packages and the Python version:
 ```bash
 pip list
-python --version
+python3 --version
 
 ```
 5. Deactivate the Virtual Environment
@@ -186,19 +186,19 @@ Thresholds used in the tests include 0.95, 0.99, and 0.995.
 __Single Test__
 To execute a single test, specify the start_index and end_index parameters:
 ```bash
-python phase1/pseudo_reload_train.py --path results/phase1/reports/config_pseudo_label_pre.xlsx --start_index 5 --end_index 1
+python3 phase1/pseudo_reload_train.py --path results/phase1/Reports/config_pseudo_label_pre.xlsx --start_index 5 --end_index 1
 ```
 This command will execute only test index 5.
 
 **All Tests**
 To execute all tests configured in the spreadsheet, starting from index 0:
 ```bash
-python phase1/pseudo_reload_train.py --path results/phase1/reports/config_pseudo_label_pre.xlsx --start_index 0
+python3 phase1/pseudo_reload_train.py --path results/phase1/Reports/config_pseudo_label_pre.xlsx --start_index 0
 ```
 **Recovery**
 To resume tests after a failure:
 ```bash
-python phase1/pseudo_reload_train_recovery.py --path results/phase1/reports/config_pseudo_label_pre.xlsx --start_index 0
+python3 phase1/pseudo_reload_train_recovery.py --path results/phase1/Reports/config_pseudo_label_pre.xlsx --start_index 0
 ```
 Neste caso, o teste 0, travou! Para reiniciar o treinamento executamos o scritp acima.
 
