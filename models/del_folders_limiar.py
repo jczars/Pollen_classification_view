@@ -1,4 +1,5 @@
 
+import glob
 import shutil
 import os
 import numpy as np
@@ -82,6 +83,30 @@ def initial(params):
     
 
     return categories, categories_vistas, model
+def del_folder(path, flag=0):
+    if os.path.isdir(path):
+        print('O path exists ',path)
+        if flag==1:
+            shutil.rmtree(path)
+    else:
+        print('path not found')
+        
+def del_vistas(params):
+    for vt in params['vistas']:
+        path_vistas=params['bd_src']+'/'+vt
+        #print(path_vistas)
+        cat_names = sorted(os.listdir(path_vistas))
+        
+        for j in tqdm(cat_names):
+            path_folder = path_vistas+'/'+j
+            print(path_folder)
+            query=path_folder+params['tipo']
+            images_path = glob.glob(query)
+            total=len(images_path)
+            print(total)
+            if total< params['limiar']:
+                print('del folders')
+                del_folder(path_folder, params['flag'])
 
 def create_dataSet(_path_data, _csv_data, _categories=None):
     """
