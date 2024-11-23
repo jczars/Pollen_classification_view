@@ -307,7 +307,7 @@ At the end of the execution, the script generates a balanced dataset with additi
 **Usage**:  
 To run the script, ensure that the configuration file (`config_balanced.yaml`) is properly set up, then execute the following command:
 ```bash
-python preprocess/balanc_BD_vistas_k.py --config preprocess/config_balabce.yaml 
+python preprocess/balanc_BD_vistas_k.py --config preprocess/config_balanced.yaml
 ```
 
 [Table of contentes](#table-of-contents)
