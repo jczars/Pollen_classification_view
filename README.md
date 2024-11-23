@@ -138,7 +138,7 @@ This command will execute only test index 5.
 **All Tests**
 To execute all tests configured in the spreadsheet, starting from index 0:
 ```bash
-python 0_pseudo_labels/pseudo_reload_train.py --path results/phase1/reports/config_pseudo_label_pre.xlsx --start_index 0
+python phase1/pseudo_reload_train.py --path results/phase1/reports/config_pseudo_label_pre.xlsx --start_index 0
 ```
 **Recovery**
 To resume tests after a failure:
