@@ -34,7 +34,7 @@ There are several ways to create a virtual environment. In this project, the con
 
 To create the virtual environment using conda, run the following command:
 ```bash
-conda create --name tfGpu python=3.8
+conda create --name tfGpu python=3.10.13
 ```
 
 **Activate the virtual environment**:
