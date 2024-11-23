@@ -249,7 +249,7 @@ The database class names follow the syntax “1.Thymbra” (e.g., "1.Thymbra", "
 Use the rename_folders.py script to rename the classes:
 
 ```bash
-python preprocess/rename_folders.py --path_data BD/Cropped\ Pollen\ Grains/
+python3 preprocess/rename_folders.py --path_data BD/Cropped\ Pollen\ Grains/
 ```
 This command runs the rename_folders.py script to rename the class folders inside the Cropped Pollen Grains directory. Each folder name will be converted to lowercase for consistency.
 
@@ -264,7 +264,7 @@ A new dataset folder containing all images resized to 224 x 224, ensuring consis
 Usage: To run the resizing script with the configuration file, use the following command:
 
 ```bash
-python preprocess/resize_img_bd.py --config preprocess/config_resize.yaml
+python3 preprocess/resize_img_bd.py --config preprocess/config_resize.yaml
 ```
 
 **4. Separated dataset**:
@@ -276,7 +276,7 @@ At the end of the execution, the script generates reports and separates images i
 **Usage**:
 To run the script, ensure that the configuration file is properly set up, then execute the following command:
 ```bash
-python preprocess/separeted_bd.py --config preprocess/config_separeted.yaml
+python3 preprocess/separeted_bd.py --config preprocess/config_separeted.yaml
 ```
 Ensure that the classes are correctly specified in the config_separeted.yaml file before running the script.
 
@@ -294,7 +294,7 @@ Reports generated as CSV files (split_*.csv) containing information about the sp
 Ensure that the config_split.yaml file is correctly configured before running the script. Then, use the following command:
 
 ```bash
-python preprocess/split_BD_vistas_k.py --config preprocess/config_split.yaml
+python3 preprocess/split_BD_vistas_k.py --config preprocess/config_split.yaml
 ```
 
 **6. Data augmentation with balancing**:
