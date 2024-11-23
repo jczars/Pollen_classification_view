@@ -97,17 +97,24 @@ cd ./BD
 ```
 
 **2. Download the Dataset:**
-Download the dataset directly using the following link:
+Download the dataset directly using the link below. If gdown is not installed, you can install it using pip install gdown.
 
 ```bash
-https://drive.google.com/file/d/1YKr26i6et_ducSg_lRTfntsx1o2XBcdw/view?usp=sharing
+pip install gdown
+```
+
+```bash
+gdown "https://drive.google.com/uc?id=1YKr26i6et_ducSg_lRTfntsx1o2XBcdw" -O BI_5.zip
 ```
 
 **3. Extracting the Dataset:**
 After downloading, extract the dataset into the ./BD/ directory:
 ```bash
-unzip BI_5.zip -d ./BD/
+unzip BI_5.zip
 ```
+
+**4. Verify the Dataset:**
+After extraction, ensure that the dataset is correctly organized as described in the Project Folder Structure section. Check if the folder structure matches the expected layout for proper use in the project. [Project Folder Structure](#project-Folder-Structure)
 
 ### Running Pseudo-Labeling:
 After preparing the initial dataset BI_5, the next step is to train pre-trained networks with pseudo-labeling.
