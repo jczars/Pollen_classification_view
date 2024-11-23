@@ -30,11 +30,12 @@ def reset_keras():
     if physical_devices:
         try:
             for device in physical_devices:
-                tf.config.experimental.reset_memory_stats(device.name)
+                tf.config.experimental.reset_memory_stats(device)
                 print(f"Memory stats reset for device: {device.name}")
         except Exception as e:
             print(f"Error resetting memory stats: {e}")
-
+    else:
+        print("No GPU devices found.")
     gc.collect()  # Trigger garbage collection
     print("Garbage collection complete.")
 
