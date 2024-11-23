@@ -93,7 +93,7 @@ def del_folder(path, flag=0):
         
 def del_vistas(params):
     for vt in params['vistas']:
-        path_vistas=params['bd_src']+'/'+vt
+        path_vistas=params['bd_dst']+'/'+vt
         #print(path_vistas)
         cat_names = sorted(os.listdir(path_vistas))
         
