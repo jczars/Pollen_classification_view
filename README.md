@@ -44,8 +44,11 @@ source tfGpu/bin/activate
 ```bash
 git clone https://github.com/jczars/Pollen_classification_view.git
 ```
-
-**3. Install dependencies**
+**3. access the folder**
+```bash
+cd Pollen_classification_view/
+```
+**4. Install dependencies**
 ```bash
 pip install -r requirements.txt
 ```
