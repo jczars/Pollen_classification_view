@@ -16,3 +16,4 @@ tensorflow-addons==0.23.0
 vit-keras==0.1.2
 keras==2.15.0
 nvidia-ml-py3
+pywhatkit==x.x.x
