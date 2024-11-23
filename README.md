@@ -116,6 +116,12 @@ unzip BI_5.zip
 **4. Verify the Dataset:**
 After extraction, ensure that the dataset is correctly organized as described in the Project Folder Structure section. Check if the folder structure matches the expected layout for proper use in the project. [Project Folder Structure](#project-Folder-Structure)
 
+**5. Return to the Project's Root Directory**
+After verifying the dataset, return to the project's root directory to proceed with the next steps:
+```bash
+cd ..
+```
+
 ## Running Pseudo-Labeling:
 After preparing the initial dataset BI_5, the next step is to train pre-trained networks with pseudo-labeling.
 
