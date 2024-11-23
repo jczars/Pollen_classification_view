@@ -7,7 +7,7 @@ import pandas as pd
 import openpyxl
 import tensorflow as tf
 import os
-from memory_profiler import profile
+#from memory_profiler import profile
 
 #Variables the environment
 
@@ -19,6 +19,7 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 tf.get_logger().setLevel('ERROR')  # Limits TensorFlow messages to errors only
 
 # # Functions
+path_reports = './results/phase1/Reports/'
 
 # ## rec
 #@profile
@@ -450,11 +451,11 @@ def run(workbook_path: str, id_test: int, verbose=1):
         }
 
         # recurarar csv_NewtainSet14
-        _pseudo_csv=f'./0_pseudo_labels/Reports/{id_test}_{config["model"]}_{config["aug"]}_{config["base"]}/pseudo_csv/'
+        _pseudo_csv=f'{path_reports}{id_test}_{config["model"]}_{config["aug"]}_{config["base"]}/pseudo_csv/'
         _csv_New_TrainSet = os.path.join(_pseudo_csv, f'trainSet_T{time_step}.csv')
         print(f"_csv_New_TrainSet {_csv_New_TrainSet}")
 
-        save_dir = f'./0_pseudo_labels/Reports/{id_test}_{config["model"]}_{config["aug"]}_{config["base"]}/models/'
+        save_dir = f'{path_reports}{id_test}_{config["model"]}_{config["aug"]}_{config["base"]}/models/'
         
         config_train={
         'id_test': id_test,
@@ -480,9 +481,9 @@ def run(workbook_path: str, id_test: int, verbose=1):
                     'pseudo_csv': _pseudo_csv
         }
         #/media/jczars/4C22F02A22F01B22/Pollen_classification_view/0_pseudo_labels/Reports/BI_5_testSet.csv
-        path_test= f"./0_pseudo_labels/Reports/{config['base']}_testSet.csv"
-        train_path= f"./0_pseudo_labels/Reports/{config['base']}_trainSet.csv"
-        save_dir_train= f'./0_pseudo_labels/Reports/{id_test}_{config["model"]}_{config["aug"]}_{config["base"]}'
+        path_test= f"{path_reports}{config['base']}_testSet.csv"
+        train_path= f"{path_reports}{config['base']}_trainSet.csv"
+        save_dir_train= f'{path_reports}{id_test}_{config["model"]}_{config["aug"]}_{config["base"]}'
         num_labels = len(categories)
         print(path_test)
         res_pre = {
