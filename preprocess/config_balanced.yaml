@@ -8,7 +8,7 @@ goal: 192
 k_folds: 10
 
 # Diretório base onde estão armazenados os dados de imagens
-base_dir: '/media/jczars/4C22F02A22F01B22/Pollen_classification_view/BD/CPD1_Dn_VTcr_151124/'
+base_dir: './BD/CPD1_Dn_VTcr_151124/'
 
 # Lista das vistas (por exemplo, EQUATORIAL e POLAR) a serem processadas
 vistas:
