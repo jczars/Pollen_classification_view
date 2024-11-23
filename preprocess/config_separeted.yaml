@@ -1,9 +1,9 @@
 image_size : 224 # input image size
 batch_size : 16 # Number of images processed in each batch
 limiar : 20 # Threshold value used for filtering or decision-making
-bd_src : "/media/jczars/4C22F02A22F01B22/Pollen_classification_view/BD/CPD1_Cr_Rs" # Source directory containing the isolated image dataset
-bd_dst : "/media/jczars/4C22F02A22F01B22/Pollen_classification_view/BD/CPD1_Dn_VTcr_151124/" # Destination directory to save the reprocessed images
-path_model : "/media/jczars/4C22F02A22F01B22/Pollen_classification_view/0_pseudo_labels/Reports/5_DenseNet201_sem_BI_5/models/5_DenseNet201_bestLoss_23.keras" # Path to the pre-trained model file
-path_labels : "/media/jczars/4C22F02A22F01B22/Pollen_classification_view/BD/BI_5/labels/" # Directory containing the labels for the dataset
+bd_src : "./BD/CPD1_Cr_Rs" # Source directory containing the isolated image dataset
+bd_dst : "./BD/CPD1_Dn_VTcr_151124/" # Destination directory to save the reprocessed images
+path_model : "./results/phase1/Reports/5_DenseNet201_sem_BI_5/models/5_DenseNet201_bestLoss_23.keras" # Path to the pre-trained model file
+path_labels : "./BD/BI_5/labels/" # Directory containing the labels for the dataset
 motivo : "Redo the DB Views using the isolated base" # Purpose or reason for this configuration setup
-date : "12/11/24" # Date when this configuration setup was created
+date : "23/11/24" # Date when this configuration setup was created
