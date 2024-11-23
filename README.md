@@ -49,7 +49,7 @@ git clone https://github.com/jczars/Pollen_classification_view.git
 **3. Install dependencies**
 ```bash
 cd Pollen_classification_view/
-conda install --file requirements.txt
+pip install -r requirements.txt
 ```
 
 **4. Verify the Installation**
