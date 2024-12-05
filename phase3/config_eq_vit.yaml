@@ -1,8 +1,0 @@
-base_model_dir: "/media/jczars/4C22F02A22F01B22/Pollen_classification_view/2_fine_tuned/Reports_vit/"
-data_base_dir: "/media/jczars/4C22F02A22F01B22/Pollen_classification_view/BD/CPD1_Dn_VTcr_151124/EQUATORIAL_R/"
-committee_networks:
-  - 0_DenseNet201
-  - 0_vit_b16
-excel_file: "3_ensemble/Reports_vit/EQUATORIAL_ens_111124.xlsx"
-BATCH: 16
-INPUT_SIZE: [224, 224]
