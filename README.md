@@ -280,34 +280,20 @@ python3 preprocess/separeted_bd.py --config preprocess/config_separeted.yaml
 ```
 Ensure that the classes are correctly specified in the config_separeted.yaml file before running the script.
 
-**5. Split the dataset into views and prepare for cross-validation**:
-This script splits the dataset into separate folders to perform cross-validation.
+**5. Prepare the Dataset for Cross-Validation and Data Augmentation**:
+This script divides the dataset into separate folders to perform cross-validation and then applies data augmentation using a balancing strategy, where the goal variable specifies the target number of images per class. The script counts the samples in each class, and any class below the defined target is augmented until the target size is reached.
 
 **Inputs**:
-A YAML configuration file (example: config_split.yaml) that defines the parameters for the script execution.
+A YAML configuration file (example: config_balanced.yaml) that defines the parameters for the script execution.
 
 **Expected Outputs**:
-Two generated folders: EQUATORIAL_R and POLAR_R.
-Reports generated as CSV files (split_*.csv) containing information about the splits.
-
-**Example of Execution**:
-Ensure that the config_split.yaml file is correctly configured before running the script. Then, use the following command:
-
-```bash
-python3 preprocess/split_BD_vistas_k.py --config preprocess/config_split.yaml
-```
-
-**6. Data augmentation with balancing**:
-
-This script performs data augmentation using a balancing strategy, where the **goal** variable specifies the target number of images per class. The script counts the samples in each class, and any class below the defined goal is augmented until it reaches the target size.
-
-**Expected Results**:  
 At the end of the execution, the script generates a balanced dataset with additional images for classes that initially have fewer samples. The balanced dataset is saved in the specified output folder.
 
-**Usage**:  
-To run the script, ensure that the configuration file (`config_balanced.yaml`) is properly set up, then execute the following command:
+**Example of Execution**:
+To run the script, make sure the configuration file (config_balanced.yaml) is set up correctly and execute the following command:
+
 ```bash
-python preprocess/balanc_BD_vistas_k.py --config preprocess/config_balanced.yaml
+python preprocess/aug_balanc_bd_k.py --config preprocess/config_balanced.yaml
 ```
 
 [Table of contentes](#table-of-contents)
