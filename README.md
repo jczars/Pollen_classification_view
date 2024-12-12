@@ -16,11 +16,12 @@
 
 # Pollen_classification_view
 
-This project focuses on the classification of pollen grains by taking into account their characteristic views (Equatorial, Polar). The system is divided into three phases:
+This project focuses on the classification of pollen grains, taking into account their characteristic views (Equatorial and Polar). The system is structured in three distinct phases:
 
-Phase 1: Separate pollen into views (Equatorial and Polar) using pseudo-labeling.
-Phase 2: Refine selected models and classify datasets generated in Phase 1.
-Phase 3: Assemble ensembles using models from Phase 2 for more accurate classification.
+Phase 1: Separation of pollen into views (Equatorial and Polar) using pseudo-labeling.
+Phase 2: Refinement of selected models and classification of datasets generated in Phase 1.
+Phase 3: Classification of the original dataset and comparison of classification metrics with those obtained from datasets separated by views.
+Important note: In the article, the methodology is divided into two main parts. Due to revisions, the phases were renamed to parts, so Part 1 corresponds to Phase 1, and Part 2 corresponds to Phase 2. Phase 3 was removed from the methodology and is only mentioned in the results section onward.
 
 [Table of contentes](#table-of-contents)
 
@@ -353,6 +354,25 @@ The output includes:
 This structure ensures organized storage and easy access to the results of each test.
 
 [Table of contentes](#table-of-contents)
+
+## Phase 3
+### Preprocess
+
+**1. Prepare the Dataset for Cross-Validation and Data Augmentation**:
+This script divides the dataset into separate folders to perform cross-validation and then applies data augmentation using a balancing strategy, where the goal variable specifies the target number of images per class. The script counts the samples in each class, and any class below the defined target is augmented until the target size is reached.
+
+**Inputs**:
+A YAML configuration file (example: config_origin_format.yaml) that defines the parameters for the script execution.
+
+**Expected Outputs**:
+At the end of the execution, the script generates a balanced dataset with additional images for classes that initially have fewer samples. The balanced dataset is saved in the specified output folder.
+
+**Example of Execution**:
+To run the script, make sure the configuration file (config_origin_format.yaml) is set up correctly and execute the following command:
+
+```bash
+python preprocess/split_aug_bd_k.py --config preprocess/config_origin_format.yaml
+```
 
 
 # Interpretation of results
