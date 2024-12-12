@@ -193,7 +193,7 @@ def graph_img_cat(data_dir):
 
     # Create the horizontal bar chart
     fig, ax = plt.subplots(figsize=(15, 10))
-    bars = sns.barplot(y=category_names, x=img_pr_cat, palette="viridis", ax=ax)
+    bars = sns.barplot(y=category_names, x=img_pr_cat, ax=ax)
 
     # Add values on top of each bar
     for i, bar in enumerate(bars.patches):
