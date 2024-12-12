@@ -530,6 +530,8 @@ These are the tools used to interpret the test results.
 ## Interpretation of Phase 3
 The same tools from the previous phase are used in this phase. Additionally, consolidated reports are utilized, as explained in the results section of the article. These consolidated reports include the consolidated confusion matrix, the consolidated classification report, and the consolidated box plot. The term consolidated refers to the process of combining the reports from all 10 folds of the cross-validation into a single report.
 
+A pasta discussão
+
 [Table of contentes](#table-of-contents)
 
 # Project Folder Structure
