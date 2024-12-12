@@ -315,7 +315,7 @@ results/phase2/reports/config_FT_vistas_121124.xlsx
 **Execution**:
 Use the following command to run the fine-tuning script:
 ```bash
-python phase2/FT_DFT_K10_xlsx.py results/phase2/reports/config_FT_vistas_121124.xlsx
+python phase2/FT_DFT_K10_xlsx.py results/phase2/reports_cr_13_400/config_FT_vt_cr_281124.xlsx
 ```
 **Failure Management**:
 During the tests, especially when using memory-intensive networks like DenseNet201, failures may occur due to full memory consumption. To address this, a spreadsheet with control variables tracks the progress of the tests, allowing for recovery.
@@ -377,10 +377,24 @@ To run the script, make sure the configuration file (config_origin_format.yaml) 
 python preprocess/split_aug_bd_k.py --config preprocess/config_origin_format.yaml
 ```
 
+### Fine-tuning
+
+The same procedure from Phase 2 will be applied in this stage, with some observations. 
+The script used will be the same: FT_DFT_K10_xlsx.py. The test spreadsheet will be: results/phase3/reports_cr_400/config_FT_Orig_cr_281124.xlsx. It is important to verify whether the paths to the databases are correct. Relative paths have been used to avoid the need for adjustments during execution. However, if any issues arise, adjustments should be made directly in the spreadsheet.
+
+**Execution**:
+Use the following command to run the fine-tuning script:
+```bash
+python phase2/FT_DFT_K10_xlsx.py results/phase3/reports_cr_400/config_FT_Orig_cr_281124.xlsx
+```
 
 # Interpretation of results
 
 ## Interpretation of Phase 1
+This is an illustrative example and may not correspond to the current one. To check the most recent examples, please refer to the files:
+
+BD/CPD1_Dn_VTcr_281124/df_qde_vistas.csv
+BD/CPD1_Dn_VTcr_281124/df_summary_filtered.csv
 
 1. **Overall Class Distribution (data_summary.csv)**
 
@@ -456,31 +470,36 @@ python preprocess/split_aug_bd_k.py --config preprocess/config_origin_format.yam
 | myrtus        | -          | 786     |
 | oxalis        | -          | 131     |
 
-
+The remaining results of this phase can be found in the Results section, sub-section 4.1 Results of dataset separation by views.
 
 [Table of contentes](#table-of-contents)
+
 ## Interpretation of Phase 2
 
-## 4. Classification Report for DenseNet201 (k=1, Equatorial View)
+The results of Phase 2 are presented in sub-section 4.2 Classification results of datasets separated by Views, and the experimental results are stored in the results/phase2 folder.
+To evaluate the results, pay close attention to the structure of the results folders. An illustration of this structure is provided in [Description of Key Folders](#description-of-Key-Folders)
 
-This section presents the results obtained using the DenseNet201 classifier on the **k=1 fold** with **equatorial views**. The evaluation includes training performance metrics, a boxplot of prediction probabilities, a confusion matrix, and a classification report.
 
-### 4.1 Training Metrics
+## Classification Report for DenseNet201 (k=1, Equatorial View)
+
+This section presents **illustrative results** obtained using the DenseNet201 classifier on the k=1-fold with **equatorial views**. The evaluation includes training performance metrics, a box plot of prediction probabilities, a confusion matrix, and a detailed classification report.
+
+### Training Metrics
 The following graph illustrates the **loss and accuracy** progression during training:
 
 ![Training Loss and Accuracy](images/Test_0_0_DenseNet201_TrainLoss_k1.jpg)
 
-### 4.2 Prediction Confidence Analysis
+### Prediction Confidence Analysis
 The boxplot below displays the **distribution of prediction probabilities** for correctly classified samples:
 
 ![Boxplot of Prediction Probabilities](/images/Test_0_0_DenseNet201_boxplot_k1.jpg)
 
-### 4.3 Confusion Matrix
+### Confusion Matrix
 The confusion matrix generated from the test dataset classification is shown below:
 
 ![Confusion Matrix](images/Test_0_0_DenseNet201_mat_conf_k1.jpg)
 
-### 4.4 Classification Report
+### Classification Report
 The table below presents detailed metrics for each class:
 
 |    Class     | Precision | Recall | F1-Score | Support |
@@ -509,6 +528,7 @@ These are the tools used to interpret the test results.
 
 [Table of contentes](#table-of-contents)
 ## Interpretation of Phase 3
+The same tools from the previous phase are used in this phase. Additionally, consolidated reports are utilized, as explained in the results section of the article. These consolidated reports include the consolidated confusion matrix, the consolidated classification report, and the consolidated box plot. The term consolidated refers to the process of combining the reports from all 10 folds of the cross-validation into a single report.
 
 [Table of contentes](#table-of-contents)
 
@@ -633,14 +653,21 @@ Pollen_classification_view
 │   ├── split_BD_vistas_k.py
 ├── results
 │   ├── phase 1
-│       ├── reports
-│            ├── 5_DenseNet201_sem_BI_5
-│            ├── config_pseudo_label_pre.xlsx
+│       ├── reports_cr
+│            ├── 1_DenseNet201_sem_BI_5
+│            ├── config_pseudo_label_pre_cr.xlsx
 │   ├── phase 2
-│       ├── reports
+│       ├── reports_cr_13_400
 │            ├── 0_DenseNet201
 │            ├── 0_DenseNet201_reports
-│            ├── config_FT_vistas_Aug400_181124.xlsx
+│            ├── 0_DenseNet201_reports_consolidated
+│            ├── config_FT_vt_cr_281124.xlsx
+│   ├── phase 3
+│       ├── reports_cr_13_400
+│            ├── 0_DenseNet201
+│            ├── 0_DenseNet201_reports
+│            ├── 0_DenseNet201_reports_consolidated
+│            ├── config_FT_Orig_cr_281124.xlsx
 ```
 
 [Table of contentes](#table-of-contents)
