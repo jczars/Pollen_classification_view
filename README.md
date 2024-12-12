@@ -5,6 +5,7 @@
 - [Usage](#usage)
   - [Phase 1](#phase-1)
   - [Phase 2](#phase-2)
+  - [Phase 3](#phase-3)
 - [Interpretation of results](#interpretation-of-results)
   - [Interpretation of Phase 1](#interpretation-of-phase-1)
   - [Interpretation of Phase 2](#interpretation-of-phase-2)
