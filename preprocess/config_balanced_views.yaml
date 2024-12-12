@@ -2,7 +2,7 @@
 type: 'png'
 
 # Target number of images per category
-goal: 50
+goal: 400
 
 # Number of fold directories (k-folds) in the dataset
 k_folds: 10
