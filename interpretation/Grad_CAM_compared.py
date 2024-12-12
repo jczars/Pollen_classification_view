@@ -8,11 +8,6 @@ import numpy as np
 import tensorflow as tf
 import yaml
 
-# Add the current directory to the PYTHONPATH
-print(os.getcwd())
-sys.path.insert(0, "/media/jczars/4C22F02A22F01B22/Pollen_classification_view/")
-print(sys.path)
-
 # Importing modules and functions
 from models import grad_cam_lib as cam
 from models import sound_test_finalizado
