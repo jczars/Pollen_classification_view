@@ -6,10 +6,10 @@
   - [Phase 1](#phase-1)
   - [Phase 2](#phase-2)
   - [Phase 3](#phase-3)
-- [Interpretation of results](#interpretation-of-results)
-  - [Interpretation of Phase 1](#interpretation-of-phase-1)
-  - [Interpretation of Phase 2](#interpretation-of-phase-2)
-  - [Interpretation of Phase 3](#interpretation-of-phase-3)
+- [Results of results](#interpretation-of-results)
+  - [Results of Phase 1](#interpretation-of-phase-1)
+  - [Results of Phase 2](#interpretation-of-phase-2)
+  - [Results of Phase 3](#interpretation-of-phase-3)
 - [Project Folder Structure](#project-Folder-Structure)
   - [Description of Key Folders](#description-of-Key-Folders)
   - [Resources](#resources)
@@ -389,9 +389,9 @@ Use the following command to run the fine-tuning script:
 python phase2/FT_DFT_K10_xlsx.py results/phase3/reports_cr_400/config_FT_Orig_cr_281124.xlsx
 ```
 
-# Interpretation of results
+# Results
 
-## Interpretation of Phase 1
+## Results of dataset separation by views
 This is an illustrative example and may not correspond to the current one. To check the most recent examples, please refer to the files:
 
 BD/CPD1_Dn_VTcr_281124/df_qde_vistas.csv
@@ -475,13 +475,13 @@ The remaining results of this phase can be found in the Results section, sub-sec
 
 [Table of contentes](#table-of-contents)
 
-## Interpretation of Phase 2
+## Classification results of datasets separated by Views
 
 The results of Phase 2 are presented in sub-section 4.2 Classification results of datasets separated by Views, and the experimental results are stored in the results/phase2 folder.
 To evaluate the results, pay close attention to the structure of the results folders. An illustration of this structure is provided in [Description of Key Folders](#description-of-Key-Folders)
 
 
-## Classification Report for DenseNet201 (k=1, Equatorial View)
+## Classification report for DenseNet201 (k=1, Equatorial View)
 
 This section presents **illustrative results** obtained using the DenseNet201 classifier on the k=1-fold with **equatorial views**. The evaluation includes training performance metrics, a box plot of prediction probabilities, a confusion matrix, and a detailed classification report.
 
@@ -528,22 +528,39 @@ The table below presents detailed metrics for each class:
 These are the tools used to interpret the test results.
 
 [Table of contentes](#table-of-contents)
-## Interpretation of Phase 3
+
+## Classification results of the dataset in its original format
 The same tools from the previous phase are used in this phase. Additionally, consolidated reports are utilized, as explained in the results section of the article. These consolidated reports include the consolidated confusion matrix, the consolidated classification report, and the consolidated box plot. The term consolidated refers to the process of combining the reports from all 10 folds of the cross-validation into a single report.
 
-A pasta discussão tem o script que gera os relatórios consolidados.
+## Consolidated results
+The **discussion** folder contains the script that generates the consolidated reports.
 
 **Inputs**:
-A YAML configuration file (example: config_origin_format.yaml) that defines the parameters for the script execution.
+A YAML configuration file (example: config_consolidaded.yaml) that defines the parameters for the script execution.
 
 **Expected Outputs**:
 At the end of the execution, the script generates a balanced dataset with additional images for classes that initially have fewer samples. The balanced dataset is saved in the specified output folder.
 
 **Example of Execution**:
-To run the script, make sure the configuration file (config_origin_format.yaml) is set up correctly and execute the following command:
+To run the script, make sure the configuration file (config_consolidaded.yaml) is set up correctly and execute the following command:
 
 ```bash
 python discussion/consolidated_reports.py --config discussion/config_consolidaded.yaml
+```
+## Interpretability
+This study investigates the use of visualization techniques—Grad-CAM, Grad-CAM++, and Score-CAM—to understand the decision-making process of neural networks in the task of pollen grain classification. These methods allow for the identification of image regions that significantly influence the model’s predictions, aiding in the distinction between correct and incorrect classifications. In addition, probability graphs are utilized to represent the model’s confidence in its classifications, offering a quantitative perspective on the decisions made.
+
+**Inputs:**
+A YAML configuration file (e.g., config_class_well.yaml) that defines the parameters for executing the script.
+
+**Expected Outputs:**
+Upon execution, the script generates a balanced dataset by adding additional images to classes that initially have fewer samples. This balanced dataset is saved in the specified output folder.
+
+**Example of Execution:**
+To run the script, ensure the configuration file (config_class_well.yaml) is properly set up and execute the following command:
+
+```bash
+python interpretation/Grad_CAM_compared.py --config interpretation/config_class_well.yaml
 ```
 
 
