@@ -1,0 +1,11 @@
+# Número de pastas de dobras (k-folds) no dataset
+k_folds: 10
+
+normalize: False
+
+# Diretório onde estão os relatóriios de avaliação
+folder:
+- './results/phase2/reports_cr_13_400/0_DenseNet201_reports/'  
+- './results/phase2/reports_cr_13_400/1_DenseNet201_reports/' 
+- './results/phase3/reports_cr_500/0_DenseNet201_reports/'
+- './results/phase3/reports_cr_500/1_DenseNet201_reports/'
