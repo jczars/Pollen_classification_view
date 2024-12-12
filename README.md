@@ -6,7 +6,7 @@
   - [Phase 1](#phase-1)
   - [Phase 2](#phase-2)
   - [Phase 3](#phase-3)
-- [Results of results](#interpretation-of-results)
+- [Results](#Results)
   - [Results of Phase 1](#interpretation-of-phase-1)
   - [Results of Phase 2](#interpretation-of-phase-2)
   - [Results of Phase 3](#interpretation-of-phase-3)
