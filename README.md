@@ -297,7 +297,7 @@ At the end of the execution, the script generates a balanced dataset with additi
 To run the script, make sure the configuration file (config_balanced.yaml) is set up correctly and execute the following command:
 
 ```bash
-python preprocess/aug_balanc_bd_k.py --config preprocess/config_balanced.yaml
+python preprocess/split_aug_bd_k.py --config preprocess/config_balanced_views.yaml
 ```
 
 [Table of contentes](#table-of-contents)
