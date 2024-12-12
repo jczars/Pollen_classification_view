@@ -531,7 +531,21 @@ These are the tools used to interpret the test results.
 ## Interpretation of Phase 3
 The same tools from the previous phase are used in this phase. Additionally, consolidated reports are utilized, as explained in the results section of the article. These consolidated reports include the consolidated confusion matrix, the consolidated classification report, and the consolidated box plot. The term consolidated refers to the process of combining the reports from all 10 folds of the cross-validation into a single report.
 
-A pasta discussão
+A pasta discussão tem o script que gera os relatórios consolidados.
+
+**Inputs**:
+A YAML configuration file (example: config_origin_format.yaml) that defines the parameters for the script execution.
+
+**Expected Outputs**:
+At the end of the execution, the script generates a balanced dataset with additional images for classes that initially have fewer samples. The balanced dataset is saved in the specified output folder.
+
+**Example of Execution**:
+To run the script, make sure the configuration file (config_origin_format.yaml) is set up correctly and execute the following command:
+
+```bash
+python discussion/consolidated_reports.py --config discussion/config_consolidaded.yaml
+```
+
 
 [Table of contentes](#table-of-contents)
 
