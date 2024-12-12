@@ -18,10 +18,11 @@
 
 This project focuses on the classification of pollen grains, taking into account their characteristic views (Equatorial and Polar). The system is structured in three distinct phases:
 
-Phase 1: Separation of pollen into views (Equatorial and Polar) using pseudo-labeling.
-Phase 2: Refinement of selected models and classification of datasets generated in Phase 1.
-Phase 3: Classification of the original dataset and comparison of classification metrics with those obtained from datasets separated by views.
-Important note: In the article, the methodology is divided into two main parts. Due to revisions, the phases were renamed to parts, so Part 1 corresponds to Phase 1, and Part 2 corresponds to Phase 2. Phase 3 was removed from the methodology and is only mentioned in the results section onward.
+**Phase 1:** Separation of pollen into views (Equatorial and Polar) using pseudo-labeling.
+**Phase 2:** Refinement of selected models and classification of datasets generated in Phase 1.
+**Phase 3:** Classification of the original dataset and comparison of classification metrics with those obtained from datasets separated by views.
+
+**Important note:** In the article, the methodology is divided into two main parts. Due to revisions, the phases were renamed to parts, so Part 1 corresponds to Phase 1, and Part 2 corresponds to Phase 2. Phase 3 was removed from the methodology and is only mentioned in the results section onward.
 
 [Table of contentes](#table-of-contents)
 
