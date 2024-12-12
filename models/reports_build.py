@@ -304,7 +304,7 @@ def plot_confidence_boxplot(df_correct):
     # Plot the boxplot using seaborn
     #sns.boxplot(data=df_correct, y="true_label", x="confidence", ax=ax, palette="Blues")
     sns.boxplot(data=df_correct, x="confidence", y="true_label", ax=ax, hue="true_label", 
-                palette="Blues", showfliers=False)
+                palette="Blues", showfliers=True)
     
     # Set up the plot title and labels
     ax.set_title("Confidence Scores for Correct Classifications", fontsize=16)
