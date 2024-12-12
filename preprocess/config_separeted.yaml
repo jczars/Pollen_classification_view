@@ -2,7 +2,7 @@ image_size : 224 # input image size
 batch_size : 16 # Number of images processed in each batch
 limiar : 20 # Threshold value used for filtering or decision-making
 bd_src : "./BD/CPD1_Cr_Rs" # Source directory containing the isolated image dataset
-bd_dst : "./BD/CPD1_Mb_VTcr_281124/" # Destination directory to save the reprocessed images
+bd_dst : "./BD/CPD1_Dn_VTcr_281124/" # Destination directory to save the reprocessed images
 path_model : "./results/phase1/reports_cr/1_DenseNet201_sem_BI_5/models/1_DenseNet201_bestLoss_13.keras" # Path to the pre-trained model file
 path_labels : "./BD/BI_Cr_5/labels/" # Directory containing the labels for the dataset
 motivo : "Testando a nova base BI_Cr_5" # Purpose or reason for this configuration setup
