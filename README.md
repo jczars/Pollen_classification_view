@@ -574,12 +574,18 @@ A YAML configuration file (e.g., config_class_well.yaml) that defines the parame
 Upon execution, the script generates a balanced dataset by adding additional images to classes that initially have fewer samples. This balanced dataset is saved in the specified output folder.
 
 **Example of Execution:**
-To run the script, ensure the configuration file (config_class_well.yaml) is properly set up and execute the following command:
+To run the script, ensure that the configuration file (config_class_well_k1.yaml) is properly set up and execute the following command:
+
+For correct classification:
 
 ```bash
 python interpretation/Grad_CAM_compared.py --config interpretation/config_class_well.yaml
 ```
+For incorrect classification:
 
+```bash
+python interpretation/Grad_CAM_compared.py --config interpretation/config_class_wrong_eq_k1.yaml
+```
 
 [Table of contentes](#table-of-contents)
 
