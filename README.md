@@ -10,6 +10,8 @@
   - [Results of Phase 1](#Results-of-dataset-separation-by-views)
   - [Results of Phase 2](#Classification-results-of-datasets-separated-by-Views)
   - [Results of Phase 3](#Classification-results-of-the-dataset-in-its-original-format)
+  - [Consolidated results](#Consolidated-results)
+  - [Interpretability](#Interpretability)
 - [Project Folder Structure](#project-Folder-Structure)
   - [Description of Key Folders](#description-of-Key-Folders)
   - [Resources](#resources)
