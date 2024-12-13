@@ -8,4 +8,3 @@ folder:
 - './results/phase2/reports_cr_13_400/0_DenseNet201_reports/'  
 - './results/phase2/reports_cr_13_400/1_DenseNet201_reports/' 
 - './results/phase3/reports_cr_400/0_DenseNet201_reports/'
-- './results/phase3/reports_cr_400/1_DenseNet201_reports/'
