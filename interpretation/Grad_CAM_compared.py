@@ -393,8 +393,8 @@ def run(config):
     
     saved_dir = "./interpretation/grad_cam/"
     # Create the directory if it doesn't exist
-    os.makedirs(os.path.dirname(image_saved), exist_ok=True)
-    
+    os.makedirs(os.path.dirname(saved_dir), exist_ok=True)
+
     image_saved = os.path.join(saved_dir, nome)
     fig.savefig(image_saved)
 
