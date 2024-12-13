@@ -10,7 +10,9 @@
   - [Results of Phase 1](#Results-of-dataset-separation-by-views)
   - [Results of Phase 2](#Classification-results-of-datasets-separated-by-Views)
   - [Results of Phase 3](#Classification-results-of-the-dataset-in-its-original-format)
+- [Discussion](#Discussion)
   - [Consolidated results](#Consolidated-results)
+  - [Test the Wilcoxon](#Test-wilcoxon)
   - [Interpretability](#Interpretability)
 - [Project Folder Structure](#project-Folder-Structure)
   - [Description of Key Folders](#description-of-Key-Folders)
@@ -532,6 +534,7 @@ These are the tools used to interpret the test results.
 
 [Table of contentes](#table-of-contents)
 
+# Discussion
 ## Classification results of the dataset in its original format
 The same tools from the previous phase are used in this phase. Additionally, consolidated reports are utilized, as explained in the results section of the article. These consolidated reports include the consolidated confusion matrix, the consolidated classification report, and the consolidated box plot. The term consolidated refers to the process of combining the reports from all 10 folds of the cross-validation into a single report.
 
@@ -550,6 +553,20 @@ To run the script, make sure the configuration file (config_consolidaded.yaml) i
 ```bash
 python discussion/consolidated_reports.py --config discussion/config_consolidaded.yaml
 ```
+
+## Test Wilcoxon
+The discussion folder contains the script that performs the Wilcoxon hypothesis test.
+
+**Inputs**:
+A **spreadsheet** containing the classification reports of the datasets being compared (e.g., Comparar_literatura.xlsx), which defines the parameters for the script execution. The results are saved in a new sheet called results.
+
+**Example of Execution**:
+To run the script, ensure that the configuration file (config_consolidated.yaml) is correctly configured, then execute the following command:
+
+```bash
+python discussion/test_wilcoxon.py --path discussion/Comparar_literatura.xlsx
+```
+
 ## Interpretability
 This study investigates the use of visualization techniques—Grad-CAM, Grad-CAM++, and Score-CAM—to understand the decision-making process of neural networks in the task of pollen grain classification. These methods allow for the identification of image regions that significantly influence the model’s predictions, aiding in the distinction between correct and incorrect classifications. In addition, probability graphs are utilized to represent the model’s confidence in its classifications, offering a quantitative perspective on the decisions made.
 
