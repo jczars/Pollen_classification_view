@@ -305,9 +305,6 @@ To run the script, make sure the configuration file (config_balanced.yaml) is se
 python preprocess/split_aug_bd_k.py --config preprocess/config_balanced_views.yaml
 ```
 
-[Table of contentes](#table-of-contents)
-
-
 ### Fine-tuning
 In this steps, pre-trained models are refined to classify the datasets generated in preprocess. The selected models include DenseNet201, MobileNet, InceptionV3, ResNet152V2 and Xception. The fine-tuning process follows the DFT (Deeply Fine-Tuning) strategy to optimize the network performance.
 
