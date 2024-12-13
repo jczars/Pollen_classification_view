@@ -1,5 +1,7 @@
 import pandas as pd
 from scipy.stats import wilcoxon
+import argparse
+import os
 
 
 # Function to load the spreadsheet, perform comparisons, and apply tests
@@ -66,16 +68,47 @@ def process_spreadsheet(file_path):
     return results_df
 
 
-# Path to the Excel file
-file_path = "discussion/Comparar_literatura.xlsx"  # Replace with the correct path to your file
+# Main function to handle command-line arguments
+if __name__ == "__main__":
+    # Default file path configuration
+    default_path = 'discussion/Comparar_literatura.xlsx'
+    
+    # Set up argparse to handle command-line arguments
+    parser = argparse.ArgumentParser(description="Run the pollen classification process.")
+    parser.add_argument(
+        '--path', 
+        type=str, 
+        default=default_path, 
+        help="Path to the workbook. If not provided, the default path will be used."
+    )
+    parser.add_argument(
+        '--start_index', 
+        type=int, 
+        default=0, 
+        help="Starting index for the run. Default is 0."
+    )
+    parser.add_argument(
+        '--end_index', 
+        type=int, 
+        default=None, 
+        help="Ending index for the run. If not provided, the function will use the default (None)."
+    )
 
-# Perform comparative analysis and Wilcoxon test
-results = process_spreadsheet(file_path)
+    args = parser.parse_args()
+    
+    # Check if the given path exists
+    if not os.path.exists(args.path):
+        print(f"Warning: The provided workbook path '{args.path}' does not exist.")
+        print("Using default workbook path.")
+        args.path = default_path
 
-# Load the original spreadsheet
-with pd.ExcelWriter(file_path, engine="openpyxl", mode="a") as writer:
-    # Save the Wilcoxon test results in a new sheet called "resultados"
-    results.to_excel(writer, index=False, sheet_name="results")
+    # Perform comparative analysis and Wilcoxon test
+    results = process_spreadsheet(args.path)
 
-# Display completion message
-print("The results and their interpretations have been saved in the new 'resultados' sheet of the spreadsheet.")
+    # Load the original spreadsheet and save the results in a new sheet
+    with pd.ExcelWriter(args.path, engine="openpyxl", mode="a") as writer:
+        # Save the Wilcoxon test results in a new sheet called "results"
+        results.to_excel(writer, index=False, sheet_name="results")
+
+    # Display completion message
+    print(f"The results and their interpretations have been saved in the new 'results' sheet of the spreadsheet: {args.path}")
