@@ -1,4 +1,4 @@
-path_model: "./results/phase3/reports_cr_500/1_DenseNet201/1_DenseNet201_bestLoss_1.keras"
+path_model: "./results/phase3/reports_cr_400/0_DenseNet201/0_DenseNet201_bestLoss_1.keras"
 nome: "GradCAM_class_wrong_k1.png"
 conv_layer_name: "relu"
 img_size: 224
