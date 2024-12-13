@@ -584,7 +584,7 @@ python interpretation/Grad_CAM_compared.py --config interpretation/config_class_
 For incorrect classification:
 
 ```bash
-python interpretation/Grad_CAM_compared.py --config interpretation/config_class_wrong_eq_k1.yaml
+python interpretation/Grad_CAM_compared.py --config interpretation/config_class_wrong_orig_k1.yaml
 ```
 
 [Table of contentes](#table-of-contents)
