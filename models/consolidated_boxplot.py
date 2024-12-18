@@ -41,21 +41,40 @@ def consolidator(folder, prefix, k):
 
 
 def plot_confidence_boxplot(df_correct, type='correct'):
+    """
+    Creates a boxplot of confidence scores for correctly classified samples.
 
+    Parameters:
+        df_correct (pd.DataFrame): DataFrame containing correctly classified samples.
+
+    Returns:
+        fig: Matplotlib figure object of the boxplot.
+    """
     if type == 'correct':
         title="Consolidated Confidence Scores for Correct Classifications"
     else:
         title="Consolidated Confidence Scores for Incorrect Classifications"
-    fig=plt.figure(figsize=(9, 6), dpi=100)
 
+    # Set up the figure and its dimensions
+    fig, ax = plt.subplots(figsize=(9, 6), dpi=100)
+    
+    # Customize the plot style
     sns.set_style("whitegrid")
-
-    # Adicionando Título ao gráfico
-    sns.boxplot(y=df_correct["true_label"], x=df_correct["confidence"])
-    plt.title(title, loc="center", fontsize=18)
-    plt.xlabel("Confidence")
-    plt.ylabel("classes")
-
+    
+    # Plot the boxplot using seaborn
+    #sns.boxplot(data=df_correct, y="true_label", x="confidence", ax=ax, palette="Blues")
+    sns.boxplot(data=df_correct, x="confidence", y="true_label", ax=ax, hue="true_label", 
+                palette="Blues", showfliers=True)
+    
+    # Set up the plot title and labels
+    ax.set_title(title, fontsize=16)
+    ax.set_xlabel("Confidence", fontsize=12)
+    ax.set_ylabel("Class", fontsize=12)
+    
+    # Improve readability of y-axis labels
+    ax.set_yticklabels(ax.get_yticklabels(), fontsize=10, rotation=0)
+    
+    plt.tight_layout()
     return fig
 
 def saved(folder):
