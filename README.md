@@ -289,6 +289,13 @@ python3 preprocess/separeted_bd.py --config preprocess/config_separeted.yaml
 ```
 Ensure that the classes are correctly specified in the config_separeted.yaml file before running the script.
 
+**Attention**
+When tested on a different GPU, the pseudo-labeling showed significant differences that resulted in a different number of classes than those used in the article. To avoid this issue, which may influence the final result, weight 13 of the DenseNet201 network will be made available.
+
+```bash
+gdown https://drive.google.com/uc?id=1YIENLYSaRljIq1mZclMdvUUrq6XVS9hz
+```
+
 **5. Prepare the Dataset for Cross-Validation and Data Augmentation**:
 This script divides the dataset into separate folders to perform cross-validation and then applies data augmentation using a balancing strategy, where the goal variable specifies the target number of images per class. The script counts the samples in each class, and any class below the defined target is augmented until the target size is reached.
 
