@@ -7,8 +7,8 @@ import yaml
 from tqdm import tqdm
 
 # Add custom module path to system path
-sys.path.append('/media/jczars/4C22F02A22F01B22/$WinREAgent/Pollen_classification_view/')
-print("System paths:", sys.path)
+#sys.path.append('/media/jczars/4C22F02A22F01B22/$WinREAgent/Pollen_classification_view/')
+#print("System paths:", sys.path)
 
 # Import custom modules and functions
 from models import utils, sound_test_finalizado
@@ -58,7 +58,7 @@ def run(params):
 
     Parameters:
     - params (dict): A dictionary with the following keys:
-        - 'tipo': Image file type (e.g., 'png', 'jpg').
+        - 'type': Image file type (e.g., 'png', 'jpg').
         - 'bd_src': Source directory for images.
         - 'bd_dst': Destination directory for resized images.
         - 'save_dir': Directory to save the graph image.
@@ -79,7 +79,7 @@ def run(params):
             print(f'\nSource: {src}')
             print(f'Destination: {dst}')
 
-        save_resize(src, dst, params['tipo'], params['save'], params['verbose'])
+        save_resize(src, dst, params['type'], params['save'], params['verbose'])
 
     fig = utils.graph_img_cat(params['bd_dst'])
     save_dir = params['save_dir']
