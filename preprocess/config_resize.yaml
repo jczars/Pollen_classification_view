@@ -1,4 +1,4 @@
-tipo: "png"  # Image file type (e.g., 'jpg', 'png')
+type: "png"  # Image file type (e.g., 'jpg', 'png')
 bd_src: "./BD/Cropped Pollen Grains/"  # Destination directory to save resized images
 bd_dst: "./BD/CPD1_Cr_Rs/"   # Directory to save the distribution chart
 save_dir: "./preprocess"  # Directory to save the distribution graph
